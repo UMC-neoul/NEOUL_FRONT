@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Neoul</string>
+    <string name="menu_home_text">홈</string>
+    <string name="menu_category_text">카테고리</string>
+    <string name="menu_brand_text">브랜드</string>
+    <string name="menu_story_text">이야기</string>
+    <string name="menu_my_text">마이페이지</string>
+</resources>

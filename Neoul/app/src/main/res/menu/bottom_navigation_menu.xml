@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:title="@string/menu_home_text" />
+
+    <item
+        android:id="@+id/menu_category"
+        android:title="@string/menu_category_text" />
+
+    <item
+        android:id="@+id/menu_brand"
+        android:title="@string/menu_brand_text" />
+
+    <item
+        android:id="@+id/menu_story"
+        android:title="@string/menu_story_text" />
+
+    <item
+        android:id="@+id/menu_my"
+        android:title="@string/menu_my_text" />
+
+</menu>
