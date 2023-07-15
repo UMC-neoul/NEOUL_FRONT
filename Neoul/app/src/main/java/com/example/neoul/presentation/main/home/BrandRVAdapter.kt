@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoul.data.model.Brand
-import com.example.neoul.databinding.ItemBrandBinding
+import com.example.neoul.databinding.ItemHomeBrandBinding
 
 class BrandRVAdapter(val itemList: ArrayList<Brand>):RecyclerView.Adapter<BrandRVAdapter.DataViewHolder>() {
-    inner class DataViewHolder(private val viewBinding: ItemBrandBinding) :
+    inner class DataViewHolder(private val viewBinding: ItemHomeBrandBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: Brand) {
             viewBinding.apply {
@@ -24,7 +24,7 @@ class BrandRVAdapter(val itemList: ArrayList<Brand>):RecyclerView.Adapter<BrandR
         viewType: Int
     ): BrandRVAdapter.DataViewHolder {
         val viewBinding =
-            ItemBrandBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemHomeBrandBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DataViewHolder(viewBinding)
     }
 

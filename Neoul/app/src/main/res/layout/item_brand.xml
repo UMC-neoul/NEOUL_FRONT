@@ -1,64 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp">
+    android:layout_height="wrap_content">
 
-    <View
-        android:id="@+id/view_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/brandCardView"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@drawable/border_radius_8"
-        android:backgroundTint="@color/warmGray98"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:backgroundTint="#F5F5F5"
+        app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="0dp">
 
-    <ImageView
-        android:id="@+id/img_brand"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginLeft="16dp"
-        android:background="@drawable/border_radius_999"
-        android:clipToOutline="true"
-        android:src="@drawable/base"
-        app:layout_constraintBottom_toBottomOf="@id/view_content"
-        app:layout_constraintStart_toStartOf="@id/view_content"
-        app:layout_constraintTop_toTopOf="@id/view_content" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp">
 
-    <TextView
-        android:id="@+id/text_brand_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:text="브랜드명"
-        android:textColor="@color/warmGray10"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/text_brand_content"
-        app:layout_constraintStart_toEndOf="@id/img_brand"
-        app:layout_constraintTop_toTopOf="@id/img_brand" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/brandLogo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/text_brand_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:text="한줄소개입니다"
-        app:layout_constraintBottom_toBottomOf="@id/img_brand"
-        app:layout_constraintStart_toStartOf="@id/text_brand_title"
-        app:layout_constraintTop_toBottomOf="@id/text_brand_title" />
+            <TextView
+                android:id="@+id/brandName"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="12dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxWidth="200dp"
+                android:textColor="#1A1C1E"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/brandLogo"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="브랜드1" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/chevron_right"
-        app:layout_constraintBottom_toBottomOf="@id/img_brand"
-        app:layout_constraintEnd_toEndOf="@id/view_content"
-        app:layout_constraintTop_toTopOf="@id/img_brand" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxWidth="230dp"
+                android:textColor="#909094"
+                android:textSize="14dp"
+                app:layout_constraintStart_toStartOf="@id/brandName"
+                app:layout_constraintTop_toBottomOf="@id/brandName"
+                tools:text="한 줄 설명 입니다." />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chevron_right_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:paddingStart="11dp"
+        tools:itemCount="5"
+        android:paddingBottom="16dp"
+        tools:listitem="@layout/item_product_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/brandCardView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="178dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

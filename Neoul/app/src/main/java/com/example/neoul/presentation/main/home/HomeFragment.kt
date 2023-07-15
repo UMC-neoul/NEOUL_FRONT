@@ -10,7 +10,6 @@ import com.example.neoul.data.model.Brand
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
-import com.example.neoul.presentation.main.category.CategoryFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
