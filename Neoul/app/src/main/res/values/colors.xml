@@ -8,7 +8,9 @@
     <color name="coolGray95">#EDF1F9</color>
     <color name="warmGray98">#F5F5F5</color>
     <color name="warmGray10">#1A1C1E</color>
+    <color name="warmGray20">#2F3033</color>
     <color name="warmGray60">#909094</color>
     <color name="primary50">#4175D0</color>
+    <color name="primary60">#5E8FEC</color>
     <color name="primary70">#80AAFF</color>
 </resources>
