@@ -13,7 +13,7 @@ import com.example.neoul.databinding.ActivityMainBinding
 import com.example.neoul.presentation.main.brand.BrandFragment
 import com.example.neoul.presentation.main.category.CategoryFragment
 import com.example.neoul.presentation.main.home.HomeFragment
-import com.example.neoul.presentation.main.my.MyFragment
+import com.example.neoul.presentation.main.my.MyPageFragment
 import com.example.neoul.presentation.main.story.StoryFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.menu_my ->{
-                    showFragment(MyFragment.newInstance(), MyFragment.TAG)
+                    showFragment(MyPageFragment.newInstance(), MyPageFragment.TAG)
                     return@setOnItemSelectedListener true
                 }
                 else ->{
