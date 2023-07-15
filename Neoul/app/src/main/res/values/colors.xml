@@ -2,11 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="coolGray10">#171C22</color>
     <color name="coolGray60">#8C9199</color>
     <color name="coolGray90">#DEE3EB</color>
     <color name="coolGray95">#EDF1F9</color>
     <color name="warmGray98">#F5F5F5</color>
     <color name="warmGray10">#1A1C1E</color>
+    <color name="warmGray60">#909094</color>
     <color name="primary50">#4175D0</color>
     <color name="primary70">#80AAFF</color>
 </resources>
