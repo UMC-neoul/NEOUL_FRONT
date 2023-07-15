@@ -51,7 +51,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         viewBinding.recyclerBest.adapter = dataRVAdapter
         viewBinding.recyclerBest.layoutManager =
-            GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL, false)
+            GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
         dataRVAdapter.notifyDataSetChanged()
         viewBinding.recyclerBest.setHasFixedSize(true)
     }
@@ -61,7 +61,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         viewBinding.recyclerRecommend.adapter = dataRVAdapter
         viewBinding.recyclerRecommend.layoutManager =
-            GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL, false)
+            GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
         dataRVAdapter.notifyDataSetChanged()
         viewBinding.recyclerRecommend.setHasFixedSize(true)
     }
