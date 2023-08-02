@@ -23,6 +23,10 @@
             android:name=".presentation.main.brand.detail.BrandDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.main.home.EventActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".presentation.main.MainActivity"
             android:exported="true">
             <intent-filter>
@@ -86,6 +90,10 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+
+
+
 
 
 
