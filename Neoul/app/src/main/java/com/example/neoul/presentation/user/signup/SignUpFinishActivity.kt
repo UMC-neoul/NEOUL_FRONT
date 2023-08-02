@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivitySignupFinishBinding
 import com.example.neoul.presentation.user.login.LoginActivity
+import com.example.neoul.presentation.user.login.LoginEmailActivity
 
 class SignUpFinishActivity:AppCompatActivity() {
     private lateinit var binding:ActivitySignupFinishBinding
@@ -16,8 +17,15 @@ class SignUpFinishActivity:AppCompatActivity() {
 
         with(binding){
             btnToLogin.setOnClickListener {
+                val intent = Intent(this@SignUpFinishActivity,LoginEmailActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+            btnToHome.setOnClickListener {
                 val intent = Intent(this@SignUpFinishActivity,LoginActivity::class.java)
                 startActivity(intent)
+                finish()
             }
         }//with(binding)
     }//onCreate

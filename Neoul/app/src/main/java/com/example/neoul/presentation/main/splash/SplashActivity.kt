@@ -6,7 +6,9 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivitySplashBinding
+import com.example.neoul.presentation.main.MainActivity
 import com.example.neoul.presentation.user.login.LoginActivity
+import com.example.neoul.presentation.user.signup.PreferenceActivity
 
 class SplashActivity:AppCompatActivity() {
     private lateinit var binding:ActivitySplashBinding
@@ -22,7 +24,5 @@ class SplashActivity:AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         },1500)
-
-
     }
 }
