@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:gravity="center"
@@ -18,7 +19,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="16dp"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/baseline_close_24" />
+            android:src="@drawable/back_arrow" />
     </LinearLayout>
 
     <LinearLayout
@@ -29,7 +30,6 @@
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -37,31 +37,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="이메일로 로그인"
+            android:text="회원가입"
             android:textColor="@color/black"
             android:textSize="18dp" />
-
-
     </LinearLayout>
 
     <TextView
-        android:id="@+id/txt_email"
+        android:id="@+id/txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:text="이메일"
+        android:text="이름"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_email"
-        app:layout_constraintStart_toStartOf="@+id/edit_email" />
+        app:layout_constraintBottom_toTopOf="@+id/edit_name"
+        app:layout_constraintStart_toStartOf="@+id/edit_name" />
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edit_email"
+        android:id="@+id/edit_name"
         style="@style/TextBox"
         android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginTop="46dp"
-        android:hint="example@email.com"
+        android:hint="홍길동"
         android:paddingLeft="18dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,55 +67,63 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/txt_password"
+        android:id="@+id/txt_birth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        android:text="비밀번호"
+        android:text="생년월일"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_password"
-        app:layout_constraintStart_toStartOf="@+id/edit_password" />
+        app:layout_constraintBottom_toTopOf="@+id/edit_birth"
+        app:layout_constraintStart_toStartOf="@+id/edit_birth" />
 
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edit_password"
+        android:id="@+id/edit_birth"
         style="@style/TextBox"
         android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginTop="42dp"
-        android:hint="6자 이상의 비밀번호"
+        android:hint="2000.01.01"
         android:paddingLeft="18dp"
         android:textColor="@color/black"
-        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_name" />
+
+    <TextView
+        android:id="@+id/txt_phone_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:text="휴대폰 번호"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit_phonenum"
+        app:layout_constraintStart_toStartOf="@+id/edit_phonenum" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_phonenum"
+        style="@style/TextBox"
+        android:layout_width="328dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="42dp"
+        android:hint="01012345678"
+        android:paddingLeft="18dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/edit_birth"
+        app:layout_constraintTop_toBottomOf="@+id/edit_birth" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_next"
         style="@style/SuccessFailBox"
         android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
         android:enabled="false"
-        android:text="로그인"
-        android:textColor="@color/black"
+        android:text="완료"
+        android:textColor="#909094"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_password" />
-
-    <TextView
-        style="@style/UnderLine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="비밀번호 찾기"
-        android:textColor="#8C9199"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        app:layout_constraintVertical_bias="0.708" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_phonenum" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

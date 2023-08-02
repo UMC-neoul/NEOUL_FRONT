@@ -10,3 +10,5 @@ class MyPageViewModel : BaseViewModel() {
 
     }
 }
+
+//뷰모델로 api전부 받고 liveData를 받아서 activity구현
