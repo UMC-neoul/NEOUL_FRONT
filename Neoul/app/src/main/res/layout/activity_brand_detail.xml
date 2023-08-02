@@ -18,8 +18,7 @@
             app:expandedTitleMarginStart="100dp"
             app:expandedTitleMarginTop="72dp"
             app:expandedTitleTextAppearance="@style/expandedBarBrandTitleStyle"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="꼬부기">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -67,6 +66,7 @@
                     tools:text="#거북이" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/favoriteBtn"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
                     android:layout_marginHorizontal="16dp"
@@ -79,6 +79,7 @@
                     app:strokeWidth="0dp">
 
                     <TextView
+                        android:id="@+id/favoriteText"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:layout_gravity="center"
@@ -197,7 +198,7 @@
                 tools:listitem="@layout/item_product_grid"
                 android:id="@+id/itemRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
+                android:layout_height="match_parent"
                 android:background="@color/white"
                 android:nestedScrollingEnabled="false"
                 android:overScrollMode="never" />

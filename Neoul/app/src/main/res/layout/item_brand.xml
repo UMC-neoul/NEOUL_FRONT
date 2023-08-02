@@ -29,7 +29,7 @@
                 android:layout_height="40dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/brandName"
@@ -47,6 +47,7 @@
                 tools:text="브랜드1" />
 
             <TextView
+                android:id="@+id/brandContent"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:ellipsize="end"
@@ -69,6 +70,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVIew"
         android:layout_width="0dp"
         android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

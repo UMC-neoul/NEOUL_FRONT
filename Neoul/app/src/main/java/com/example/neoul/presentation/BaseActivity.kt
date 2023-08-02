@@ -8,7 +8,7 @@ import kotlinx.coroutines.Job
 abstract class BaseActivity<VM: BaseViewModel, VB: ViewBinding>: AppCompatActivity() {
 
     abstract val viewModel: VM
-    private lateinit var  binding: VB
+    protected lateinit var  binding: VB
 
     abstract fun getViewBinding():VB
 

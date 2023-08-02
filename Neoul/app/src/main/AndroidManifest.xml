@@ -17,7 +17,7 @@
             android:name=".presentation.product.ProductActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.main.story.detail.StoryDetailActivity"
+             android:name=".presentation.main.story.detail.StoryDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.main.brand.detail.BrandDetailActivity"
