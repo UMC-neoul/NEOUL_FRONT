@@ -7,7 +7,8 @@ import com.example.neoul.presentation.main.brand.BrandViewModel
 import com.example.neoul.presentation.main.brand.detail.BrandDetailViewModel
 import com.example.neoul.presentation.main.category.CategoryViewModel
 import com.example.neoul.presentation.main.home.HomeViewModel
-import com.example.neoul.presentation.main.my.MyViewModel
+import com.example.neoul.presentation.main.my.MyPageViewModel
+import com.example.neoul.presentation.main.my.MyPageFragment
 import com.example.neoul.presentation.main.story.StoryViewModel
 import com.example.neoul.presentation.main.story.detail.StoryDetailViewModel
 import com.example.neoul.presentation.product.ProductViewModel
@@ -30,8 +31,10 @@ val appModule = module {
     viewModel { BrandViewModel() }
     viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand) }
     viewModel { StoryViewModel() }
+
     viewModel { MyViewModel() }
     viewModel { (story: Story) -> StoryDetailViewModel(story) }
     //viewModel { MyPageViewModel() }
     viewModel { (product: GoodsItem) -> ProductViewModel(product) }
+
 }

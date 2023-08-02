@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-    
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerVIew"
         android:layout_width="0dp"

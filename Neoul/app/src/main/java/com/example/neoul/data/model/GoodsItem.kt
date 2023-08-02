@@ -1,5 +1,6 @@
 package com.example.neoul.data.model
 
+
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -11,3 +12,4 @@ data class GoodsItem(
     val goodsImage: String,
     var liked: Boolean = false
 ) : Parcelable
+

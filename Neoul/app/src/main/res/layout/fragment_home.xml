@@ -1,16 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <TextView
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Home"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/img_board"
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/border_radius_8"
+                android:backgroundTint="@color/coolGray90"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_brand"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/border_radius_8"
+                android:backgroundTint="@color/coolGray95"
+                app:layout_constraintEnd_toStartOf="@id/view_story"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img_board">
+
+                <TextView
+                    android:id="@+id/text_brand_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="브랜드"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/view_brand"
+                    app:layout_constraintTop_toTopOf="@id/view_brand" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:text="다양한 후원 브랜드를\n만나보세요"
+                    android:textColor="#73777F"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="@id/text_brand_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_brand_title" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/view_story"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/border_radius_8"
+                android:backgroundTint="@color/coolGray95"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/view_brand"
+                app:layout_constraintTop_toTopOf="@id/view_brand">
+
+                <TextView
+                    android:id="@+id/text_story_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="이야기"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/view_story"
+                    app:layout_constraintTop_toTopOf="@id/view_story" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingBottom="16dp"
+                    android:text="도움이 필요한 이들의\n이야기를 확인하세요"
+                    android:textColor="#73777F"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="@id/text_story_title"
+                    app:layout_constraintTop_toBottomOf="@id/text_story_title" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/img_shirt"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/border_radius_999"
+                android:scaleType="center"
+                android:src="@drawable/shirt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/view_brand" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="의류"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/img_shirt"
+
+                app:layout_constraintStart_toStartOf="@id/img_shirt"
+                app:layout_constraintTop_toBottomOf="@id/img_shirt" />
+
+            <ImageView
+                android:id="@+id/img_accesary"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/border_radius_999"
+                android:scaleType="center"
+                android:src="@drawable/accesary"
+                app:layout_constraintEnd_toStartOf="@id/img_cup"
+                app:layout_constraintStart_toEndOf="@id/img_shirt"
+                app:layout_constraintTop_toTopOf="@id/img_shirt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="악세사리"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/img_accesary"
+                app:layout_constraintStart_toStartOf="@id/img_accesary"
+                app:layout_constraintTop_toBottomOf="@id/img_shirt" />
+
+            <ImageView
+                android:id="@+id/img_cup"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/border_radius_999"
+                android:scaleType="center"
+                android:src="@drawable/cup"
+                app:layout_constraintEnd_toStartOf="@id/img_bag"
+                app:layout_constraintStart_toEndOf="@id/img_accesary"
+                app:layout_constraintTop_toTopOf="@id/img_shirt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="소품"
+                android:textSize="12sp"
+                android:textStyle="bold"
+
+                app:layout_constraintEnd_toEndOf="@id/img_cup"
+                app:layout_constraintStart_toStartOf="@id/img_cup"
+                app:layout_constraintTop_toBottomOf="@id/img_shirt" />
+
+            <ImageView
+                android:id="@+id/img_bag"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/border_radius_999"
+                android:scaleType="center"
+                android:src="@drawable/bag"
+                app:layout_constraintEnd_toStartOf="@id/img_etc"
+                app:layout_constraintStart_toEndOf="@id/img_cup"
+                app:layout_constraintTop_toTopOf="@id/img_shirt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="악세사리"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/img_bag"
+                app:layout_constraintStart_toStartOf="@id/img_bag"
+                app:layout_constraintTop_toBottomOf="@id/img_shirt" />
+
+            <ImageView
+                android:id="@+id/img_etc"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/border_radius_999"
+                android:scaleType="center"
+                android:src="@drawable/etc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_shirt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="기타"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/img_etc"
+                app:layout_constraintStart_toStartOf="@id/img_etc"
+                app:layout_constraintTop_toBottomOf="@id/img_shirt" />
+
+            <View
+                android:id="@+id/view_border"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="44dp"
+                android:background="@color/warmGray98"
+                app:layout_constraintTop_toBottomOf="@id/img_shirt" />
+
+            <TextView
+                android:id="@+id/text_best"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="오늘의 인기 아이템"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/img_board"
+                app:layout_constraintTop_toBottomOf="@id/view_border" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="더 보기"
+                android:textColor="@color/coolGray60"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/text_best"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_best" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_best"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_best"
+                tools:listitem="@layout/item_best" />
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="이름"
+                android:textColor="@color/primary50"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/img_board"
+                app:layout_constraintTop_toBottomOf="@id/recycler_best" />
+
+
+            <TextView
+                android:id="@+id/text_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="님 추천 아이템"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/text_name"
+                app:layout_constraintTop_toTopOf="@id/text_name"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="더 보기"
+                android:textColor="@color/coolGray60"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/text_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_name" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_recommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="11dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_name" />
+
+            <TextView
+                android:id="@+id/text_new_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="새로운 브랜드"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/img_board"
+                app:layout_constraintTop_toBottomOf="@id/recycler_recommend" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="더 보기"
+                android:textColor="@color/coolGray60"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="@id/text_new_brand"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_new_brand" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="96dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_new_brand"
+                tools:listitem="@layout/item_best" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
