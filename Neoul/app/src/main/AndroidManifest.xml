@@ -25,6 +25,9 @@
         <activity
             android:name=".presentation.main.home.EventActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.main.home.SearchActivity"
+            android:exported="false" />
 
         <activity
             android:name=".presentation.main.MainActivity"

@@ -42,6 +42,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         viewBinding.imgBoard.setOnClickListener {
             startActivity(Intent(requireContext(),EventActivity::class.java))
         }
+        viewBinding.imgSearch.setOnClickListener {
+            startActivity(Intent(requireContext(),SearchActivity::class.java))
+        }
         return viewBinding.root
     }
 
