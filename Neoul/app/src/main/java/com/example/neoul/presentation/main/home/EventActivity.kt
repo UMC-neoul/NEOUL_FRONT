@@ -16,6 +16,10 @@ class EventActivity:AppCompatActivity() {
         viewBinding = ActivityEventBinding.inflate(layoutInflater)
 
         setContentView(viewBinding.root)
+
+        viewBinding.imgClose.setOnClickListener {
+            finish()
+        }
         eventAdapter(getDummyItemList())
     }
 
