@@ -23,6 +23,13 @@
             android:name=".presentation.main.brand.detail.BrandDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.main.home.EventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.main.home.SearchActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".presentation.main.MainActivity"
             android:exported="false">
         </activity>
@@ -102,6 +109,10 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+
+
+
 
     </application>
 

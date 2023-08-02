@@ -4,10 +4,14 @@
     <color name="white">#FFFFFFFF</color>
     <color name="primary95">#EDF0FF</color>
     <color name="coolGray10">#171C22</color>
+    <color name="coolGray20">#2C3137</color>
+    <color name="coolGray50">#73777F</color>
     <color name="coolGray60">#8C9199</color>
     <color name="coolGray90">#DEE3EB</color>
     <color name="coolGray95">#EDF1F9</color>
     <color name="warmGray98">#F5F5F5</color>
+    <color name="warmGray80">#C6C6CA</color>
+    <color name="warmGray95">#F1F0F4</color>
     <color name="warmGray10">#1A1C1E</color>
     <color name="warmGray20">#2F3033</color>
     <color name="warmGray60">#909094</color>

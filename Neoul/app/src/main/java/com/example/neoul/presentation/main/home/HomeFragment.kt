@@ -1,11 +1,17 @@
 package com.example.neoul.presentation.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
+
+
+
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.neoul.R
 import com.example.neoul.data.model.Brand
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.databinding.FragmentHomeBinding
@@ -33,7 +39,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = FragmentHomeBinding.inflate(layoutInflater)
-
+        viewBinding.imgBoard.setOnClickListener {
+            startActivity(Intent(requireContext(),EventActivity::class.java))
+        }
+        viewBinding.imgSearch.setOnClickListener {
+            startActivity(Intent(requireContext(),SearchActivity::class.java))
+        }
         return viewBinding.root
     }
 
