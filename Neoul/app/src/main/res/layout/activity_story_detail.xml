@@ -20,8 +20,7 @@
             app:maxLines="2"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleTextAppearance="@style/expandedBarStoryTitleStyle"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="독립운동가 후손,\n 현실이 이게 맞나요?">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -126,6 +125,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/seeMoreBtn"
                     app:layout_constraintTop_toTopOf="@id/brandAdText"
                     app:layout_constraintBottom_toBottomOf="@id/brandAdText"
                     app:layout_constraintEnd_toEndOf="parent"

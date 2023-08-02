@@ -2,31 +2,54 @@ package com.example.neoul.presentation.main.brand
 
 import android.content.Intent
 import android.view.View
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import androidx.core.view.isVisible
 import com.example.neoul.R
+import com.example.neoul.adapter.BrandItemRVAdapter
+import com.example.neoul.adapter.StoryRVAdapter
 import com.example.neoul.databinding.FragmentBrandBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
+import com.example.neoul.presentation.main.story.detail.StoryDetailActivity
+import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class BrandFragment : BaseFragment<BrandViewModel, FragmentBrandBinding>() {
+
+    companion object {
+        fun newInstance() = BrandFragment()
+
+        const val TAG = "BrandFragment"
+    }
 
     override val viewModel by viewModel<BrandViewModel>()
 
     override fun getViewBinding() = FragmentBrandBinding.inflate(layoutInflater)
 
+    private val adapter by lazy {
+        BrandItemRVAdapter(
+            brandClickListener = {
+                startActivity(
+                    BrandDetailActivity.newIntent(requireContext(), it)
+                )
+            }, productClickListener = {
+                startActivity(
+                    ProductActivity.newIntent(requireContext(),it)
+                )
+            })
+    }
+
     override fun initViews() {
         super.initViews()
+        spinnerAdapt()
+        binding.recyclerView.adapter = adapter
+    }
 
-        //
-        binding.banner.setOnClickListener {
-            startActivity(Intent(requireContext(),BrandDetailActivity::class.java))
-        }
+    override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner) {
+        adapter.setList(it)
+    }
 
+    private fun spinnerAdapt() {
         val items = resources.getStringArray(R.array.brand_sort)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, items)
         binding.brandSpinner.adapter = arrayAdapter
@@ -48,20 +71,10 @@ class BrandFragment : BaseFragment<BrandViewModel, FragmentBrandBinding>() {
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
-            }
+            override fun onNothingSelected(parent: AdapterView<*>) {}
         }
         binding.brandSortBtn.setOnClickListener {
             binding.brandSpinner.performClick()
         }
-    }
-
-    override fun observeDate() {}
-
-    companion object {
-        fun newInstance() = BrandFragment()
-
-        const val TAG = "BrandFragment"
     }
 }
