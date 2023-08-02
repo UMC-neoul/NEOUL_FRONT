@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivitySignupBinding
 import org.jetbrains.annotations.NotNull
+import org.koin.android.ext.android.bind
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -43,10 +44,10 @@ class SignUpActivity : AppCompatActivity() {
 
                 override fun afterTextChanged(s: Editable?) {
                     if(editEmail.length()>5){
-                        password_check = true
+                        email_check = true
                         signup_check()
                     }else{
-                        password_check = false
+                        email_check = false
                         signup_check()
                     }
                 }
@@ -113,6 +114,11 @@ class SignUpActivity : AppCompatActivity() {
                 startActivity(intent)
             }
 
+            btnBack.setOnClickListener {
+                val intent = Intent(this@SignUpActivity,CheckPrivacySignUpActivity::class.java)
+                startActivity(intent)
+            }
+
         }//with(binding)
 
     }//onCreate
@@ -121,12 +127,15 @@ class SignUpActivity : AppCompatActivity() {
         if(email_check){
             if(password_check){
                 binding.btnNext.isEnabled = password_double_check
+                binding.btnNext.setTextColor(Color.parseColor("#ffffff"))
             }else{
                 binding.btnNext.isEnabled = false
+                binding.btnNext.setTextColor(Color.parseColor("#909094"))
             }
         }
         else{
             binding.btnNext.isEnabled = false
+            binding.btnNext.setTextColor(Color.parseColor("#909094"))
         }
     }
 

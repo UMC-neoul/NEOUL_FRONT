@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivitySignupCheckBinding
+import com.example.neoul.presentation.user.login.LoginActivity
 import org.koin.android.ext.android.bind
 
 class SignUpCheckActivity:AppCompatActivity() {
@@ -56,6 +57,12 @@ class SignUpCheckActivity:AppCompatActivity() {
                 var intent = Intent(this@SignUpCheckActivity, CheckPrivacySignUpActivity::class.java)
                 startActivity(intent)
             }
+
+            btnBack.setOnClickListener {
+                val intent = Intent(this@SignUpCheckActivity, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
         }//with(binding)
 
     }//onCreate

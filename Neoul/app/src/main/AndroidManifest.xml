@@ -24,12 +24,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.main.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
 
         <!--Splash Activity 추가-->
@@ -49,13 +44,13 @@
 
         <!--Login Activity 추가-->
         <activity
-            android:name=".presentation.user.user.LoginActivity"
+            android:name=".presentation.user.login.LoginEmailActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".presentation.user.user.LoginEmailActivity"
+            android:name=".presentation.user.login.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -88,20 +83,28 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
 
+        <!--preference Activity 추가-->
+        <activity
+            android:name=".presentation.user.signup.PreferenceActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
+        <!--MyPageSetting Activity 추가-->
+        <activity
+            android:name=".presentation.main.my.setting.MyPageSettingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-
-
-
-
-
-
-
-
-
-
-
+        <activity
+            android:name=".presentation.main.my.setting.MyPageSettingChangeInfoActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
+
+
 
 </manifest>

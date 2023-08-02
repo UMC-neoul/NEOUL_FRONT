@@ -135,23 +135,27 @@ class CheckPrivacySignUpActivity:AppCompatActivity() {
                     binding.phoneCheck.setBackgroundColor(Color.parseColor("#EDF0FF"))
                     binding.phoneCheck.setTextColor(Color.parseColor("#5E8FEC"))
                     binding.btnNext.isEnabled = true
+                    binding.btnNext.setTextColor(Color.parseColor("#ffffff"))
                 }
                 else{
                     binding.phoneCheck.isEnabled = false
                     binding.phoneCheck.setTextColor(Color.parseColor("#909094"))
                     binding.btnNext.isEnabled = false
+                    binding.btnNext.setTextColor(Color.parseColor("#909094"))
                 }
             }
             else{
                 binding.phoneCheck.isEnabled = false
                 binding.phoneCheck.setTextColor(Color.parseColor("#909094"))
                 binding.btnNext.isEnabled = false
+                binding.btnNext.setTextColor(Color.parseColor("#909094"))
             }
         }
         else{
             binding.phoneCheck.isEnabled = false
             binding.phoneCheck.setTextColor(Color.parseColor("#909094"))
             binding.btnNext.isEnabled = false
+            binding.btnNext.setTextColor(Color.parseColor("#909094"))
         }
     }
 
