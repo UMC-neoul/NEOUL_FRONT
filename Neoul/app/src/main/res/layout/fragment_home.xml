@@ -64,6 +64,8 @@
                 android:layout_marginRight="16dp"
                 android:background="@drawable/border_radius_8"
                 android:backgroundTint="@color/coolGray90"
+                android:src="@drawable/banner_main"
+                android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

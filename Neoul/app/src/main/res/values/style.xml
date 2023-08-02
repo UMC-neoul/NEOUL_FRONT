@@ -59,6 +59,21 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="BottomNavTextInactiveStyle" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/coolGray50</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+
+    </style>
+
+    <style name="BottomNavTextActiveStyle" parent="@android:style/TextAppearance.Small">
+        <item name="android:textColor">@color/coolGray20</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle"></item>
+
+    </style>
+
+
 
 
 </resources>

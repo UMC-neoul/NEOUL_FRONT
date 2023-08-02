@@ -34,9 +34,9 @@ val appModule = module {
     viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand) }
     viewModel { StoryViewModel() }
 
-    viewModel { MyViewModel() }
+//    viewModel { MyViewModel() }
     viewModel { (story: Story) -> StoryDetailViewModel(story) }
-    //viewModel { MyPageViewModel() }
+    viewModel { MyPageViewModel() }
     viewModel { (product: GoodsItem) -> ProductViewModel(product) }
 
 }
