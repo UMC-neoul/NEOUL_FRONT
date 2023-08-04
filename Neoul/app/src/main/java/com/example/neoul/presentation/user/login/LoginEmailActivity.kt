@@ -91,29 +91,6 @@ class LoginEmailActivity : AppCompatActivity() {
 
             btnLogin.setOnClickListener {
                 login()
-                if(id_ == "test@naver.com"){
-                    finalcheck()
-                    id_check = true
-                    txtEmail.text = "이메일"
-                    txtEmail.setTextColor(Color.parseColor("#5D5E61"))
-                }
-                else{
-                    txtEmail.text = "이메일 주소를 입력해 주세요."
-                    txtEmail.setTextColor(Color.parseColor("#BA1A1A"))
-                    id_check = false
-                }
-                
-                if(password_ == "123456"){
-                    finalcheck()
-                    password_check = true
-                    txtPassword.text = "비밀번호"
-                    txtPassword.setTextColor(Color.parseColor("#5D5E61"))
-                }
-                else{
-                    txtPassword.text = "6자 이상의 비밀번호를 입력해세요."
-                    password_check = false
-                    txtPassword.setTextColor(Color.parseColor("#BA1A1A"))
-                }
             }
 
 
@@ -133,6 +110,9 @@ class LoginEmailActivity : AppCompatActivity() {
     }
 
     private fun login(){
+
+
+
         id_ = binding.editEmail.text.toString()
         password_ = binding.editPassword.text.toString()
     }
