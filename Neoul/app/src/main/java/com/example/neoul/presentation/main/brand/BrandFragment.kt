@@ -1,16 +1,13 @@
 package com.example.neoul.presentation.main.brand
 
-import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.neoul.R
 import com.example.neoul.adapter.BrandItemRVAdapter
-import com.example.neoul.adapter.StoryRVAdapter
 import com.example.neoul.databinding.FragmentBrandBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
-import com.example.neoul.presentation.main.story.detail.StoryDetailActivity
 import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 

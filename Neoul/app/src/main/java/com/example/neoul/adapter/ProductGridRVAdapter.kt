@@ -3,12 +3,12 @@ package com.example.neoul.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.neoul.data.model.GoodsItem
+import com.example.neoul.data.model.Product
 import com.example.neoul.databinding.ItemProductGridBinding
 
 class ProductGridRVAdapter(
-    var productClickListener: (GoodsItem) -> Unit,
-    var productList: List<GoodsItem> = listOf()
+    var productClickListener: (Product) -> Unit,
+    var productList: List<Product> = listOf()
 ) : RecyclerView.Adapter<ProductGridRVAdapter.ProductGridHolder>() {
 
 
@@ -16,13 +16,13 @@ class ProductGridRVAdapter(
         private val binding: ItemProductGridBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: GoodsItem) {
+        fun bind(data: Product) {
             binding.root.setOnClickListener {
                 productClickListener(data)
             }
-            binding.productName.text =data.title
+            binding.productName.text =data.name
             binding.productPrice.text = data.price.toString()
-            binding.productSalePercent.text = data.percent.toString()+"%"
+            //binding.productSalePercent.text = data.price.toString()+"%"
         }
     }
 
@@ -37,7 +37,7 @@ class ProductGridRVAdapter(
 
     override fun getItemCount() = productList.size
 
-    fun setList(list: List<GoodsItem>) {
+    fun setList(list: List<Product>) {
         productList = list
         notifyDataSetChanged()
     }

@@ -59,9 +59,9 @@ class StoryDetailActivity : BaseActivity<StoryDetailViewModel, ActivityStoryDeta
 
     private fun handleSuccess(state : StoryDetailState.Success){
         title = state.story.title
-        binding.writerName.text = state.story.author
+      //  binding.writerName.text = state.story.author
         binding.writeDate.text = state.story.date
-        binding.articleContent.text = state.story.content
+        binding.articleContent.text = state.content
         adapter.setList(state.brandList)
     }
 

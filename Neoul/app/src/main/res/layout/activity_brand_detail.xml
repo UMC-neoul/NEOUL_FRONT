@@ -33,7 +33,7 @@
                     android:layout_marginTop="76dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/brand_ex" />
 
                 <TextView
                     android:id="@+id/brandSimpleDescription"
@@ -48,7 +48,7 @@
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/brandLogo"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="바다거북이를 보호하자" />
+                    android:text="바다거북이를 보호하자" />
 
                 <TextView
                     android:id="@+id/brandTag"
@@ -63,7 +63,7 @@
                     android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/brandLogo"
                     app:layout_constraintTop_toBottomOf="@id/brandSimpleDescription"
-                    tools:text="#거북이" />
+                    android:text="#거북이" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/favoriteBtn"
@@ -72,6 +72,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginBottom="24dp"
                     android:backgroundTint="#5E8FEC"
+                    app:cardElevation="0dp"
                     app:cardCornerRadius="4dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -105,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/white"
+                android:paddingEnd="16dp"
                 app:layout_collapseMode="pin" />
 
 

@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoul.data.model.BrandItem
-import com.example.neoul.data.model.GoodsItem
+import com.example.neoul.data.model.Product
 import com.example.neoul.databinding.ItemBrandBinding
 
-class BrandItemRVAdapter(val brandClickListener: (BrandItem) -> Unit, val productClickListener: (GoodsItem) -> Unit) :
+class BrandItemRVAdapter(val brandClickListener: (BrandItem) -> Unit, val productClickListener: (Product) -> Unit) :
     RecyclerView.Adapter<BrandItemRVAdapter.BrandItemHolder>() {
 
     private var brandList: List<BrandItem> = listOf()
