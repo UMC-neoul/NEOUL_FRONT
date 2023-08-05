@@ -3,17 +3,15 @@ package com.example.neoul.presentation.product
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import com.example.neoul.R
 import com.example.neoul.data.model.GoodsItem
+import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
-import com.example.neoul.presentation.main.story.StoryFragment
-import com.example.neoul.presentation.main.story.detail.StoryDetailState
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -69,7 +67,7 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
     }
 
     private fun handleSuccess(state: ProductState.Success) {
-        title = state.product.title
+        title = state.product.name
     }
 
     override fun initViews() {
@@ -109,7 +107,7 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
 
     companion object {
         const val PRODUCT_KEY = "product"
-        fun newIntent(context: Context, product: GoodsItem) =
+        fun newIntent(context: Context, product: Product) =
             Intent(context, ProductActivity::class.java).apply {
                 putExtra(PRODUCT_KEY, product)
             }

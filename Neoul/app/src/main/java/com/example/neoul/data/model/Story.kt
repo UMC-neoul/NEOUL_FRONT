@@ -5,9 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Story(
+    val id: Int,
     val title: String,
-    val content: String,
-    val author: String,
+    val category: String,
     val date: String,
     val image : String,
 ): Parcelable

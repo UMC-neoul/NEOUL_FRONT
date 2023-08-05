@@ -8,8 +8,11 @@ sealed class StoryDetailState {
 
     object Loading: StoryDetailState()
 
+    object Failure: StoryDetailState()
+
     data class Success(
         val story: Story,
+        val content: String,
         val brandList: List<BrandItem>
     ) : StoryDetailState()
 }
