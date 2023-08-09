@@ -1,7 +1,9 @@
 package com.example.neoul.di
 
 import com.example.neoul.data.network.BrandApiService
+import com.example.neoul.data.network.ProductApiService
 import com.example.neoul.data.network.StoryApiService
+import com.example.neoul.data.network.TestApiService
 import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.story.StoryRepository
 import okhttp3.OkHttpClient
@@ -11,13 +13,19 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
+fun provideTestApiService(retrofit: Retrofit): TestApiService {
+    return retrofit.create(TestApiService::class.java)
+}
 fun provideStoryApiService(retrofit: Retrofit): StoryApiService {
     return retrofit.create(StoryApiService::class.java)
 }
 
 fun provideBrandApiService(retrofit: Retrofit): BrandApiService {
     return retrofit.create(BrandApiService::class.java)
+}
+
+fun provideProductApiService(retrofit: Retrofit): ProductApiService {
+    return retrofit.create(ProductApiService::class.java)
 }
 
 fun provideNeoulRetrofit(
@@ -44,6 +52,6 @@ fun buildOkHttpClint(): OkHttpClient {
     }
     return OkHttpClient.Builder()
         .connectTimeout(5, TimeUnit.SECONDS)
-        .addInterceptor(interceptor)
+      //  .addInterceptor(interceptor)
         .build()
 }

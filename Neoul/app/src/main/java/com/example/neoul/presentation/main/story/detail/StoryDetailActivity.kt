@@ -1,8 +1,11 @@
 package com.example.neoul.presentation.main.story.detail
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
+import com.bumptech.glide.Glide
+import com.example.neoul.R
 import com.example.neoul.adapter.BrandItemRVAdapter
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityStoryDetailBinding
@@ -53,16 +56,24 @@ class StoryDetailActivity : BaseActivity<StoryDetailViewModel, ActivityStoryDeta
         binding.brandRecommendItem.adapter = adapter
         setSupportActionBar(binding.toolBar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        title = ""
     }
 
     private fun handleLoading(){}
 
+    @SuppressLint("SetTextI18n")
     private fun handleSuccess(state : StoryDetailState.Success){
-        title = state.story.title
       //  binding.writerName.text = state.story.author
         binding.writeDate.text = state.story.date
         binding.articleContent.text = state.content
+        binding.brandAdText.text = state.category+ "을(를) 후원하는 브랜드"
         adapter.setList(state.brandList)
+        title = state.story.title
+        Glide.with(this)
+            .load(state.story.image)
+            .error(R.drawable.base_img)
+            .fallback(R.drawable.base_img)
+            .into(binding.storyImage)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.example.neoul.R
 import com.example.neoul.adapter.ProductGridRVAdapter
 import com.example.neoul.adapter.ProductHorizontalRVAdapter
@@ -92,15 +93,21 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
     }
 
     private fun handleSuccess(state: BrandDetailState.Success) {
-        title = state.product.name
-        binding.brandSimpleDescription.text = state.product.content
-        adapterGrid.setList(state.product.productList)
-        adapterHorizontal.setList(state.product.productList)
+        title = state.brand.name
+        binding.brandSimpleDescription.text = state.brand.content
+        Glide.with(this)
+            .load(state.brand.image)
+            .error(R.drawable.base_img)
+            .fallback(R.drawable.base_img)
+            .into(binding.brandLogo)
+        adapterGrid.setList(state.brand.productList)
+        adapterHorizontal.setList(state.brand.productList)
     }
 
     override fun initViews() {
         super.initViews()
         setSupportActionBar(binding.toolBar)
+        title = ""
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         binding.brandRecommendItem.adapter = adapterHorizontal
         binding.itemRecyclerView.adapter = adapterGrid

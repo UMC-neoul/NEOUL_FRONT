@@ -9,8 +9,8 @@ class DefaultStoryRepository(
     private val storyApiService : StoryApiService,
     private val ioDispatcher: CoroutineDispatcher
 ) : StoryRepository {
-    override suspend fun getStoryList() : List<Data>?  = withContext(ioDispatcher) {
-        val response = storyApiService.getStoryListApi()
+    override suspend fun getStoryList(accessToken: String) : List<Data>?  = withContext(ioDispatcher) {
+        val response = storyApiService.getStoryListApi(accessToken)
         if (response.isSuccessful){
             response.body()?.data ?: listOf()
         }else{
@@ -18,9 +18,9 @@ class DefaultStoryRepository(
         }
     }
 
-    override suspend fun getStoryDetail(storyId: Int): com.example.neoul.data.response.story.detail.Data?
+    override suspend fun getStoryDetail(accessToken: String,storyId: Int): com.example.neoul.data.response.story.detail.Data?
     = withContext(ioDispatcher){
-        val response = storyApiService.getStoryDetailApi(storyId)
+        val response = storyApiService.getStoryDetailApi(accessToken,storyId)
         if (response.isSuccessful){
             response.body()?.data
         }else{

@@ -5,15 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import android.webkit.WebChromeClient
 import androidx.core.content.ContextCompat
 import com.example.neoul.R
-import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>() {
 
@@ -66,8 +68,27 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun handleSuccess(state: ProductState.Success) {
         title = state.product.name
+        //현재 시간 가져오기
+        val now = System.currentTimeMillis()
+        val date = Date(now)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val getTime = dateFormat.format(date)
+        viewModel.postViewHistory(getTime)
+
+        //webView 설정
+        binding.webView.apply {
+            this.settings.apply {
+                javaScriptEnabled= true // 자바스크립트 사용여부
+                setSupportMultipleWindows(true) // 새창 띄우기 허용여부
+                javaScriptCanOpenWindowsAutomatically= true // 자바스크립트가 window.open()을 사용할 수 있도록 설정
+                loadWithOverviewMode= true // html의 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
+            }
+            this.webChromeClient = WebChromeClient()
+            this.loadUrl(state.product.productUrl)
+        }
     }
 
     override fun initViews() {
@@ -93,10 +114,12 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
                 finish()
                 return true
             }
+
             R.id.toolbar_search -> {
                 //검색화면 이동
                 return true
             }
+
             R.id.toolbar_favorite -> {
                 //찜화면 이동
                 return true

@@ -12,6 +12,7 @@ data class Brand(
     val profileImg: String
 ){
     fun toModel() =BrandItem(
+        id = brandId,
         name = name,
         content = intro,
         image = profileImg,

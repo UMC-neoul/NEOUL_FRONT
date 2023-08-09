@@ -13,6 +13,7 @@ data class Data(
 ){
 
     fun toModel() = BrandItem(
+        id =brandId,
         name = name,
         content = intro,
         image = profileImg,
