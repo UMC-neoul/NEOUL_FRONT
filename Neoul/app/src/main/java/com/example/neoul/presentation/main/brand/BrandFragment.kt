@@ -60,10 +60,12 @@ class BrandFragment : BaseFragment<BrandViewModel, FragmentBrandBinding>() {
                 when (position) {
                     0 -> {
                         binding.brandSortBtn.text = items[0]
+                        viewModel.recommendSortBtn()
                     }
 
                     1 -> {
                         binding.brandSortBtn.text = items[1]
+                        viewModel.recentSortBtn()
                     }
                 }
             }

@@ -41,8 +41,13 @@ class BrandViewModel(
         brandLiveData.value = brandList
     }
 
-    //정렬 버튼 눌렀을 때
-    fun clickSortBtn(){
+    //최신순 정렬
+    fun recentSortBtn(){
+        brandLiveData.value = brandLiveData.value?.reversed()
+    }
 
+    //추천순 정렬
+    fun recommendSortBtn(){
+        fetchData()
     }
 }
