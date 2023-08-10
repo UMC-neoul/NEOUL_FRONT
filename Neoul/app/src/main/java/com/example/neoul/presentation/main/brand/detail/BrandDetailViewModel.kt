@@ -3,7 +3,7 @@ package com.example.neoul.presentation.main.brand.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.neoul.data.model.BrandItem
-import com.example.neoul.data.model.GoodsItem
+import com.example.neoul.data.model.Product
 import com.example.neoul.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -13,7 +13,7 @@ class BrandDetailViewModel(
 
     val brandDetailStateLiveData = MutableLiveData<BrandDetailState>(BrandDetailState.Uninitialized)
     val brandLikedLiveData = MutableLiveData<Boolean>(brand.liked)
-    val productListLiveData = MutableLiveData<List<GoodsItem>>()
+    val productListLiveData = MutableLiveData<List<Product>>()
 
     override fun fetchData() = viewModelScope.launch {
         productListLiveData.value = brand.productList
