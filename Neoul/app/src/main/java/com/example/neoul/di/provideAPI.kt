@@ -1,7 +1,9 @@
 package com.example.neoul.di
 
 import com.example.neoul.data.network.BrandApiService
+import com.example.neoul.data.network.ProductApiService
 import com.example.neoul.data.network.StoryApiService
+import com.example.neoul.data.network.TestApiService
 import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.story.StoryRepository
 import com.example.neoul.presentation.user.login.LoginDataSource.LoginInterface
@@ -12,7 +14,6 @@ import org.koin.android.BuildConfig
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
-
 
 fun provideStoryApiService(retrofit: Retrofit): StoryApiService {
     return retrofit.create(StoryApiService::class.java)
@@ -30,6 +31,10 @@ fun provideSignUpApiService(retrofit: Retrofit):SignupInterface{
     return retrofit.create(SignupInterface::class.java)
 }
 
+
+fun provideProductApiService(retrofit: Retrofit): ProductApiService {
+    return retrofit.create(ProductApiService::class.java)
+}
 
 fun provideNeoulRetrofit(
     okHttpClient: OkHttpClient,
@@ -55,6 +60,6 @@ fun buildOkHttpClint(): OkHttpClient {
     }
     return OkHttpClient.Builder()
         .connectTimeout(5, TimeUnit.SECONDS)
-        .addInterceptor(interceptor)
+      //  .addInterceptor(interceptor)
         .build()
 }

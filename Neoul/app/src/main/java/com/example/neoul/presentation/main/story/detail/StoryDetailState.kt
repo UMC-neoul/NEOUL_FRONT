@@ -13,6 +13,7 @@ sealed class StoryDetailState {
     data class Success(
         val story: Story,
         val content: String,
+        val category: String,
         val brandList: List<BrandItem>
     ) : StoryDetailState()
 }

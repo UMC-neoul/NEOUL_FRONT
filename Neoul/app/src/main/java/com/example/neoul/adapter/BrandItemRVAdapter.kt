@@ -3,6 +3,8 @@ package com.example.neoul.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.neoul.R
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.Product
 import com.example.neoul.databinding.ItemBrandBinding
@@ -24,6 +26,11 @@ class BrandItemRVAdapter(val brandClickListener: (BrandItem) -> Unit, val produc
             binding.brandCardView.setOnClickListener {
                 brandClickListener(data)
             }
+            Glide.with(itemView)
+                .load(data.image)
+                .error(R.drawable.base_img)
+                .fallback(R.drawable.base_img)
+                .into(binding.brandLogo)
         }
     }
 

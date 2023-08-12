@@ -3,6 +3,7 @@ package com.example.neoul.presentation.main.story
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.neoul.data.model.Story
+import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.story.StoryRepository
 import com.example.neoul.presentation.BaseViewModel
 import kotlinx.coroutines.launch
@@ -26,9 +27,9 @@ class StoryViewModel(
 //            Story("독립운동가 후손, 현실이 이게 맞나요","bbbb","bbbb","bbb","aa")
 //        )
 
-        val story = storyRepository.getStoryList()?.map {
+        val story = storyRepository.getStoryList(Url.AUTH_KEY)?.map {
             it.toModel()
-        }
+        } ?: listOf()
         storyLiveData.value = story
     }
 }

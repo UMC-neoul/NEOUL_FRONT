@@ -1,8 +1,10 @@
 package com.example.neoul.presentation.main.story
 
+import android.content.Intent
 import com.example.neoul.adapter.StoryRVAdapter
 import com.example.neoul.databinding.FragmentStoryBinding
 import com.example.neoul.presentation.BaseFragment
+import com.example.neoul.presentation.main.home.SearchActivity
 import com.example.neoul.presentation.main.story.detail.StoryDetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -21,6 +23,9 @@ class StoryFragment : BaseFragment<StoryViewModel, FragmentStoryBinding>() {
     override fun initViews() {
         super.initViews()
         binding.storyRV.adapter = adapter
+        binding.searchBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), SearchActivity::class.java))
+        }
     }
 
     override fun observeDate() = viewModel.storyLiveData.observe(viewLifecycleOwner) {
