@@ -8,7 +8,7 @@ data class Data(
     val categoryVName: String,
     val intro: String,
     val name: String,
-    val products: List<Product>,
+    val productList: List<Product>,
     val profileImg: String
 ){
 
@@ -17,13 +17,18 @@ data class Data(
         name = name,
         content = intro,
         image = profileImg,
-        productList = products.map {
+        productList = productList.map {
             com.example.neoul.data.model.Product(
                 deliveryInfo = it.deliveryInfo,
                 name = it.name,
                 price = it.price,
                 productId = it.productId,
-                productUrl = it.productUrl
+                productUrl = it.productUrl,
+                productImg = if(it.productImgList.isNotEmpty()){
+                    it.productImgList.first()
+                }else{
+                    ""
+                }
             )
         }
     )

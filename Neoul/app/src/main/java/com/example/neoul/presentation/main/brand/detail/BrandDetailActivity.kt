@@ -8,6 +8,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.neoul.R
@@ -16,6 +18,7 @@ import com.example.neoul.adapter.ProductHorizontalRVAdapter
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.databinding.ActivityBrandDetailBinding
 import com.example.neoul.presentation.BaseActivity
+import com.example.neoul.presentation.main.home.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -56,6 +59,9 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
             when (it) {
                 is BrandDetailState.Success -> {
                     handleSuccess(it)
+                }
+                is BrandDetailState.Failure -> {
+                    handleFailure()
                 }
                 else -> Unit
             }
@@ -101,7 +107,16 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
             .fallback(R.drawable.base_img)
             .into(binding.brandLogo)
         adapterGrid.setList(state.brand.productList)
+        adapterGrid.brandName = state.brand.name
         adapterHorizontal.setList(state.brand.productList)
+        var hashTag  = ""
+        binding.brandTag.text = state.brand.hashTag?.forEach {
+            hashTag += "$it "
+        }.toString()
+    }
+
+    private fun handleFailure() {
+        Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()
     }
 
     override fun initViews() {
@@ -132,21 +147,22 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
                 when (position) {
                     0 -> {
                         binding.brandSortBtn.text = items[position]
+                        viewModel.recommendSortClick()
                     }
 
                     1 -> {
                         binding.brandSortBtn.text = items[position]
+                        viewModel.recentSortClick()
                     }
 
                     2 -> {
                         binding.brandSortBtn.text = items[position]
+                        viewModel.lowPriceSortClick()
                     }
 
                     3 -> {
                         binding.brandSortBtn.text = items[position]
-                    }
-                    4 -> {
-                        binding.brandSortBtn.text = items[position]
+                        viewModel.highPriceSortClick()
                     }
                 }
             }
@@ -166,11 +182,13 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
+                //뒤로가기
                 finish()
                 return true
             }
             R.id.toolbar_search -> {
                 //검색화면 이동
+                startActivity(Intent(this, SearchActivity::class.java))
                 return true
             }
             R.id.toolbar_favorite -> {

@@ -29,7 +29,7 @@ class ProductHorizontalRVAdapter(
             binding.productPrice.text = DecimalFormat("#,###").format(data.price)+"원"
             //binding.productSalePercent.text = data.percent.toString()+"%"
             Glide.with(itemView)
-                .load(data.productUrl)
+                .load(data.productImg)
                 .error(R.drawable.base_img)
                 .fallback(R.drawable.base_img)
                 .into(binding.productImage)

@@ -26,7 +26,12 @@ data class Data(
                 name = it.name,
                 price = it.price,
                 productId = it.productId,
-                productUrl = it.productUrl
+                productUrl = it.productUrl,
+                productImg = if(it.productImgList.isNotEmpty()){
+                    it.productImgList.first()
+                }else{
+                    ""
+                }
             )
         },
         liked = hearted,

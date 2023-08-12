@@ -52,8 +52,28 @@ class BrandDetailViewModel(
         }
     }
 
-    //정렬 버튼을 눌렀을 때
-    fun clickSortBtn() {
+    //낮은 가격순 버튼을 눌렀을 때
+    fun lowPriceSortClick() {
+        productListLiveData.value = productListLiveData.value?.sortedBy {
+            it.price
+        }
+    }
 
+    //낮은 가격순 버튼을 눌렀을 때
+    fun highPriceSortClick() {
+        productListLiveData.value = productListLiveData.value?.sortedBy {
+            it.price
+        }?.reversed()
+    }
+
+    //최근순 버튼을 눌렀을 때
+    fun recentSortClick() {
+        fetchData()
+        productListLiveData.value = productListLiveData.value?.reversed()
+    }
+
+    //추천순 버튼을 눌렀을 때
+    fun recommendSortClick() {
+        fetchData()
     }
 }

@@ -1,5 +1,7 @@
 package com.example.neoul.presentation.main.brand
 
+import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -8,6 +10,7 @@ import com.example.neoul.adapter.BrandItemRVAdapter
 import com.example.neoul.databinding.FragmentBrandBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
+import com.example.neoul.presentation.main.home.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -40,6 +43,9 @@ class BrandFragment : BaseFragment<BrandViewModel, FragmentBrandBinding>() {
         super.initViews()
         spinnerAdapt()
         binding.recyclerView.adapter = adapter
+        binding.searchBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), SearchActivity::class.java))
+        }
     }
 
     override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner) {
@@ -60,12 +66,12 @@ class BrandFragment : BaseFragment<BrandViewModel, FragmentBrandBinding>() {
                 when (position) {
                     0 -> {
                         binding.brandSortBtn.text = items[0]
-                        viewModel.recommendSortBtn()
+                        viewModel.recommendSortClick()
                     }
 
                     1 -> {
                         binding.brandSortBtn.text = items[1]
-                        viewModel.recentSortBtn()
+                        viewModel.recentSortClick()
                     }
                 }
             }

@@ -6,12 +6,14 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebChromeClient
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.neoul.R
 import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
+import com.example.neoul.presentation.main.home.SearchActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
@@ -35,7 +37,9 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
                 is ProductState.Success -> {
                     handleSuccess(it)
                 }
-
+                is ProductState.Failure -> {
+                    handleFailure()
+                }
                 else -> Unit
             }
         }
@@ -91,6 +95,10 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
         }
     }
 
+    private fun handleFailure() {
+        Toast.makeText(this,"ERROR",Toast.LENGTH_LONG).show()
+    }
+
     override fun initViews() {
         super.initViews()
         //toolbar 설정
@@ -111,12 +119,14 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
+                //뒤로가기
                 finish()
                 return true
             }
 
             R.id.toolbar_search -> {
                 //검색화면 이동
+                startActivity(Intent(this, SearchActivity::class.java))
                 return true
             }
 

@@ -1,5 +1,7 @@
 package com.example.neoul.presentation.main.brand
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.neoul.data.model.BrandItem
@@ -16,8 +18,7 @@ class BrandViewModel(
     override fun fetchData() = viewModelScope.launch {
         val brandList = brandRepository.getBrandList(Url.AUTH_KEY)?.map {
             it.toModel()
-        }
-
+        } ?: listOf()
 //        val productList = listOf(
 //            Product("", "[핸드메이드] 푸른마음 귀걸이", 16400, 12,""),
 //            Product("", "[핸드메이드] 푸른마음 귀걸이", 16400, 12,""),
@@ -42,12 +43,12 @@ class BrandViewModel(
     }
 
     //최신순 정렬
-    fun recentSortBtn(){
+    fun recentSortClick(){
         brandLiveData.value = brandLiveData.value?.reversed()
     }
 
     //추천순 정렬
-    fun recommendSortBtn(){
+    fun recommendSortClick(){
         fetchData()
     }
 }

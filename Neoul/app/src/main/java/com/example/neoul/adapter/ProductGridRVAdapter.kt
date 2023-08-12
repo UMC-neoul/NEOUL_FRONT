@@ -15,7 +15,7 @@ class ProductGridRVAdapter(
     var productList: List<Product> = listOf()
 ) : RecyclerView.Adapter<ProductGridRVAdapter.ProductGridHolder>() {
 
-
+    var brandName =""
     inner class ProductGridHolder(
         private val binding: ItemProductGridBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -25,11 +25,12 @@ class ProductGridRVAdapter(
             binding.root.setOnClickListener {
                 productClickListener(data)
             }
+            binding.brandName.text = brandName
             binding.productName.text =data.name
             binding.productPrice.text = DecimalFormat("#,###").format(data.price)+"원"
             //binding.productSalePercent.text = data.price.toString()+"%"
             Glide.with(itemView)
-                .load(data.productUrl)
+                .load(data.productImg)
                 .error(R.drawable.base_img)
                 .fallback(R.drawable.base_img)
                 .into(binding.productImage)

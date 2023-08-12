@@ -13,9 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-fun provideTestApiService(retrofit: Retrofit): TestApiService {
-    return retrofit.create(TestApiService::class.java)
-}
 fun provideStoryApiService(retrofit: Retrofit): StoryApiService {
     return retrofit.create(StoryApiService::class.java)
 }

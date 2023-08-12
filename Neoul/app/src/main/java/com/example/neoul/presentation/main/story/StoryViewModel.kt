@@ -29,7 +29,7 @@ class StoryViewModel(
 
         val story = storyRepository.getStoryList(Url.AUTH_KEY)?.map {
             it.toModel()
-        }
+        } ?: listOf()
         storyLiveData.value = story
     }
 }
