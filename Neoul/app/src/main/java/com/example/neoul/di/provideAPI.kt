@@ -4,6 +4,8 @@ import com.example.neoul.data.network.BrandApiService
 import com.example.neoul.data.network.StoryApiService
 import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.story.StoryRepository
+import com.example.neoul.presentation.user.login.LoginDataSource.LoginInterface
+import com.example.neoul.presentation.user.signup.SignupDataFile.SignupInterface
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.BuildConfig
@@ -19,6 +21,15 @@ fun provideStoryApiService(retrofit: Retrofit): StoryApiService {
 fun provideBrandApiService(retrofit: Retrofit): BrandApiService {
     return retrofit.create(BrandApiService::class.java)
 }
+
+fun provideLoginApiService(retrofit: Retrofit):LoginInterface{
+    return retrofit.create(LoginInterface::class.java)
+}
+
+fun provideSignUpApiService(retrofit: Retrofit):SignupInterface{
+    return retrofit.create(SignupInterface::class.java)
+}
+
 
 fun provideNeoulRetrofit(
     okHttpClient: OkHttpClient,

@@ -5,13 +5,29 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.neoul.data.repository.login.LoginRepository
 import com.example.neoul.databinding.ActivityLoginEmailBinding
+import com.example.neoul.presentation.main.MainActivity
+import com.example.neoul.presentation.user.login.LoginDataFile.Data
+import com.example.neoul.presentation.user.login.LoginDataFile.User
 import com.example.neoul.presentation.user.signup.PreferenceActivity
+import com.example.neoul.util.saveJwt
+import com.example.neoul.util.saveRefresh
+import com.example.neoul.util.saveUsername
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.bind
+import org.koin.android.ext.android.inject
+import kotlin.math.log
 
 class LoginEmailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginEmailBinding
+
+    private val loginApi by inject<LoginRepository>()
+
 
     //아이디, 비밀번호 입력시 판단 기준
     var et_email = false
@@ -110,21 +126,40 @@ class LoginEmailActivity : AppCompatActivity() {
     }
 
     private fun login(){
-
-
-
-        id_ = binding.editEmail.text.toString()
-        password_ = binding.editPassword.text.toString()
-    }
-    
-    private fun finalcheck(){
-        if(id_check){
-            if(password_check){
-                val intent = Intent(this,PreferenceActivity::class.java)
-                startActivity(intent)
-                finish()
+        lifecycleScope.launch {
+            val loginData = loginApi.login(getUser())
+            Log.d("Tester", "login:12312 ${loginData?.message}")
+            if(loginData?.code == 200 && loginData?.data!!.firstLogin){
+                startFirstLoginActivity()
+            }else if(loginData?.code == 200){
+                startSuccessActivity()
+            }else{
+                Toast.makeText(this@LoginEmailActivity,loginData?.message.toString(),Toast.LENGTH_SHORT)
+                    .show()
             }
         }
+
+
+
+    }
+
+    private fun getUser(): User {
+        var id = binding.editEmail.text.toString()
+        var password = binding.editPassword.text.toString()
+
+        return User(username = id, password = password)
+    }
+    
+    private fun startSuccessActivity(){
+        val intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun startFirstLoginActivity(){
+        val intent = Intent(this,PreferenceActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
