@@ -10,5 +10,6 @@ data class Product(
     val price: Int,
     val productId: Int,
     val productUrl: String,
+    val productImg : String,
     var liked : Boolean = false
 ):Parcelable

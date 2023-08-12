@@ -1,11 +1,13 @@
 package com.example.neoul.presentation.main.brand.detail
 
-import com.example.neoul.data.model.BrandItem
+import com.example.neoul.data.model.BrandDetail
 
 sealed class BrandDetailState {
     object Uninitialized : BrandDetailState()
 
+    object Failure: BrandDetailState()
+
     data class Success(
-        val product: BrandItem
+        val brand: BrandDetail
     ) : BrandDetailState()
 }

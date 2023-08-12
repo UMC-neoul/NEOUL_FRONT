@@ -33,7 +33,7 @@
                     android:layout_marginTop="76dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/brand_ex" />
+                    tools:src="@drawable/brand_ex" />
 
                 <TextView
                     android:id="@+id/brandSimpleDescription"
@@ -48,7 +48,7 @@
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/brandLogo"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="바다거북이를 보호하자" />
+                    tools:text="바다거북이를 보호하자" />
 
                 <TextView
                     android:id="@+id/brandTag"

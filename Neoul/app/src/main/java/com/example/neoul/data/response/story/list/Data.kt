@@ -6,11 +6,11 @@ data class Data(
     val categoryVName: String,
     val createdAt: String,
     val preImg: String,
-    val sid: Int,
+    val storyId: Int,
     val title: String
 ){
     fun toModel()=Story(
-        id = sid,
+        id = storyId,
         title = title,
         date = createdAt,
         category = categoryVName,
