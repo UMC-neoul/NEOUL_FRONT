@@ -7,6 +7,8 @@ import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.product.ProductRepository
 import com.example.neoul.data.response.like.history.request.HistoryRequest
 import com.example.neoul.presentation.BaseViewModel
+import com.example.neoul.util.UserCode.jwt
+import com.example.neoul.util.getJwt
 import kotlinx.coroutines.launch
 
 class ProductViewModel(
@@ -14,12 +16,18 @@ class ProductViewModel(
     private val productRepository: ProductRepository
 ) : BaseViewModel() {
 
+    private var jwt = ""
+
     val productLikedLiveData = MutableLiveData<Boolean>(null)
     val productStateLiveData = MutableLiveData<ProductState>(ProductState.Uninitialized)
 
     override fun fetchData() = viewModelScope.launch {
+
+        //accessToken 가져오기
+        jwt = "Bearer "+ getJwt()
+
         //찜한 상품인지 확인 (PRODUCT LIKE LIST GET) -> 찜 버튼 적용
-        val liked = productRepository.likeProductList(Url.AUTH_KEY)?.likedProduct?.any{
+        val liked = productRepository.likeProductList(jwt)?.likedProduct?.any{
             it.productId == product.productId
         }
         productLikedLiveData.value = liked
@@ -31,11 +39,11 @@ class ProductViewModel(
         viewModelScope.launch {
             if (productLikedLiveData.value == false) {
                 //PRODUCT LIKE PATCH
-                productRepository.likeProduct(Url.AUTH_KEY, product.productId)
+                productRepository.likeProduct(jwt, product.productId)
                 productLikedLiveData.value = true
             } else {
                 //PRODUCT DISLIKE PATCH
-                productRepository.dislikeProduct(Url.AUTH_KEY, product.productId)
+                productRepository.dislikeProduct(jwt, product.productId)
                 productLikedLiveData.value = false
             }
         }
@@ -44,7 +52,7 @@ class ProductViewModel(
     fun postViewHistory(currentTime: String) {
         viewModelScope.launch {
             //HISTORY POST
-            productRepository.postViewHistory(Url.AUTH_KEY, HistoryRequest(currentTime,product.productId))
+            productRepository.postViewHistory(jwt, HistoryRequest(currentTime,product.productId))
         }
     }
 }

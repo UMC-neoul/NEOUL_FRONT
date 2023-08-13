@@ -3,6 +3,7 @@ package com.example.neoul.di
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
+import com.example.neoul.data.preference.ApplicationPreferenceManager
 import com.example.neoul.data.repository.brand.BrandRepository
 import com.example.neoul.data.repository.brand.DefaultBrandRepository
 import com.example.neoul.data.repository.login.DefultLoginRepository
@@ -23,6 +24,7 @@ import com.example.neoul.presentation.main.story.StoryViewModel
 import com.example.neoul.presentation.main.story.detail.StoryDetailViewModel
 import com.example.neoul.presentation.product.ProductViewModel
 import kotlinx.coroutines.Dispatchers
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -48,6 +50,8 @@ val appModule = module {
     single { provideSignUpApiService(get()) }
     single<SignupRepository>{DefultSignupRepository(get(),get())}
 
+    //preference
+    single { ApplicationPreferenceManager(androidApplication()) }
 
     //Repository
     single<StoryRepository> { DefaultStoryRepository(get(), get()) }
@@ -59,7 +63,7 @@ val appModule = module {
     viewModel { EventViewModel() }
     viewModel { CategoryViewModel() }
     viewModel { BrandViewModel(get()) }
-    viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand, get()) }
+    viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand, get() ) }
     viewModel { StoryViewModel(get()) }
     viewModel { (story: Story) -> StoryDetailViewModel(story, get()) }
     viewModel { MyPageViewModel() }

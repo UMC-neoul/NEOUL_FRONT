@@ -8,15 +8,23 @@ import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.brand.BrandRepository
 import com.example.neoul.presentation.BaseViewModel
+import com.example.neoul.util.UserCode.jwt
+import com.example.neoul.util.getJwt
 import kotlinx.coroutines.launch
 
 class BrandViewModel(
     private val brandRepository: BrandRepository
 ) : BaseViewModel() {
 
+    private var jwt =""
+
     val brandLiveData = MutableLiveData<List<BrandItem>>()
     override fun fetchData() = viewModelScope.launch {
-        val brandList = brandRepository.getBrandList(Url.AUTH_KEY)?.map {
+
+        //accessToken 가져오기
+        jwt = "Bearer "+ getJwt()
+
+        val brandList = brandRepository.getBrandList(jwt)?.map {
             it.toModel()
         } ?: listOf()
 //        val productList = listOf(
