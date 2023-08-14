@@ -7,9 +7,11 @@ import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.neoul.R
 import com.example.neoul.databinding.ActivityMainBinding
 import com.example.neoul.presentation.main.brand.BrandFragment
@@ -17,11 +19,16 @@ import com.example.neoul.presentation.main.category.CategoryFragment
 import com.example.neoul.presentation.main.home.HomeFragment
 import com.example.neoul.presentation.main.my.MyPageFragment
 import com.example.neoul.presentation.main.story.StoryFragment
+import com.example.neoul.util.MainMenuBus
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    private val menuBus by inject<MainMenuBus>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initViews()
+        observe()
     }
 
     private fun initViews() {
@@ -87,4 +95,19 @@ class MainActivity : AppCompatActivity() {
                 .commitAllowingStateLoss()
         }
     }
+    fun goToTab(menuId: MainMenuId){
+        binding.bottomNav.selectedItemId = menuId.id
+    }
+
+    private fun observe(){
+        lifecycleScope.launch {
+            menuBus.mainTabFlow.collect{
+                goToTab(it)
+            }
+        }
+    }
+}
+
+enum class MainMenuId(@IdRes val id: Int){
+    BRAND(R.id.menu_brand)
 }

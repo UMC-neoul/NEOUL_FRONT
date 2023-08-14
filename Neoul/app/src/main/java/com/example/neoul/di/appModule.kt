@@ -23,6 +23,7 @@ import com.example.neoul.presentation.main.my.MyPageViewModel
 import com.example.neoul.presentation.main.story.StoryViewModel
 import com.example.neoul.presentation.main.story.detail.StoryDetailViewModel
 import com.example.neoul.presentation.product.ProductViewModel
+import com.example.neoul.util.MainMenuBus
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.dsl.viewModel
@@ -50,13 +51,15 @@ val appModule = module {
     single { provideSignUpApiService(get()) }
     single<SignupRepository>{DefultSignupRepository(get(),get())}
 
-    //preference
-    single { ApplicationPreferenceManager(androidApplication()) }
 
     //Repository
     single<StoryRepository> { DefaultStoryRepository(get(), get()) }
     single<BrandRepository> { DefaultBrandRepository(get(), get()) }
     single<ProductRepository> { DefaultProductRepository(get(), get()) }
+
+    //util
+    single { ApplicationPreferenceManager(androidApplication()) }
+    single { MainMenuBus() }
 
     //VM
     viewModel { HomeViewModel() }
