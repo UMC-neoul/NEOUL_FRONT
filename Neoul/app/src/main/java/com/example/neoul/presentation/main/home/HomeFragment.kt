@@ -7,19 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 
 
-
-
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.neoul.R
 import com.example.neoul.data.model.Brand
 import com.example.neoul.data.model.GoodsItem
+import com.example.neoul.data.response.brand.list.BrandResponse
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
+import com.example.neoul.presentation.main.header.SearchActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
-
+    var data: BrandResponse? = null
     override val viewModel by viewModel<HomeViewModel>()
 
     override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
@@ -32,26 +31,31 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         const val TAG = "HomeFragment"
     }
 
-    private lateinit var viewBinding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentHomeBinding.inflate(layoutInflater)
-        viewBinding.imgBoard.setOnClickListener {
-            startActivity(Intent(requireContext(),EventActivity::class.java))
-        }
-        viewBinding.imgSearch.setOnClickListener {
-            startActivity(Intent(requireContext(),SearchActivity::class.java))
-        }
-        return viewBinding.root
+        binding = FragmentHomeBinding.inflate(layoutInflater)
+
+
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // bestAdapter() 메서드 호출
-        bestAdapter(getDummyItemList()) // 이곳에 적절한 데이터 리스트를 전달해야 합니다.
+
+
+        binding.imgBoard.setOnClickListener {
+            startActivity(Intent(requireContext(), EventActivity::class.java))
+        }
+        binding.imgSearch.setOnClickListener {
+            startActivity(Intent(requireContext(), SearchActivity::class.java))
+
+        }
+
+        bestAdapter(getDummyItemList())
         recommandAdapter(getDummyItemList2())
         brandAdapter(getDummyItemList3())
     }
@@ -59,31 +63,31 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private fun bestAdapter(itemList: ArrayList<GoodsItem>) {
         val dataRVAdapter = BestItemRVAdapter(itemList)
 
-        viewBinding.recyclerBest.adapter = dataRVAdapter
-        viewBinding.recyclerBest.layoutManager =
+        binding.recyclerBest.adapter = dataRVAdapter
+        binding.recyclerBest.layoutManager =
             GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
         dataRVAdapter.notifyDataSetChanged()
-        viewBinding.recyclerBest.setHasFixedSize(true)
+        binding.recyclerBest.setHasFixedSize(true)
     }
 
     private fun recommandAdapter(itemList: ArrayList<GoodsItem>) {
         val dataRVAdapter = BestItemRVAdapter(itemList)
 
-        viewBinding.recyclerRecommend.adapter = dataRVAdapter
-        viewBinding.recyclerRecommend.layoutManager =
+        binding.recyclerRecommend.adapter = dataRVAdapter
+        binding.recyclerRecommend.layoutManager =
             GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
         dataRVAdapter.notifyDataSetChanged()
-        viewBinding.recyclerRecommend.setHasFixedSize(true)
+        binding.recyclerRecommend.setHasFixedSize(true)
     }
 
     private fun brandAdapter(itemList: ArrayList<Brand>) {
         val dataRVAdapter = BrandRVAdapter(itemList)
 
-        viewBinding.recyclerBrand.adapter = dataRVAdapter
-        viewBinding.recyclerBrand.layoutManager =
+        binding.recyclerBrand.adapter = dataRVAdapter
+        binding.recyclerBrand.layoutManager =
             LinearLayoutManager(context)
         dataRVAdapter.notifyDataSetChanged()
-        viewBinding.recyclerBrand.setHasFixedSize(true)
+        binding.recyclerBrand.setHasFixedSize(true)
     }
 
     private fun getDummyItemList(): ArrayList<GoodsItem> {
@@ -115,4 +119,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
         return dummyList
     }
+
+
 }

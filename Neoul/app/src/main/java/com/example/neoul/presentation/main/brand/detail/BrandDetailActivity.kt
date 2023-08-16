@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.example.neoul.R
@@ -18,7 +17,7 @@ import com.example.neoul.adapter.ProductHorizontalRVAdapter
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.databinding.ActivityBrandDetailBinding
 import com.example.neoul.presentation.BaseActivity
-import com.example.neoul.presentation.main.home.SearchActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf

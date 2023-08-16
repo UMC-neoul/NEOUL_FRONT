@@ -1,4 +1,4 @@
-package com.example.neoul.presentation.main.home
+package com.example.neoul.presentation.main.header
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

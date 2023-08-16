@@ -1,6 +1,5 @@
 package com.example.neoul.presentation.main.brand
 
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.view.View
 import android.widget.AdapterView
@@ -10,7 +9,7 @@ import com.example.neoul.adapter.BrandItemRVAdapter
 import com.example.neoul.databinding.FragmentBrandBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
-import com.example.neoul.presentation.main.home.SearchActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 

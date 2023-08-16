@@ -13,7 +13,7 @@ import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
-import com.example.neoul.presentation.main.home.SearchActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
