@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.neoul.data.model.Brand
+import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.brand.list.BrandResponse
 import com.example.neoul.databinding.FragmentHomeBinding
@@ -23,7 +24,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-    override fun observeDate() {}
+    override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner){
+        brandAdapter(it as ArrayList<BrandItem>)
+    }
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -57,7 +60,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         bestAdapter(getDummyItemList())
         recommandAdapter(getDummyItemList2())
-        brandAdapter(getDummyItemList3())
+
     }
 
     private fun bestAdapter(itemList: ArrayList<GoodsItem>) {
@@ -80,14 +83,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.recyclerRecommend.setHasFixedSize(true)
     }
 
-    private fun brandAdapter(itemList: ArrayList<Brand>) {
-        val dataRVAdapter = BrandRVAdapter(itemList)
+    private fun brandAdapter(itemList: ArrayList<BrandItem>) {
+        val dataRVAdapter = BrandRVAdapter(itemList,{})
 
         binding.recyclerBrand.adapter = dataRVAdapter
         binding.recyclerBrand.layoutManager =
             LinearLayoutManager(context)
         dataRVAdapter.notifyDataSetChanged()
         binding.recyclerBrand.setHasFixedSize(true)
+
     }
 
     private fun getDummyItemList(): ArrayList<GoodsItem> {
