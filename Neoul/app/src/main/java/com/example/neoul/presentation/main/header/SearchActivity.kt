@@ -4,18 +4,30 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 import com.example.neoul.databinding.ActivitySearchBinding
+import com.example.neoul.presentation.BaseActivity
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class SearchActivity: AppCompatActivity() {
-    private lateinit var viewBinding: ActivitySearchBinding
+class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
+
+
+    override val viewModel by viewModel<SearchViewModel>()
+    override fun getViewBinding() =
+        ActivitySearchBinding.inflate(layoutInflater)
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = ActivitySearchBinding.inflate(layoutInflater)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
 
-        setContentView(viewBinding.root)
+        setContentView(binding.root)
 
-        viewBinding.imgBack.setOnClickListener {
+        binding.imgBack.setOnClickListener {
             finish()
         }
+
+    }
+
+    override fun observeData() {
 
     }
 }
