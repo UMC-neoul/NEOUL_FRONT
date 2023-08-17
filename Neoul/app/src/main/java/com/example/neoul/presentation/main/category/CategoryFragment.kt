@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.neoul.R
 import com.example.neoul.databinding.FragmentCategoryBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.BrandFragment
@@ -52,6 +53,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
 
         TabLayoutMediator(viewBinding.layoutTab, viewBinding.viewPager) { tab, position ->
             tab.text = tabTitleArray[position]
+
         }.attach()
 
         return viewBinding.root

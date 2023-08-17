@@ -15,6 +15,7 @@ import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.brand.list.BrandResponse
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
+import com.example.neoul.presentation.main.header.LikeListActivity
 import com.example.neoul.presentation.main.header.SearchActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -55,6 +56,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         }
         binding.imgSearch.setOnClickListener {
             startActivity(Intent(requireContext(), SearchActivity::class.java))
+
+        }
+
+
+        binding.imgHeart.setOnClickListener {
+            startActivity(Intent(requireContext(), LikeListActivity::class.java))
 
         }
 
