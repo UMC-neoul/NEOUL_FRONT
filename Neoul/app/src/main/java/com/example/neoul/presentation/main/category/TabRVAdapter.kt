@@ -4,16 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoul.data.model.CategoryItem
+import com.example.neoul.data.response.product.category.Data
 import com.example.neoul.databinding.ItemCatItemBinding
 
-class TabRVAdapter(private val itemList: ArrayList<CategoryItem>) :
+class TabRVAdapter(private val itemList: List<Data>) :
     RecyclerView.Adapter<TabRVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(data: CategoryItem) {
+        fun bind(data: Data) {
             viewBinding.textName.text = data.brandName
-            viewBinding.textTitle.text = data.title
-            viewBinding.textPercent.text = data.percent.toString()
+            viewBinding.textTitle.text = data.productName
+
             viewBinding.textPrice.text = data.price.toString()
         }
     }

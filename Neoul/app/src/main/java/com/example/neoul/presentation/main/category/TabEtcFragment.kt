@@ -1,6 +1,69 @@
 package com.example.neoul.presentation.main.category
 
-import androidx.fragment.app.Fragment
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
-class TabEtcFragment:Fragment() {
+import com.example.neoul.data.model.CategoryItem
+import com.example.neoul.data.response.product.category.Data
+
+import com.example.neoul.databinding.FragmentTabClothesBinding
+import com.example.neoul.presentation.BaseFragment
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
+
+class TabEtcFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBinding>() {
+//    private lateinit var viewBinding: FragmentTabClothesBinding
+
+    override val viewModel by viewModel<CategoryViewModel> {
+        parametersOf(5, 1)
+    }
+
+    override fun getViewBinding() = FragmentTabClothesBinding.inflate(layoutInflater)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentTabClothesBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
+
+    override fun observeDate() = viewModel.categoryLiveData.observe(viewLifecycleOwner) {
+        categoryAdapter(it)
+    }
+
+    private fun categoryAdapter(itemList: List<Data>) {
+        val dataRVAdapter = TabRVAdapter(itemList)
+
+        binding.recyclerItem.adapter = dataRVAdapter
+        binding.recyclerItem.layoutManager =
+            GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
+        dataRVAdapter.notifyDataSetChanged()
+        binding.recyclerItem.setHasFixedSize(true)
+    }
+
+    private fun getDummyItemList(): ArrayList<CategoryItem> {
+        val dummyList = ArrayList<CategoryItem>().apply {
+            add(CategoryItem("브랜드1", "바다마을 목걸이", 11, 25100, ""))
+            add(CategoryItem("브랜드2", "바다마을 목걸이3", 11, 20100, ""))
+            add(CategoryItem("브랜드3", "바다마을 목걸이", 11, 23100, ""))
+            add(CategoryItem("브랜드4", "바다마을 목걸이3", 16, 60100, ""))
+            add(CategoryItem("브랜드5", "바다마을 목걸이", 21, 27100, ""))
+
+
+        }
+        return dummyList
+    }
+
 }

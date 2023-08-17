@@ -59,7 +59,9 @@ val appModule = module {
     //VM
     viewModel { HomeViewModel(get()) }
     viewModel { EventViewModel() }
-    viewModel { CategoryViewModel() }
+    viewModel { (categoryId: Int, option: Int) ->
+        CategoryViewModel(get(), categoryId, option)
+    }
     viewModel { BrandViewModel(get()) }
     viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand, get()) }
     viewModel { StoryViewModel(get()) }
