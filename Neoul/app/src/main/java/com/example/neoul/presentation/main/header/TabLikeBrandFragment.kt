@@ -24,8 +24,9 @@ class TabLikeBrandFragment : BaseFragment<LikeListViewModel, FragmentTabLikeBran
 
     override fun getViewBinding() = FragmentTabLikeBrandBinding.inflate(layoutInflater)
 
-    override fun observeDate() {
-
+    override fun observeDate() = viewModel.likedBrandLiveData.observe(viewLifecycleOwner) {
+        productAdapter(it.likedBrands)
+        binding.textBrandCnt.text = "브랜드 "+it.brandCnt
     }
 
     override fun onCreateView(
@@ -34,7 +35,7 @@ class TabLikeBrandFragment : BaseFragment<LikeListViewModel, FragmentTabLikeBran
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTabLikeBrandBinding.inflate(layoutInflater)
-        productAdapter(getDummyItemList())
+
         return binding.root
     }
 
