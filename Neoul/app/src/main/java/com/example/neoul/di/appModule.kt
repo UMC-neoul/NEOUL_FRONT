@@ -69,6 +69,6 @@ val appModule = module {
     viewModel { MyPageViewModel() }
     viewModel { (product: Product) -> ProductViewModel(product, get()) }
     viewModel { SearchViewModel() }
-    viewModel { LikeListViewModel() }
+    viewModel { LikeListViewModel(get()) }
 
 }
