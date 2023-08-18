@@ -57,7 +57,7 @@ val appModule = module {
     single<ProductRepository> { DefaultProductRepository(get(), get()) }
 
     //VM
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel(get(),get()) }
     viewModel { EventViewModel() }
     viewModel { (categoryId: Int, option: Int) ->
         CategoryViewModel(get(), categoryId, option)

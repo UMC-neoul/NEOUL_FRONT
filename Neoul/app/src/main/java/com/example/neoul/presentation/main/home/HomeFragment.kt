@@ -13,6 +13,7 @@ import com.example.neoul.data.model.Brand
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.brand.list.BrandResponse
+import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.header.LikeListActivity
@@ -27,6 +28,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner){
         brandAdapter(it as ArrayList<BrandItem>)
+        observeDate2()
+    }
+
+    private fun  observeDate2() = viewModel.allLiveData.observe(viewLifecycleOwner){
+        bestAdapter(it as ArrayList<Data>)
+        recommandAdapter(it)
     }
 
     companion object {
@@ -65,12 +72,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
         }
 
-        bestAdapter(getDummyItemList())
-        recommandAdapter(getDummyItemList2())
+//        bestAdapter(getDummyItemList())
+//        recommandAdapter(getDummyItemList2())
 
     }
 
-    private fun bestAdapter(itemList: ArrayList<GoodsItem>) {
+    private fun bestAdapter(itemList: ArrayList<Data>) {
         val dataRVAdapter = BestItemRVAdapter(itemList)
 
         binding.recyclerBest.adapter = dataRVAdapter
@@ -80,7 +87,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         binding.recyclerBest.setHasFixedSize(true)
     }
 
-    private fun recommandAdapter(itemList: ArrayList<GoodsItem>) {
+    private fun recommandAdapter(itemList: ArrayList<Data>) {
         val dataRVAdapter = BestItemRVAdapter(itemList)
 
         binding.recyclerRecommend.adapter = dataRVAdapter
