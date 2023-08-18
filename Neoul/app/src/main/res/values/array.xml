@@ -6,8 +6,9 @@
     </string-array>
     <string-array name="product_sort">
         <item>추천순</item>
+        <item>인기순</item>
         <item>신상품순</item>
-        <item>낮은가격순</item>
-        <item>높은가격순</item>]
+        <item>낮은 가격순</item>
+        <item>높은 가격순</item>]
     </string-array>
 </resources>
