@@ -28,7 +28,7 @@ class BrandDetailViewModel(
         if (getJwt().isNullOrEmpty()){
             brandDetailStateLiveData.value = BrandDetailState.NotAuth
         }else{
-            jwt = "Bearer "+ getJwt()
+            jwt = getJwt().toString()
         }
 
         //찜한 브랜지인지 확인 (BRAND LIKE LIST GET) -> 찜 버튼 적용

@@ -28,7 +28,7 @@ class ProductViewModel(
         if (getJwt().isNullOrEmpty()){
             productStateLiveData.value = ProductState.NotAuth
         }else{
-            jwt = "Bearer "+ getJwt()
+            jwt = getJwt().toString()
         }
 
         //찜한 상품인지 확인 (PRODUCT LIKE LIST GET) -> 찜 버튼 적용
