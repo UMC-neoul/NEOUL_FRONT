@@ -6,7 +6,7 @@ import com.example.neoul.presentation.user.signup.SignupDataFile.SignupUser
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-class DefultSignupRepository(
+class DefaultSignupRepository(
     private val signupApiService:SignupInterface,
     private val ioDispatcher: CoroutineDispatcher,
 
@@ -15,8 +15,10 @@ class DefultSignupRepository(
         val response = signupApiService.signUp(signupUser)
         if(response.isSuccessful){
             return@withContext response.body()
+
         }else{
             return@withContext null
+
         }
     }
 }

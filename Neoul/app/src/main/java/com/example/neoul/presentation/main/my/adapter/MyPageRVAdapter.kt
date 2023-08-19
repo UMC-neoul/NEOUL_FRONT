@@ -6,51 +6,48 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.neoul.databinding.FragmentMypageBinding
-import com.example.neoul.presentation.main.my.data.Merchan
 import com.example.neoul.databinding.ItemMypageMerchandiseBinding
+import com.example.neoul.presentation.main.my.data.MyPageItem
+import com.example.neoul.presentation.main.my.data.MyPageProduct
 import kotlinx.coroutines.flow.merge
 
-class MyPageRVAdapter (): RecyclerView.Adapter<MyPageRVAdapter.ViewHolder>() {
+class MyPageRVAdapter (val mypageclickListener: (MyPageProduct)->Unit): RecyclerView.Adapter<MyPageRVAdapter.ViewHolder>() {
 
-    private val merchan = ArrayList<Merchan>()
+    private var myPageProduct : List<MyPageProduct> = listOf()
 
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
+        ItemMypageMerchandiseBinding.inflate(
+            LayoutInflater.from(viewGroup.context),
+            viewGroup,
+            false
+        )
 
+    )
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): MyPageRVAdapter.ViewHolder {
-        val binding: ItemMypageMerchandiseBinding = ItemMypageMerchandiseBinding.inflate(LayoutInflater.from(viewGroup.context),viewGroup, false)
-
-        return ViewHolder(binding, viewGroup.context)
-    }
 
     override fun onBindViewHolder(holder: MyPageRVAdapter.ViewHolder, position: Int) {
-
+        holder.bind(myPageProduct[position])
     }
 
-    override fun getItemCount(): Int = merchan.size
+    override fun getItemCount(): Int = myPageProduct.size
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun addMerchan(merchan: ArrayList<Merchan>){
-        this.merchan.clear()
-        this.merchan.addAll(merchan)
-
+    fun setList(list:List<MyPageProduct>){
+        myPageProduct = list
         notifyDataSetChanged()
     }
 
-    fun removemerchan(position: Int){
-        merchan.removeAt(position)
-        notifyDataSetChanged()
-    }
 
-    inner class ViewHolder(val binding:ItemMypageMerchandiseBinding,val context: Context) : RecyclerView.ViewHolder(binding.root){
-        fun bind(merchan: Merchan){
-            Glide.with(context)
-                .load(merchan.wareImageUrl)
+    inner class ViewHolder(
+        val binding:ItemMypageMerchandiseBinding,
+    ) : RecyclerView.ViewHolder(binding.root){
+        fun bind(data: MyPageProduct){
+            Glide.with(itemView)
+                .load(data.productImgList)
                 .into(binding.itemMypageMerchandise)
             //binding.itemMypageMerchandise.setImageResource(merchan.wareImageUrl!!)
-            binding.price.text = merchan.price.toString()
-            binding.name.text = merchan.ware
-            binding.sale.text = merchan.salePercent
+            binding.price.text = data.price.toString()
+            binding.name.text = data.brandName
+            binding.sale.text = data.price.toString()
         }
     }
 }

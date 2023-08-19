@@ -22,8 +22,13 @@ class NeoulApplication: Application() {
             androidContext(this@NeoulApplication)
             modules(appModule)
         }
-        sSharedPreference = applicationContext.getSharedPreferences("NEOUL_APP",MODE_PRIVATE)
+
+        sSharedPreference =
+            applicationContext.getSharedPreferences("NEOUL_APP", MODE_PRIVATE)
+
 
 
     }
+
+
 }

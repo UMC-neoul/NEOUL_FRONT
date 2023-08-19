@@ -13,6 +13,4 @@ interface LoginInterface {
     suspend fun emailLogin(@Body user: User): Response<EmailLoginResponse>
 
 
-
-
 }

@@ -8,6 +8,9 @@ import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivitySignupPrivacyCheckBinding
 import com.example.neoul.presentation.user.login.LoginActivity
+import com.example.neoul.util.savePhone
+import com.example.neoul.util.saveSignName
+import com.example.neoul.util.saveUserBirth
 
 class CheckPrivacySignUpActivity:AppCompatActivity() {
     private lateinit var binding:ActivitySignupPrivacyCheckBinding
@@ -116,6 +119,9 @@ class CheckPrivacySignUpActivity:AppCompatActivity() {
 
             btnNext.setOnClickListener {
                 val intent = Intent(this@CheckPrivacySignUpActivity,SignUpActivity::class.java)
+                savePhone(editPhonenum.text.toString())
+                saveUserBirth(editBirth.text.toString())
+                saveSignName(editName.text.toString())
                 startActivity(intent)
             }
 
