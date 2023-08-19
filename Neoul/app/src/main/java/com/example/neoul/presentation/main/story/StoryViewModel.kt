@@ -22,7 +22,7 @@ class StoryViewModel(
         if (getJwt().isNullOrEmpty()){
             jwt = Url.AUTH_KEY
         }else{
-            jwt = "Bearer "+ getJwt()
+            jwt = getJwt().toString()
         }
 
         val story = storyRepository.getStoryList(jwt)?.map {

@@ -25,7 +25,7 @@ class BrandViewModel(
         if (getJwt().isNullOrEmpty()){
             jwt = Url.AUTH_KEY
         }else{
-            jwt = "Bearer "+ getJwt()
+            jwt = getJwt().toString()
         }
 
         val brandList = brandRepository.getBrandList(jwt)?.map {
