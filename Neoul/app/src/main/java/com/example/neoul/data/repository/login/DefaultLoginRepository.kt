@@ -4,7 +4,6 @@ import android.util.Log
 import com.example.neoul.presentation.user.login.LoginDataFile.EmailLoginResponse
 import com.example.neoul.presentation.user.login.LoginDataFile.User
 import com.example.neoul.presentation.user.login.LoginDataSource.LoginInterface
-import com.example.neoul.util.getJwt
 import com.example.neoul.util.saveJwt
 import com.example.neoul.util.saveUsername
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,6 +21,7 @@ class DefaultLoginRepository(
             saveJwt( "Bearer " + response.body()?.data?.accessToken.toString())
             saveUsername(response.body()?.data?.username.toString())
             Log.d("Tester", "login: ${response.body()!!.data!!.firstLogin}")
+
             return@withContext response.body()
 
         }else{

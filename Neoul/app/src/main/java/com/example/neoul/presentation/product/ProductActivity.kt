@@ -8,12 +8,17 @@ import android.view.MenuItem
 import android.webkit.WebChromeClient
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.neoul.R
 import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
+import com.example.neoul.presentation.main.MainMenuId
 import com.example.neoul.presentation.main.home.SearchActivity
+import com.example.neoul.util.MainMenuBus
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
@@ -26,7 +31,7 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
             intent.getParcelableExtra<Story>(PRODUCT_KEY)
         )
     }
-
+    private val mainMenuBus by inject<MainMenuBus>()
     override fun getViewBinding(): ActivityProductBinding =
         ActivityProductBinding.inflate(layoutInflater)
 
@@ -39,6 +44,9 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
                 }
                 is ProductState.Failure -> {
                     handleFailure()
+                }
+                is ProductState.NotAuth -> {
+                    handleNotAuth()
                 }
                 else -> Unit
             }
@@ -92,6 +100,14 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
             }
             this.webChromeClient = WebChromeClient()
             this.loadUrl(state.product.productUrl)
+        }
+    }
+
+    private fun handleNotAuth() {
+        Toast.makeText(this, "로그인이 필요한 서비스입니다.", Toast.LENGTH_LONG).show()
+        lifecycleScope.launch {
+            mainMenuBus.changMenu(MainMenuId.My)
+            finish()
         }
     }
 
