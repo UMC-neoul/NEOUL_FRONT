@@ -21,31 +21,16 @@ class BrandViewModel(
     val brandLiveData = MutableLiveData<List<BrandItem>>()
     override fun fetchData() = viewModelScope.launch {
 
-        //accessToken 가져오기
-        jwt = "Bearer "+ getJwt()
+        //accessToken 가져오기 (비 회원도 일단 가져오기)
+        if (getJwt().isNullOrEmpty()){
+            jwt = Url.AUTH_KEY
+        }else{
+            jwt = "Bearer "+ getJwt()
+        }
 
         val brandList = brandRepository.getBrandList(jwt)?.map {
             it.toModel()
         } ?: listOf()
-//        val productList = listOf(
-//            Product("", "[핸드메이드] 푸른마음 귀걸이", 16400, 12,""),
-//            Product("", "[핸드메이드] 푸른마음 귀걸이", 16400, 12,""),
-//            Product("", "[핸드메이드] 푸른마음 귀걸이", 16400, 12,""),
-//            Product("", "[핸드메이드] 푸른마음 귀걸이", 16400, 12,""),
-//            Product("", "[핸드메이드] 푸른마음 귀걸이", 16400, 12,""),
-//
-
-//            )
-//        val brandList = listOf(
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//            BrandItem("꼬북이", "바다거북이를 보호하자", "aa",  productList),
-//           )
 
         brandLiveData.value = brandList
     }

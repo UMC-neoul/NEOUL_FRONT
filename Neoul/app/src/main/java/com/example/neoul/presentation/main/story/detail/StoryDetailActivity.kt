@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.neoul.R
@@ -50,11 +51,11 @@ class StoryDetailActivity : BaseActivity<StoryDetailViewModel, ActivityStoryDeta
     override fun getViewBinding(): ActivityStoryDetailBinding = ActivityStoryDetailBinding.inflate(layoutInflater)
     override fun observeData() =viewModel.storyDetailLiveData.observe(this){
         when(it){
-            is StoryDetailState.Loading->{
-                handleLoading()
-            }
             is StoryDetailState.Success->{
                 handleSuccess(it)
+            }
+            is StoryDetailState.NotAuth ->{
+                handleNotAuth()
             }
             else -> Unit
         }
@@ -73,8 +74,6 @@ class StoryDetailActivity : BaseActivity<StoryDetailViewModel, ActivityStoryDeta
         }
     }
 
-    private fun handleLoading(){}
-
     @SuppressLint("SetTextI18n")
     private fun handleSuccess(state : StoryDetailState.Success){
       //  binding.writerName.text = state.story.author
@@ -88,6 +87,14 @@ class StoryDetailActivity : BaseActivity<StoryDetailViewModel, ActivityStoryDeta
             .error(R.drawable.base_img)
             .fallback(R.drawable.base_img)
             .into(binding.storyImage)
+    }
+
+    private fun handleNotAuth() {
+        Toast.makeText(this, "로그인이 필요한 서비스입니다.", Toast.LENGTH_LONG).show()
+        lifecycleScope.launch {
+            mainMenuBus.changMenu(MainMenuId.My)
+            finish()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

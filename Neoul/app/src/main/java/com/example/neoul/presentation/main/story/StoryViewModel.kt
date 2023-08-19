@@ -18,8 +18,12 @@ class StoryViewModel(
     val storyLiveData = MutableLiveData<List<Story>>()
     override fun fetchData() = viewModelScope.launch {
 
-        //accessToken 가져오기
-        jwt = "Bearer "+ getJwt()
+        //accessToken 가져오기 (비 회원도 일단 가져오기)
+        if (getJwt().isNullOrEmpty()){
+            jwt = Url.AUTH_KEY
+        }else{
+            jwt = "Bearer "+ getJwt()
+        }
 
         val story = storyRepository.getStoryList(jwt)?.map {
             it.toModel()

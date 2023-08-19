@@ -7,9 +7,12 @@ import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.neoul.R
@@ -20,6 +23,7 @@ import com.example.neoul.presentation.main.home.HomeFragment
 import com.example.neoul.presentation.main.my.MyPageFragment
 import com.example.neoul.presentation.main.story.StoryFragment
 import com.example.neoul.util.MainMenuBus
+import com.example.neoul.util.NetworkManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -40,45 +44,55 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
+        //네트워크 연결 상태 확인
+        if (NetworkManager.checkNetworkState(this)){
+            binding.bottomNav.isVisible = true
+            binding.fragmentContainer.isVisible = true
+            showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
 
-        binding.bottomNav.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.menu_home -> {
+            binding.bottomNav.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.menu_home -> {
 
-                    it.setIcon(R.drawable.home_after)
-                    showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
-                    return@setOnItemSelectedListener true
-                }
+                        it.setIcon(R.drawable.home_after)
+                        showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
+                        return@setOnItemSelectedListener true
+                    }
 
-                R.id.menu_category -> {
-                    binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
-                    showFragment(CategoryFragment.newInstance(), CategoryFragment.TAG)
-                    return@setOnItemSelectedListener true
-                }
+                    R.id.menu_category -> {
+                        binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
+                        showFragment(CategoryFragment.newInstance(), CategoryFragment.TAG)
+                        return@setOnItemSelectedListener true
+                    }
 
-                R.id.menu_brand -> {
-                    binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
-                    showFragment(BrandFragment.newInstance(), BrandFragment.TAG)
-                    return@setOnItemSelectedListener true
-                }
+                    R.id.menu_brand -> {
+                        binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
+                        showFragment(BrandFragment.newInstance(), BrandFragment.TAG)
+                        return@setOnItemSelectedListener true
+                    }
 
-                R.id.menu_story -> {
-                    binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
-                    showFragment(StoryFragment.newInstance(), StoryFragment.TAG)
-                    return@setOnItemSelectedListener true
-                }
+                    R.id.menu_story -> {
+                        binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
+                        showFragment(StoryFragment.newInstance(), StoryFragment.TAG)
+                        return@setOnItemSelectedListener true
+                    }
 
-                R.id.menu_my -> {
-                    binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
-                    showFragment(MyPageFragment.newInstance(), MyPageFragment.TAG)
-                    return@setOnItemSelectedListener true
-                }
+                    R.id.menu_my -> {
+                        binding.bottomNav.menu.findItem(R.id.menu_home).setIcon(R.drawable.home)
+                        showFragment(MyPageFragment.newInstance(), MyPageFragment.TAG)
+                        return@setOnItemSelectedListener true
+                    }
 
-                else -> {
-                    return@setOnItemSelectedListener false
+                    else -> {
+                        return@setOnItemSelectedListener false
+                    }
                 }
             }
+
+        }else{
+            Toast.makeText(this,"네트워크 연결을 확인해 주세요", Toast.LENGTH_LONG).show()
+            binding.bottomNav.isGone = true
+            binding.fragmentContainer.isGone = true
         }
     }
 
@@ -109,5 +123,5 @@ class MainActivity : AppCompatActivity() {
 }
 
 enum class MainMenuId(@IdRes val id: Int){
-    BRAND(R.id.menu_brand)
+    BRAND(R.id.menu_brand),My(R.id.menu_my)
 }

@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.neoul.R
 import com.example.neoul.adapter.ProductGridRVAdapter
@@ -18,8 +19,12 @@ import com.example.neoul.adapter.ProductHorizontalRVAdapter
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.databinding.ActivityBrandDetailBinding
 import com.example.neoul.presentation.BaseActivity
+import com.example.neoul.presentation.main.MainMenuId
 import com.example.neoul.presentation.main.home.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
+import com.example.neoul.util.MainMenuBus
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -30,6 +35,8 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
             intent.getParcelableExtra(BRAND_KEY)
         )
     }
+
+    private val mainMenuBus by inject<MainMenuBus>()
 
     override fun getViewBinding(): ActivityBrandDetailBinding =
         ActivityBrandDetailBinding.inflate(layoutInflater)
@@ -62,6 +69,9 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
                 }
                 is BrandDetailState.Failure -> {
                     handleFailure()
+                }
+                is BrandDetailState.NotAuth ->{
+                    handleNotAuth()
                 }
                 else -> Unit
             }
@@ -113,6 +123,14 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
         binding.brandTag.text = state.brand.hashTag?.forEach {
             hashTag += "$it "
         }.toString()
+    }
+
+    private fun handleNotAuth() {
+        Toast.makeText(this, "로그인이 필요한 서비스입니다.", Toast.LENGTH_LONG).show()
+        lifecycleScope.launch {
+            mainMenuBus.changMenu(MainMenuId.My)
+            finish()
+        }
     }
 
     private fun handleFailure() {

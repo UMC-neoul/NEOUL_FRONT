@@ -23,8 +23,13 @@ class BrandDetailViewModel(
     val productListLiveData = MutableLiveData<List<Product>>()
 
     override fun fetchData() = viewModelScope.launch {
-        //accessToken 가져오기
-        jwt = "Bearer "+ getJwt()
+
+        //accessToken 가져오기 (비회원일때는 my fragment 로 이동)
+        if (getJwt().isNullOrEmpty()){
+            brandDetailStateLiveData.value = BrandDetailState.NotAuth
+        }else{
+            jwt = "Bearer "+ getJwt()
+        }
 
         //찜한 브랜지인지 확인 (BRAND LIKE LIST GET) -> 찜 버튼 적용
         val liked = brandRepository.likeBrandList(jwt)?.likedBrands?.any {
