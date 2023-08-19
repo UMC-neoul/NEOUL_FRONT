@@ -83,7 +83,7 @@
         android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginTop="42dp"
-        android:hint="2000.01.01"
+        android:hint="20000101"
         android:paddingLeft="18dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"

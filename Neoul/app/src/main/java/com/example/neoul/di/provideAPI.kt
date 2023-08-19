@@ -5,6 +5,7 @@ import com.example.neoul.data.network.ProductApiService
 import com.example.neoul.data.network.StoryApiService
 import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.story.StoryRepository
+import com.example.neoul.presentation.main.my.data.MyPageInterface
 import com.example.neoul.presentation.user.login.LoginDataSource.LoginInterface
 import com.example.neoul.presentation.user.signup.SignupDataFile.SignupInterface
 import okhttp3.OkHttpClient
@@ -28,6 +29,10 @@ fun provideLoginApiService(retrofit: Retrofit):LoginInterface{
 
 fun provideSignUpApiService(retrofit: Retrofit):SignupInterface{
     return retrofit.create(SignupInterface::class.java)
+}
+
+fun provideMyPageApiService(retrofit: Retrofit): MyPageInterface {
+    return retrofit.create(MyPageInterface::class.java)
 }
 
 

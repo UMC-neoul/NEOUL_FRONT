@@ -6,6 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivityLoginBinding
 import com.example.neoul.presentation.main.MainActivity
 import com.example.neoul.presentation.user.signup.SignUpCheckActivity
+import com.example.neoul.util.removeJwt
+import com.example.neoul.util.removePhone
+import com.example.neoul.util.removeRefresh
+import com.example.neoul.util.removeSignName
+import com.example.neoul.util.removeUserBirth
+import com.example.neoul.util.removeUsername
 
 class LoginActivity :AppCompatActivity() {
     private lateinit var binding:ActivityLoginBinding
@@ -14,7 +20,7 @@ class LoginActivity :AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        removeall()
 
         with(binding){
 
@@ -40,4 +46,19 @@ class LoginActivity :AppCompatActivity() {
 
         }
     }
+
+    private fun removeall(){
+        removeJwt()
+        removeRefresh()
+        removeSignName()
+        removeUsername()
+        removeUserBirth()
+        removePhone()
+    }
+
+
+
+
+
+
 }
