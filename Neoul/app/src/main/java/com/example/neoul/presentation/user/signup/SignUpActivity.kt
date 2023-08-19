@@ -5,10 +5,22 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.neoul.data.repository.signup.SignupRepository
 import com.example.neoul.databinding.ActivitySignupBinding
+import com.example.neoul.presentation.user.signup.SignupDataFile.SignupData
+import com.example.neoul.presentation.user.signup.SignupDataFile.SignupUser
+import com.example.neoul.util.getPhone
+import com.example.neoul.util.getSignName
+import com.example.neoul.util.getUserBirth
+import com.example.neoul.util.getUsername
+import kotlinx.coroutines.launch
 import org.jetbrains.annotations.NotNull
 import org.koin.android.ext.android.bind
+import org.koin.android.ext.android.inject
+import java.util.regex.Pattern
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -17,12 +29,12 @@ class SignUpActivity : AppCompatActivity() {
     var password_check = false
     var password_double_check = false
 
+    private val signUpApi by inject<SignupRepository>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
 
         with(binding){
@@ -44,7 +56,7 @@ class SignUpActivity : AppCompatActivity() {
 
                 override fun afterTextChanged(s: Editable?) {
                     if(editEmail.length()>5){
-                        email_check = true
+                        email_check = emailcheck()
                         signup_check()
                     }else{
                         email_check = false
@@ -110,8 +122,7 @@ class SignUpActivity : AppCompatActivity() {
             })
 
             btnNext.setOnClickListener {
-                val intent = Intent(this@SignUpActivity,SignUpFinishActivity::class.java)
-                startActivity(intent)
+                signup()
             }
 
             btnBack.setOnClickListener {
@@ -140,7 +151,38 @@ class SignUpActivity : AppCompatActivity() {
     }
 
 
+    val emailValidation =  "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+    private fun emailcheck() : Boolean{
+        var email = binding.editEmail.text.toString().trim()
+        val p = Pattern.matches(emailValidation, email)
+        return p
+    }
 
+    private fun signup(){
+        lifecycleScope.launch {
+            val signUpData = signUpApi.signup(getSignUpData())
+            if(signUpData?.code == 200){
+                startSuccessActivity()
+            }else{
+                Toast.makeText(this@SignUpActivity,signUpData?.message.toString(), Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+
+        }
+    }
+
+    private fun getSignUpData() : SignupUser{
+        val password = binding.editPassword.text.toString()
+        val email = binding.editEmail.text.toString()
+
+        return SignupUser(birth = getUserBirth()!!, imageUrl = "", name = getSignName()!!, password = password, username = email, phone = getPhone()!! )
+    }
+
+    private fun startSuccessActivity(){
+        val intent = Intent(this@SignUpActivity,SignUpFinishActivity::class.java)
+        startActivity(intent)
+    }
 
 
 }

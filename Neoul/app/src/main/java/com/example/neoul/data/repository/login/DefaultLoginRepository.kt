@@ -1,18 +1,16 @@
 package com.example.neoul.data.repository.login
 
 import android.util.Log
-import com.example.neoul.presentation.user.login.LoginDataFile.Data
 import com.example.neoul.presentation.user.login.LoginDataFile.EmailLoginResponse
 import com.example.neoul.presentation.user.login.LoginDataFile.User
 import com.example.neoul.presentation.user.login.LoginDataSource.LoginInterface
+import com.example.neoul.util.getJwt
 import com.example.neoul.util.saveJwt
+import com.example.neoul.util.saveUsername
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class DefultLoginRepository(
+class DefaultLoginRepository(
     private val loginApiService: LoginInterface,
     private val ioDispatcher: CoroutineDispatcher
 ) :LoginRepository{
@@ -21,12 +19,13 @@ class DefultLoginRepository(
 
         if(response.isSuccessful){
             Log.d("Tester", "login: ${response.body()}")
-            saveJwt(response.body()?.data.toString())
+            saveJwt( "Bearer " + response.body()?.data?.accessToken.toString())
+            saveUsername(response.body()?.data?.username.toString())
+            Log.d("Tester", "login: ${response.body()!!.data!!.firstLogin}")
             return@withContext response.body()
 
         }else{
-            Log.d("Tester", "login: fail ${response}")
-            return@withContext response.body()
+            return@withContext null
 
         }
     }

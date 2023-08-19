@@ -7,4 +7,10 @@ object UserCode {
     const val username = "username"
     const val refresh = "refresh"
 
+    //SignIn
+    const val birth = "birth"
+    const val signInName = "signInName"
+    const val phoneNum = "phoneNum"
+
+
 }

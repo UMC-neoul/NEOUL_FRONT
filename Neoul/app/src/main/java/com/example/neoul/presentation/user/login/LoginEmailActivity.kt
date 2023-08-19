@@ -129,12 +129,12 @@ class LoginEmailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val loginData = loginApi.login(getUser())
             Log.d("Tester", "login:12312 ${loginData?.message}")
-            if(loginData?.code == 200 && loginData?.data!!.firstLogin){
+            if(loginData?.code == 200 && loginData.data!!.firstLogin){
                 startFirstLoginActivity()
             }else if(loginData?.code == 200){
                 startSuccessActivity()
             }else{
-                Toast.makeText(this@LoginEmailActivity,loginData?.message.toString(),Toast.LENGTH_SHORT)
+                Toast.makeText(this@LoginEmailActivity,"아이디 혹은 비밀번호가 틀렸습니다.",Toast.LENGTH_SHORT)
                     .show()
             }
         }

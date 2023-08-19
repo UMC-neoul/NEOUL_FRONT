@@ -9,6 +9,7 @@ import androidx.activity.OnBackPressedDispatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivityMypageSettingBinding
 import com.example.neoul.presentation.main.MainActivity
+import com.example.neoul.presentation.user.login.LoginActivity
 
 class MyPageSettingActivity:AppCompatActivity() {
     private lateinit var binding:ActivityMypageSettingBinding
@@ -28,6 +29,11 @@ class MyPageSettingActivity:AppCompatActivity() {
                 onBackPressed()//onbackpressdispatcher? 로 교채 예정(알아보는중)
             }
 
+            btnLogout.setOnClickListener {
+                val intent = Intent(this@MyPageSettingActivity,LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
 
 
             btnPrivacyChange.setOnClickListener {
