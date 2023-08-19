@@ -8,12 +8,17 @@ import android.view.MenuItem
 import android.webkit.WebChromeClient
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.neoul.R
 import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
 import com.example.neoul.presentation.main.header.SearchActivity
+import com.example.neoul.presentation.main.MainMenuId
+import com.example.neoul.util.MainMenuBus
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.text.SimpleDateFormat
@@ -26,7 +31,7 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
             intent.getParcelableExtra<Story>(PRODUCT_KEY)
         )
     }
-
+    private val mainMenuBus by inject<MainMenuBus>()
     override fun getViewBinding(): ActivityProductBinding =
         ActivityProductBinding.inflate(layoutInflater)
 
@@ -37,9 +42,15 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
                 is ProductState.Success -> {
                     handleSuccess(it)
                 }
+
                 is ProductState.Failure -> {
                     handleFailure()
                 }
+
+                is ProductState.NotAuth -> {
+                    handleNotAuth()
+                }
+
                 else -> Unit
             }
         }
@@ -85,18 +96,26 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
         //webView 설정
         binding.webView.apply {
             this.settings.apply {
-                javaScriptEnabled= true // 자바스크립트 사용여부
+                javaScriptEnabled = true // 자바스크립트 사용여부
                 setSupportMultipleWindows(true) // 새창 띄우기 허용여부
-                javaScriptCanOpenWindowsAutomatically= true // 자바스크립트가 window.open()을 사용할 수 있도록 설정
-                loadWithOverviewMode= true // html의 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
+                javaScriptCanOpenWindowsAutomatically = true // 자바스크립트가 window.open()을 사용할 수 있도록 설정
+                loadWithOverviewMode = true // html의 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
             }
             this.webChromeClient = WebChromeClient()
             this.loadUrl(state.product.productUrl)
         }
     }
 
+    private fun handleNotAuth() {
+        Toast.makeText(this, "로그인이 필요한 서비스입니다.", Toast.LENGTH_LONG).show()
+        lifecycleScope.launch {
+            mainMenuBus.changMenu(MainMenuId.My)
+            finish()
+        }
+    }
+
     private fun handleFailure() {
-        Toast.makeText(this,"ERROR",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()
     }
 
     override fun initViews() {
