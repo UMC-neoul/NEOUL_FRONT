@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+
     <application
         android:name=".NeoulApplication"
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,12 +16,13 @@
         android:roundIcon="@mipmap/ic_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Neoul"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".presentation.product.ProductActivity"
             android:exported="false" />
         <activity
-             android:name=".presentation.main.story.detail.StoryDetailActivity"
+            android:name=".presentation.main.story.detail.StoryDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.main.brand.detail.BrandDetailActivity"
@@ -30,13 +31,16 @@
             android:name=".presentation.main.home.EventActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.main.home.SearchActivity"
+            android:name=".presentation.main.header.SearchActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.main.header.LikeListActivity"
+            android:exported="false" />
+
 
         <activity
             android:name=".presentation.main.MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
 
         <!--Splash Activity 추가-->
         <activity
@@ -52,20 +56,18 @@
         </activity>
 
 
-
         <!--Login Activity 추가-->
         <activity
             android:name=".presentation.user.login.LoginEmailActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".presentation.user.login.LoginActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
         <!--SignUp Activity 추가-->
@@ -73,25 +75,25 @@
             android:name=".presentation.user.signup.SignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".presentation.user.signup.SignUpCheckActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".presentation.user.signup.CheckPrivacySignUpActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".presentation.user.signup.SignUpFinishActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
         <!--preference Activity 추가-->
@@ -99,27 +101,23 @@
             android:name=".presentation.user.signup.PreferenceActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <!--MyPageSetting Activity 추가-->
         <activity
             android:name=".presentation.main.my.setting.MyPageSettingActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".presentation.main.my.setting.MyPageSettingChangeInfoActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
-
-
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
     </application>
-
 
 
 </manifest>

@@ -4,19 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.neoul.R
 import com.example.neoul.databinding.FragmentCategoryBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.BrandFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding>() {
 
-    override val viewModel by viewModel<CategoryViewModel>()
+    override val viewModel by viewModel<CategoryViewModel> {
+        parametersOf(1, 1)
+    }
 
     override fun getViewBinding() = FragmentCategoryBinding.inflate(layoutInflater)
 
-    override fun observeDate() {}
+    override fun observeDate() = viewModel.categoryLiveData.observe(viewLifecycleOwner) {
+
+
+    }
 
     companion object {
         fun newInstance() = CategoryFragment()
@@ -46,6 +53,7 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
 
         TabLayoutMediator(viewBinding.layoutTab, viewBinding.viewPager) { tab, position ->
             tab.text = tabTitleArray[position]
+
         }.attach()
 
         return viewBinding.root

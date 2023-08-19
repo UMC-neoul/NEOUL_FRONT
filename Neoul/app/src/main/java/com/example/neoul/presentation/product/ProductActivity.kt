@@ -14,8 +14,8 @@ import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.main.MainMenuId
-import com.example.neoul.presentation.main.home.SearchActivity
 import com.example.neoul.util.MainMenuBus
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -42,12 +42,15 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
                 is ProductState.Success -> {
                     handleSuccess(it)
                 }
+
                 is ProductState.Failure -> {
                     handleFailure()
                 }
+
                 is ProductState.NotAuth -> {
                     handleNotAuth()
                 }
+
                 else -> Unit
             }
         }
@@ -93,10 +96,10 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
         //webView 설정
         binding.webView.apply {
             this.settings.apply {
-                javaScriptEnabled= true // 자바스크립트 사용여부
+                javaScriptEnabled = true // 자바스크립트 사용여부
                 setSupportMultipleWindows(true) // 새창 띄우기 허용여부
-                javaScriptCanOpenWindowsAutomatically= true // 자바스크립트가 window.open()을 사용할 수 있도록 설정
-                loadWithOverviewMode= true // html의 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
+                javaScriptCanOpenWindowsAutomatically = true // 자바스크립트가 window.open()을 사용할 수 있도록 설정
+                loadWithOverviewMode = true // html의 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
             }
             this.webChromeClient = WebChromeClient()
             this.loadUrl(state.product.productUrl)
@@ -112,7 +115,7 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
     }
 
     private fun handleFailure() {
-        Toast.makeText(this,"ERROR",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show()
     }
 
     override fun initViews() {

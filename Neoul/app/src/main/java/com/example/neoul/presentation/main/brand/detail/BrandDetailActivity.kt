@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -19,8 +18,8 @@ import com.example.neoul.adapter.ProductHorizontalRVAdapter
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.databinding.ActivityBrandDetailBinding
 import com.example.neoul.presentation.BaseActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.main.MainMenuId
-import com.example.neoul.presentation.main.home.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
 import com.example.neoul.util.MainMenuBus
 import kotlinx.coroutines.launch
@@ -67,17 +66,20 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
                 is BrandDetailState.Success -> {
                     handleSuccess(it)
                 }
+
                 is BrandDetailState.Failure -> {
                     handleFailure()
                 }
-                is BrandDetailState.NotAuth ->{
+
+                is BrandDetailState.NotAuth -> {
                     handleNotAuth()
                 }
+
                 else -> Unit
             }
         }
         //정렬 순서 변화
-        viewModel.productListLiveData.observe(this){
+        viewModel.productListLiveData.observe(this) {
             adapterGrid.setList(it)
         }
         //찜 상태 변화
@@ -119,7 +121,7 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
         adapterGrid.setList(state.brand.productList)
         adapterGrid.brandName = state.brand.name
         adapterHorizontal.setList(state.brand.productList)
-        var hashTag  = ""
+        var hashTag = ""
         binding.brandTag.text = state.brand.hashTag?.forEach {
             hashTag += "$it "
         }.toString()
@@ -204,11 +206,13 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
                 finish()
                 return true
             }
+
             R.id.toolbar_search -> {
                 //검색화면 이동
                 startActivity(Intent(this, SearchActivity::class.java))
                 return true
             }
+
             R.id.toolbar_favorite -> {
                 //찜화면 이동
                 return true

@@ -19,6 +19,8 @@ import com.example.neoul.data.repository.story.StoryRepository
 import com.example.neoul.presentation.main.brand.BrandViewModel
 import com.example.neoul.presentation.main.brand.detail.BrandDetailViewModel
 import com.example.neoul.presentation.main.category.CategoryViewModel
+import com.example.neoul.presentation.main.header.LikeListViewModel
+import com.example.neoul.presentation.main.header.SearchViewModel
 import com.example.neoul.presentation.main.home.EventViewModel
 import com.example.neoul.presentation.main.home.HomeViewModel
 import com.example.neoul.presentation.main.my.MyPageViewModel
@@ -48,15 +50,18 @@ val appModule = module {
 
     //loginApi
     single { provideLoginApiService(get()) }
-    single<LoginRepository>{ DefaultLoginRepository(get(), get()) }
+
+    single<LoginRepository> { DefaultLoginRepository(get(), get()) }
+
 
     //SignUpApi
     single { provideSignUpApiService(get()) }
-    single<SignupRepository>{DefaultSignupRepository(get(),get())}
+
+    single<SignupRepository> { DefaultSignupRepository(get(), get()) }
 
     //MyPageApi
     single { provideMyPageApiService(get()) }
-    single<MyPageRepository>{DefaultMyPageRepository(get(),get())}
+    single<MyPageRepository> { DefaultMyPageRepository(get(), get()) }
 
 
     //Repository
@@ -69,14 +74,18 @@ val appModule = module {
     single { MainMenuBus() }
 
     //VM
-    viewModel { HomeViewModel() }
+    viewModel { HomeViewModel(get(), get()) }
     viewModel { EventViewModel() }
-    viewModel { CategoryViewModel() }
+    viewModel { (categoryId: Int) ->
+        CategoryViewModel(get(), categoryId)
+    }
     viewModel { BrandViewModel(get()) }
-    viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand, get() ) }
+    viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand, get()) }
     viewModel { StoryViewModel(get()) }
     viewModel { (story: Story) -> StoryDetailViewModel(story, get()) }
     viewModel { MyPageViewModel(get()) }
     viewModel { (product: Product) -> ProductViewModel(product, get()) }
+    viewModel { SearchViewModel() }
+    viewModel { LikeListViewModel(get(), get()) }
 
 }

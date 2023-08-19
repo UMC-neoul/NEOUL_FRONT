@@ -3,19 +3,19 @@ package com.example.neoul.presentation.main.category
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.neoul.data.model.CategoryItem
-import com.example.neoul.data.response.product.category.Data
+import com.example.neoul.data.response.like.product.LikedProduct
 import com.example.neoul.databinding.ItemCatItemBinding
 
-class TabRVAdapter(private val itemList: List<Data>) :
-    RecyclerView.Adapter<TabRVAdapter.DataViewHolder>() {
+class LikeListProductRVAdater(private val itemList: List<LikedProduct>) :
+    RecyclerView.Adapter<LikeListProductRVAdater.DataViewHolder>() {
+
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(data: Data) {
-            viewBinding.textName.text = data.brandName
+        fun bind(data: LikedProduct) {
+//            viewBinding.textName.text = data.brandName
             viewBinding.textTitle.text = data.productName
 
-            viewBinding.textPrice.text = data.price.toString()
+//            viewBinding.textPrice.text = data.price.toString()
         }
     }
 

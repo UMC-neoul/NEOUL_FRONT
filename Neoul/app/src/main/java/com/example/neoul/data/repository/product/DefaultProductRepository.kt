@@ -22,12 +22,11 @@ class DefaultProductRepository(
         }
     }
 
-    override suspend fun likeProductList(accessToken: String): Data?
-    = withContext(ioDispatcher){
+    override suspend fun likeProductList(accessToken: String): Data? = withContext(ioDispatcher) {
         val response = productApiService.likeProductListApi(accessToken)
-        if (response.isSuccessful){
+        if (response.isSuccessful) {
             response.body()?.data
-        }else{
+        } else {
             null
         }
     }
@@ -37,4 +36,33 @@ class DefaultProductRepository(
             productApiService.postViewHistory(accessToken, request)
         }
     }
+
+    override suspend fun allProduct(accessToken: String): List<com.example.neoul.data.response.product.all.Data>? =
+        withContext(ioDispatcher) {
+            val response = productApiService.allProductApi(accessToken)
+            if (response.isSuccessful) {
+                response.body()?.data
+            } else {
+                null
+            }
+
+        }
+
+    override suspend fun categoryProduct(
+        accessToken: String,
+        categoryId: Int,
+        option: Int
+    ): List<com.example.neoul.data.response.product.category.Data>? =
+        withContext(ioDispatcher){
+            val response = productApiService.categoryProductApi(accessToken,categoryId,option)
+            if (response.isSuccessful) {
+                response.body()?.data
+            } else {
+                null
+            }
+        }
+
+
+
+
 }

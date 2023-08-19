@@ -4,7 +4,7 @@ import android.content.Intent
 import com.example.neoul.adapter.StoryRVAdapter
 import com.example.neoul.databinding.FragmentStoryBinding
 import com.example.neoul.presentation.BaseFragment
-import com.example.neoul.presentation.main.home.SearchActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.main.story.detail.StoryDetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
