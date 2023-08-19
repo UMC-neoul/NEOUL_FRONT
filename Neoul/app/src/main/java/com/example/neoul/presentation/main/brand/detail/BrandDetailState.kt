@@ -7,6 +7,8 @@ sealed class BrandDetailState {
 
     object Failure: BrandDetailState()
 
+    object NotAuth: BrandDetailState()
+
     data class Success(
         val brand: BrandDetail
     ) : BrandDetailState()

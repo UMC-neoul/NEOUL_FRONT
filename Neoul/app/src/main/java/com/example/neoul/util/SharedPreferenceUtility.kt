@@ -10,7 +10,10 @@ fun saveJwt(jwt:String){
     editor.apply()
 }
 
-fun getJwt():String?=NeoulApplication.sSharedPreference.getString(UserCode.jwt,null)
+fun getJwt():String?{
+    val spf = NeoulApplication.sSharedPreference
+    return spf.getString(UserCode.jwt,null)
+}
 
 fun removeJwt(){
     val spf = NeoulApplication.sSharedPreference
