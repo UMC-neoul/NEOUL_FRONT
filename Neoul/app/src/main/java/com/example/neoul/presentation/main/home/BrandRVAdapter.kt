@@ -13,12 +13,18 @@ import com.example.neoul.databinding.ItemHomeBrandBinding
 
 class BrandRVAdapter(
     val itemList: ArrayList<BrandItem>,
-    val productClickListener: (Product) -> Unit
+    val productClickListener: (Product) -> Unit,
+    val brandClickListener: (BrandItem) -> Unit
+
 ) : RecyclerView.Adapter<BrandRVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val viewBinding: ItemHomeBrandBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: BrandItem,isFirstItem:Boolean) {
             viewBinding.apply {
+
+                viewContent.setOnClickListener {
+                    brandClickListener(data)
+                }
                 textBrandTitle.text = data.name
                 textBrandContent.text = data.content
 
