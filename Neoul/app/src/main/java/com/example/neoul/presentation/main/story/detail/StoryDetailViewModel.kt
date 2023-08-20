@@ -25,7 +25,7 @@ class StoryDetailViewModel(
         if (getJwt().isNullOrEmpty()){
             storyDetailLiveData.value = StoryDetailState.NotAuth
         }else{
-            jwt = "Bearer "+ getJwt()
+            jwt = getJwt().toString()
         }
 
         //STORY DETAIL GET

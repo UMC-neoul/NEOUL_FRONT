@@ -14,8 +14,9 @@ import com.example.neoul.data.model.Product
 import com.example.neoul.data.model.Story
 import com.example.neoul.databinding.ActivityProductBinding
 import com.example.neoul.presentation.BaseActivity
-import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.main.MainMenuId
+import com.example.neoul.presentation.main.header.LikeListActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.util.MainMenuBus
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -151,6 +152,7 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
 
             R.id.toolbar_favorite -> {
                 //찜화면 이동
+                startActivity(Intent(this, LikeListActivity::class.java))
                 return true
             }
         }

@@ -20,6 +20,7 @@ import com.example.neoul.databinding.ActivityBrandDetailBinding
 import com.example.neoul.presentation.BaseActivity
 import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.main.MainMenuId
+import com.example.neoul.presentation.main.header.LikeListActivity
 import com.example.neoul.presentation.product.ProductActivity
 import com.example.neoul.util.MainMenuBus
 import kotlinx.coroutines.launch
@@ -215,6 +216,7 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
 
             R.id.toolbar_favorite -> {
                 //찜화면 이동
+                startActivity(Intent(this, LikeListActivity::class.java))
                 return true
             }
         }

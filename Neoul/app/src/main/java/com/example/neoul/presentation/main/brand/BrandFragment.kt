@@ -9,6 +9,7 @@ import com.example.neoul.adapter.BrandItemRVAdapter
 import com.example.neoul.databinding.FragmentBrandBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
+import com.example.neoul.presentation.main.header.LikeListActivity
 import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -44,6 +45,9 @@ class BrandFragment : BaseFragment<BrandViewModel, FragmentBrandBinding>() {
         binding.recyclerView.adapter = adapter
         binding.searchBtn.setOnClickListener {
             startActivity(Intent(requireContext(), SearchActivity::class.java))
+        }
+        binding.likeListBtn.setOnClickListener {
+            startActivity(Intent(requireContext(), LikeListActivity::class.java))
         }
     }
 
