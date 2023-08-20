@@ -12,15 +12,17 @@ import com.example.neoul.R
 
 import com.example.neoul.data.model.CategoryItem
 import com.example.neoul.data.response.product.category.Data
+import com.example.neoul.data.response.product.category.dataToProduct
 
 import com.example.neoul.databinding.FragmentTabClothesBinding
 import com.example.neoul.presentation.BaseFragment
+import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class TabStuffFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBinding>() {
     //    private lateinit var viewBinding: FragmentTabClothesBinding
-    private var option : Int = 1
+    private var option: Int = 1
     override val viewModel by viewModel<CategoryViewModel> {
         parametersOf(4)
     }
@@ -47,7 +49,13 @@ class TabStuffFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBindi
     }
 
     private fun categoryAdapter(itemList: List<Data>) {
-        val dataRVAdapter = TabRVAdapter(itemList)
+        val dataRVAdapter = TabRVAdapter(itemList) { data ->
+            val product = dataToProduct(data)
+            startActivity(
+                ProductActivity.newIntent(requireContext(), product)
+            )
+        }
+
 
         binding.recyclerItem.adapter = dataRVAdapter
         binding.recyclerItem.layoutManager =

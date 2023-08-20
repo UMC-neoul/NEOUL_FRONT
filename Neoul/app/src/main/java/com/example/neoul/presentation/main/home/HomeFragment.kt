@@ -15,9 +15,11 @@ import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.brand.list.BrandResponse
 import com.example.neoul.data.response.product.all.Data
+import com.example.neoul.data.response.product.all.dataToProduct
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
+import com.example.neoul.presentation.main.category.TabRVAdapter
 import com.example.neoul.presentation.main.header.LikeListActivity
 import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
@@ -81,7 +83,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun bestAdapter(itemList: ArrayList<Data>) {
-        val dataRVAdapter = BestItemRVAdapter(itemList)
+        val dataRVAdapter = BestItemRVAdapter(itemList) { data ->
+            val product = dataToProduct(data)
+            startActivity(
+                ProductActivity.newIntent(requireContext(), product)
+            )
+        }
 
         binding.recyclerBest.adapter = dataRVAdapter
         binding.recyclerBest.layoutManager =
@@ -91,7 +98,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun recommandAdapter(itemList: ArrayList<Data>) {
-        val dataRVAdapter = BestItemRVAdapter(itemList)
+        val dataRVAdapter = BestItemRVAdapter(itemList) { data ->
+            val product = dataToProduct(data)
+            startActivity(
+                ProductActivity.newIntent(requireContext(), product)
+            )
+        }
 
         binding.recyclerRecommend.adapter = dataRVAdapter
         binding.recyclerRecommend.layoutManager =

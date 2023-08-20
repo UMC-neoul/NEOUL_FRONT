@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.neoul.data.response.like.product.LikedProduct
 import com.example.neoul.databinding.ItemCatItemBinding
 
-class LikeListProductRVAdater(private val itemList: List<LikedProduct>) :
+class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val productClickListener: (LikedProduct) -> Unit,) :
     RecyclerView.Adapter<LikeListProductRVAdater.DataViewHolder>() {
 
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
@@ -14,7 +14,9 @@ class LikeListProductRVAdater(private val itemList: List<LikedProduct>) :
         fun bind(data: LikedProduct) {
 //            viewBinding.textName.text = data.brandName
             viewBinding.textTitle.text = data.productName
-
+            viewBinding.imgItem.setOnClickListener {
+                productClickListener(data)
+            }
 //            viewBinding.textPrice.text = data.price.toString()
         }
     }

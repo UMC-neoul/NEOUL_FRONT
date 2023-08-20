@@ -7,13 +7,19 @@ import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.databinding.ItemBestBinding
 
-class BestItemRVAdapter(val itemList: ArrayList<Data>) :
+class BestItemRVAdapter(
+    val itemList: ArrayList<Data>,
+    val productClickListener: (Data) -> Unit,
+) :
     RecyclerView.Adapter<BestItemRVAdapter.DataViewHolder>() {
 
     inner class DataViewHolder(private val viewBinding: ItemBestBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: Data) {
             viewBinding.apply {
+                imgItem.setOnClickListener {
+                    productClickListener(data)
+                }
                 textTitle.text = data.productName
 //                textPercent.text = data.
                 textPrice.text = data.price.toString()
