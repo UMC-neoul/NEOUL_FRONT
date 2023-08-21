@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.lifecycleScope
 
 
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,17 +20,24 @@ import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.data.response.product.all.dataToProduct
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
+import com.example.neoul.presentation.main.MainActivity
+import com.example.neoul.presentation.main.MainMenuId
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
+import com.example.neoul.presentation.main.category.CategoryMenu
 import com.example.neoul.presentation.main.category.TabRVAdapter
 import com.example.neoul.presentation.main.header.LikeListActivity
 import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.product.ProductActivity
+import com.example.neoul.util.CategoryMenuBus
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     var data: BrandResponse? = null
     override val viewModel by viewModel<HomeViewModel>()
 
+    private val categoryMenuBus by inject<CategoryMenuBus>()
     override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
     override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner) {
@@ -61,6 +66,53 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
 
         return binding.root
+    }
+
+    override fun initState() {
+        super.initState()
+        //브랜드 이동
+        binding.viewBrand.setOnClickListener {
+            (requireActivity() as MainActivity).goToTab(MainMenuId.BRAND)
+        }
+        //스토리 이동
+        binding.viewStory.setOnClickListener {
+            (requireActivity() as MainActivity).goToTab(MainMenuId.STORY)
+        }
+        //의류 이동
+        binding.imgShirt.setOnClickListener {
+            lifecycleScope.launch {
+                categoryMenuBus.changeMenu(CategoryMenu.CLOTHES)
+            }
+            (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
+        }
+        //악세사리 이동
+        binding.imgAccesary.setOnClickListener {
+            lifecycleScope.launch {
+                categoryMenuBus.changeMenu(CategoryMenu.ACC)
+            }
+            (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
+        }
+        //소품 이동
+        binding.imgCup.setOnClickListener {
+            lifecycleScope.launch {
+                categoryMenuBus.changeMenu(CategoryMenu.PROP)
+            }
+            (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
+        }
+        //잡화 이동
+        binding.imgBag.setOnClickListener {
+            lifecycleScope.launch {
+                categoryMenuBus.changeMenu(CategoryMenu.STUFF)
+            }
+            (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
+        }
+        //기타 이동
+        binding.imgEtc.setOnClickListener {
+            lifecycleScope.launch{
+                categoryMenuBus.changeMenu(CategoryMenu.ETC)
+            }
+            (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

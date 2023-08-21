@@ -5,13 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.example.neoul.R
 import com.example.neoul.databinding.FragmentCategoryBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.BrandFragment
 import com.example.neoul.presentation.main.header.LikeListActivity
 import com.example.neoul.presentation.main.header.SearchActivity
+import com.example.neoul.util.CategoryMenuBus
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -20,6 +24,8 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
     override val viewModel by viewModel<CategoryViewModel> {
         parametersOf(1, 1)
     }
+
+    private val categoryMenuBus by inject<CategoryMenuBus>()
 
     override fun getViewBinding() = FragmentCategoryBinding.inflate(layoutInflater)
 
@@ -65,6 +71,25 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
 
         }.attach()
 
+        observeMenuBus()
+
         return binding.root
     }
+
+    fun goToTab( menu : CategoryMenu){
+        binding.viewPager.currentItem = menu.position
+    }
+
+    fun observeMenuBus(){
+        lifecycleScope.launch {
+            categoryMenuBus.category.collect{
+                goToTab(it)
+            }
+        }
+    }
+
+}
+
+enum class CategoryMenu(val position:Int){
+    CLOTHES(0),PROP(1),ACC(2),STUFF(3),ETC(4)
 }
