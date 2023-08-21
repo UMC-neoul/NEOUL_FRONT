@@ -34,5 +34,8 @@ interface ProductRepository {
         option: Int
     ) :List<com.example.neoul.data.response.product.category.Data>?
 
-
+    suspend fun getProductDetail(
+        accessToken: String,
+        productId: Int
+    ) : String?
 }

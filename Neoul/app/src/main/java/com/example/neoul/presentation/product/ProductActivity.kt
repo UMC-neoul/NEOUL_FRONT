@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebChromeClient
+import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -102,6 +103,7 @@ class ProductActivity : BaseActivity<ProductViewModel, ActivityProductBinding>()
                 javaScriptCanOpenWindowsAutomatically = true // 자바스크립트가 window.open()을 사용할 수 있도록 설정
                 loadWithOverviewMode = true // html의 컨텐츠가 웹뷰보다 클 경우 스크린 크기에 맞게 조정
             }
+            this.webViewClient = WebViewClient()    //웹 뷰 내에서 열기
             this.webChromeClient = WebChromeClient()
             this.loadUrl(state.product.productUrl)
         }
