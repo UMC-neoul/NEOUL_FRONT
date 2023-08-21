@@ -3,10 +3,12 @@ package com.example.neoul.presentation.main.category
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neoul.R
 import com.example.neoul.data.response.like.product.LikedProduct
 import com.example.neoul.databinding.ItemCatItemBinding
+import com.example.neoul.presentation.main.header.LikeListViewModel
 
-class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val productClickListener: (LikedProduct) -> Unit,) :
+class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val productClickListener: (LikedProduct) -> Unit,val viewModel: LikeListViewModel) :
     RecyclerView.Adapter<LikeListProductRVAdater.DataViewHolder>() {
 
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
@@ -18,6 +20,20 @@ class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val prod
                 productClickListener(data)
             }
 //            viewBinding.textPrice.text = data.price.toString()
+
+            viewBinding.apply {
+                imgHeart.setImageResource(R.drawable.favorite_18)
+                var i = 0
+                imgHeart.setOnClickListener {
+                    if (i % 2 == 0) {
+                        imgHeart.setImageResource(R.drawable.favorite_border)
+                    } else {
+                        imgHeart.setImageResource(R.drawable.favorite_18)
+                    }
+                    i++
+                    viewModel.clickLikeBtn(data.productId)
+                }
+            }
         }
     }
 

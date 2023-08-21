@@ -313,7 +313,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="이름"
+                android:text="게스트"
                 android:textColor="@color/primary50"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -330,6 +330,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/text_name"
                 app:layout_constraintTop_toTopOf="@id/text_name"
+                app:layout_constraintBottom_toBottomOf="@id/text_name"
 
                 />
 
