@@ -22,6 +22,7 @@ class LikeListBrandRVAdapter(
             viewBinding.viewContent.setOnClickListener {
                 brandClickListener(data)
             }
+
 //            Glide.with(itemView)
 //                .load(data.productImgList[0])
 //                .error(R.drawable.base_img)
