@@ -2,6 +2,7 @@ package com.example.neoul.presentation.main.my.setting
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -10,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.neoul.databinding.ActivityMypageSettingBinding
 import com.example.neoul.presentation.main.MainActivity
 import com.example.neoul.presentation.user.login.LoginActivity
+import com.example.neoul.util.getkakaoLogin
+import com.example.neoul.util.removekakaoLogin
+import com.kakao.sdk.user.UserApiClient
 
 class MyPageSettingActivity:AppCompatActivity() {
     private lateinit var binding:ActivityMypageSettingBinding
@@ -31,14 +35,32 @@ class MyPageSettingActivity:AppCompatActivity() {
 
             btnLogout.setOnClickListener {
                 val intent = Intent(this@MyPageSettingActivity,LoginActivity::class.java)
+                if(getkakaoLogin()!!){
+                    UserApiClient.instance.unlink { error ->
+                        if (error != null) {
+                            Log.e("Hello", "연결 끊기 실패", error)
+                        } else {
+                            Log.i("Hello", "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+
+                        }
+                    }
+
+                }
                 startActivity(intent)
+                Toast.makeText(this@MyPageSettingActivity,"로그아웃 성공",Toast.LENGTH_SHORT).show()
                 finish()
             }
 
 
             btnPrivacyChange.setOnClickListener {
-                val intent = Intent(this@MyPageSettingActivity,MyPageSettingChangeInfoActivity::class.java)
-                startActivity(intent)
+                if(getkakaoLogin()!!){
+                    Toast.makeText(this@MyPageSettingActivity,"카카오 계정은 수정할 수 없습니다.",Toast.LENGTH_SHORT).show()
+                }else{
+                    val intent = Intent(this@MyPageSettingActivity,MyPageSettingChangeInfoActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+
             }
 
         }//with(binding)

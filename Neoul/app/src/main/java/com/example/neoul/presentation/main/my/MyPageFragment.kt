@@ -14,6 +14,7 @@ import com.example.neoul.data.repository.mypage.MyPageRepository
 import com.example.neoul.databinding.FragmentMypageBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.example.neoul.presentation.main.my.adapter.MyPageRVAdapter
 import com.example.neoul.presentation.main.my.data.MyPageProduct
 import com.example.neoul.presentation.main.my.setting.MyPageSettingActivity
@@ -22,10 +23,12 @@ import com.example.neoul.presentation.user.login.LoginActivity
 import com.example.neoul.util.getJwt
 import com.example.neoul.util.getSignName
 import com.example.neoul.util.getUsername
+import com.example.neoul.util.getkakaoLogin
 import com.example.neoul.util.savePhone
 import com.example.neoul.util.saveSignName
 import com.example.neoul.util.saveUserBirth
 import com.example.neoul.util.saveUsername
+import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -94,27 +97,43 @@ class MyPageFragment : BaseFragment<MyPageViewModel, FragmentMypageBinding>() {
             setting.setOnClickListener {
                 if(getJwt() != null){
                     startActivity(Intent(requireContext(),MyPageSettingActivity::class.java))
+                }else if(getkakaoLogin()!!){
+                    startActivity(Intent(requireContext(),MyPageSettingActivity::class.java))
                 }else{
                     Toast.makeText(activity,"로그인 후 이용 가능합니다.", Toast.LENGTH_SHORT)
                         .show()
                 }
-
-
             }
 
             btnUserPrivacy.setOnClickListener {
                 if(viewBinding.txtLogin.visibility == View.VISIBLE){
                     startActivity(Intent(requireContext(),LoginActivity::class.java))
+                    requireActivity().finish()
                 }
             }
 
+            search.setOnClickListener {
+                startActivity(Intent(requireContext(),SearchActivity::class.java))
+            }
 
         }//with(viewbinding)
-
-
     }
     private fun mypagesetting(){
         Log.d("Tester", "mypagesetting: 들어왔냐?")
+        if(getkakaoLogin()!!){
+            UserApiClient.instance.me{user, error ->
+                viewBinding.txtUserName.text = "${user?.kakaoAccount?.profile?.nickname}"
+                viewBinding.txtUserEmail.text = "${user?.kakaoAccount?.email}"
+                viewBinding.txtUserName.visibility = View.VISIBLE
+                viewBinding.txtUserEmail.visibility = View.INVISIBLE
+                viewBinding.txtLogin.visibility = View.GONE
+            }
+        }else{
+            viewBinding.txtUserName.visibility = View.GONE
+            viewBinding.txtUserEmail.visibility = View.GONE
+            viewBinding.txtLogin.visibility = View.VISIBLE
+        }
+
         if(getUsername() != null){
             Log.d("Tester", "mypagesetting: 들어옴?")
             lifecycleScope.launch {
@@ -143,7 +162,6 @@ class MyPageFragment : BaseFragment<MyPageViewModel, FragmentMypageBinding>() {
             viewBinding.txtUserEmail.visibility = View.GONE
             viewBinding.txtLogin.visibility = View.VISIBLE
         }
-
 
     }
 

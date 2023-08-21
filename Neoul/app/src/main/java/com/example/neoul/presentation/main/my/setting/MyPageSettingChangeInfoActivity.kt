@@ -25,9 +25,9 @@ class MyPageSettingChangeInfoActivity:AppCompatActivity() {
 
     private val myPageInfoChangeApi by inject<MyPageRepository>()
 
-    var checkname = false
-    var checkbirth = false
-    var checkphone = false
+    var checkname = true
+    var checkbirth = true
+    var checkphone = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -151,7 +151,7 @@ class MyPageSettingChangeInfoActivity:AppCompatActivity() {
         binding.editName.setText(getUsername())
         binding.editBirth.setText(getUserBirth())
         binding.editPhonenum.setText(getPhone())
-
+        checkok()
 
 
 
