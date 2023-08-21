@@ -113,4 +113,22 @@ fun removePhone(){
     editor.apply()
 }
 
+fun savekakaoLogin(status: Boolean){
+    val spf = NeoulApplication.sSharedPreference
+    val editor = spf.edit()
+
+    editor.putBoolean(UserCode.kakao, status)
+    editor.apply()
+}
+
+fun getkakaoLogin():Boolean? = NeoulApplication.sSharedPreference.getBoolean(UserCode.kakao,false)
+
+fun removekakaoLogin(){
+    val spf = NeoulApplication.sSharedPreference
+    val editor = spf.edit()
+
+    editor.remove(UserCode.kakao)
+    editor.apply()
+}
+
 

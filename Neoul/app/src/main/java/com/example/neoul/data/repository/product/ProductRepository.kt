@@ -35,8 +35,15 @@ interface ProductRepository {
     ) :List<com.example.neoul.data.response.product.category.Data>?
 
 
+
     suspend fun recentProductList(
         accessToken: String
     ) : List<com.example.neoul.data.response.product.recent.Data>?
+
+
+    suspend fun getProductDetail(
+        accessToken: String,
+        productId: Int
+    ) : String?
 
 }
