@@ -13,7 +13,7 @@ data class MyPageData(
 ){
 
     fun toModel() = MyPageProduct(
-        brandName = brandName, clickedAt = clickedAt, price = price, productId = productId, productImgList = productImageList, productName = productName
+        brandName = brandName, clickedAt = clickedAt, price = price, productId = productId, productImgList = productImageList ,productName = productName
     )
 
 }
