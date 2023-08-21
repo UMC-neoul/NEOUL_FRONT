@@ -33,12 +33,17 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner) {
         brandAdapter(it as ArrayList<BrandItem>)
-        observeDate2()
+        allDate()
+        nameDate()
     }
 
-    private fun observeDate2() = viewModel.allLiveData.observe(viewLifecycleOwner) {
+    private fun allDate() = viewModel.allLiveData.observe(viewLifecycleOwner) {
         bestAdapter(it as ArrayList<Data>)
         recommandAdapter(it)
+    }
+
+    private fun nameDate() = viewModel.nameLiveData.observe(viewLifecycleOwner) {
+        binding.textName.text = it.name
     }
 
     companion object {

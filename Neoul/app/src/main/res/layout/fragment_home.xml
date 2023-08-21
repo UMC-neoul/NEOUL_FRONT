@@ -330,6 +330,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/text_name"
                 app:layout_constraintTop_toTopOf="@id/text_name"
+                app:layout_constraintBottom_toBottomOf="@id/text_name"
 
                 />
 
