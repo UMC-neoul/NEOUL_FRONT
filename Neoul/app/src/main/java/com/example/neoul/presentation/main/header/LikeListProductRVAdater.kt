@@ -3,6 +3,7 @@ package com.example.neoul.presentation.main.category
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neoul.R
 import com.example.neoul.data.response.like.product.LikedProduct
 import com.example.neoul.databinding.ItemCatItemBinding
 
@@ -18,6 +19,7 @@ class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val prod
                 productClickListener(data)
             }
 //            viewBinding.textPrice.text = data.price.toString()
+            viewBinding.imgHeart.setImageResource(R.drawable.favorite_18)
         }
     }
 

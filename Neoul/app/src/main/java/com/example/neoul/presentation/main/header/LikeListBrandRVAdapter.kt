@@ -3,6 +3,8 @@ package com.example.neoul.presentation.main.category
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.neoul.R
 import com.example.neoul.data.response.like.brand.LikedBrand
 import com.example.neoul.databinding.ItemHomeBrandBinding
 
@@ -20,6 +22,12 @@ class LikeListBrandRVAdapter(
             viewBinding.viewContent.setOnClickListener {
                 brandClickListener(data)
             }
+//            Glide.with(itemView)
+//                .load(data.productImgList[0])
+//                .error(R.drawable.base_img)
+//                .fallback(R.drawable.base_img)
+//                .into()
+
 //            viewBinding.textPrice.text = data.price.toString()
         }
     }

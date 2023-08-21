@@ -5,10 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -136,35 +132,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     }
 
-    private fun getDummyItemList(): ArrayList<GoodsItem> {
-        val dummyList = ArrayList<GoodsItem>().apply {
-            add(GoodsItem("[핸드메이드] 푸른마음 귀걸이", 5, 16400, "몰라"))
-            add(GoodsItem("[핸드메이드] ", 11, 21300, "몰라"))
-            add(GoodsItem("[핸드메이드] 푸른마음 귀걸이", 15, 50000, "몰라"))
-            add(GoodsItem("[핸드메이드] 푸른마음 귀걸이", 45, 60000, "몰라"))
-        }
-        return dummyList
-    }
-
-    private fun getDummyItemList2(): ArrayList<GoodsItem> {
-        val dummyList = ArrayList<GoodsItem>().apply {
-            add(GoodsItem("바다마을 목걸이", 5, 16400, "몰라"))
-            add(GoodsItem("[핸드메이드] ", 11, 21300, "몰라"))
-            add(GoodsItem("[핸드메이드] 푸른마음 귀걸이", 15, 50000, "몰라"))
-            add(GoodsItem("[핸드메이드] 푸른마음 귀걸이", 45, 60000, "몰라"))
-        }
-        return dummyList
-    }
-
-    private fun getDummyItemList3(): ArrayList<Brand> {
-        val dummyList = ArrayList<Brand>().apply {
-            add(Brand("브랜드명1", "한줄소개 1", ""))
-            add(Brand("브랜드명1", "한줄소개 1", ""))
-            add(Brand("브랜드명1", "한줄소개 1", ""))
-
-        }
-        return dummyList
-    }
 
 
 }

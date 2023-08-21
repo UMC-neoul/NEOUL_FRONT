@@ -1,16 +1,20 @@
 package com.example.neoul.presentation.main
 
+import android.os.Build.VERSION_CODES.P
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextMenu
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.IdRes
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.example.neoul.R
 import com.example.neoul.databinding.ActivityMainBinding
 import com.example.neoul.presentation.main.brand.BrandFragment
@@ -20,13 +24,13 @@ import com.example.neoul.presentation.main.my.MyPageFragment
 import com.example.neoul.presentation.main.story.StoryFragment
 import com.example.neoul.util.MainMenuBus
 import com.example.neoul.util.NetworkManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var navController: NavController
 
     private val menuBus by inject<MainMenuBus>()
 
@@ -34,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        navController = binding.navHostFragment.findNavController()
+
         initViews()
         observe()
     }
@@ -43,9 +47,8 @@ class MainActivity : AppCompatActivity() {
         //네트워크 연결 상태 확인
         if (NetworkManager.checkNetworkState(this)){
             binding.bottomNav.isVisible = true
-            binding.navHostFragment.isVisible = true
+            binding.fragmentContainer.isVisible = true
             showFragment(HomeFragment.newInstance(), HomeFragment.TAG)
-
 
             binding.bottomNav.setOnItemSelectedListener {
                 when (it.itemId) {
@@ -89,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this,"네트워크 연결을 확인해 주세요", Toast.LENGTH_LONG).show()
             binding.bottomNav.isGone = true
-            binding.navHostFragment.isGone = true
+            binding.fragmentContainer.isGone = true
         }
     }
 
@@ -102,7 +105,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.beginTransaction().show(it).commitAllowingStateLoss()
         } ?: kotlin.run {
             supportFragmentManager.beginTransaction()
-                .add(R.id.nav_host_fragment, fragment, tag)
+                .add(R.id.fragmentContainer, fragment, tag)
                 .commitAllowingStateLoss()
         }
     }

@@ -28,13 +28,13 @@ class HomeViewModel(private val brandRepository: BrandRepository,private  val pr
             it.toModel()
         } ?: listOf()
 
-        brandLiveData.value = brandList
+        brandLiveData.value = brandList.reversed()
 
         val allList = productRepository.allProduct(jwt)?.map {
             it
         } ?: listOf()
 
-        allLiveData.value = allList
+        allLiveData.value = allList.reversed()
     }
 
     fun clickLikeBtn(productId:Int){
