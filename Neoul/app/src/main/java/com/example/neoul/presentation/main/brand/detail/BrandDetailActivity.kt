@@ -173,7 +173,9 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
 
                     1 -> {
                         binding.brandSortBtn.text = items[position]
-                        viewModel.recentSortClick()
+                        lifecycleScope.launch {
+                            viewModel.recentSortClick()
+                        }
                     }
 
                     2 -> {

@@ -146,5 +146,12 @@ class MyPageFragment : BaseFragment<MyPageViewModel, FragmentMypageBinding>() {
 
 
     }
+    //최근 조회 상품 조회 갱신
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden){
+            viewModel.fetchData()
+        }
+    }
 
 }
