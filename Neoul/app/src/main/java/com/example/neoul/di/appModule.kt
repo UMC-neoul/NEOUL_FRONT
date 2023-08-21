@@ -19,6 +19,7 @@ import com.example.neoul.data.repository.story.StoryRepository
 import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.presentation.main.brand.BrandViewModel
 import com.example.neoul.presentation.main.brand.detail.BrandDetailViewModel
+import com.example.neoul.presentation.main.category.CategoryMenu
 import com.example.neoul.presentation.main.category.CategoryViewModel
 import com.example.neoul.presentation.main.header.LikeListViewModel
 import com.example.neoul.presentation.main.header.SearchViewModel
@@ -28,6 +29,7 @@ import com.example.neoul.presentation.main.my.MyPageViewModel
 import com.example.neoul.presentation.main.story.StoryViewModel
 import com.example.neoul.presentation.main.story.detail.StoryDetailViewModel
 import com.example.neoul.presentation.product.ProductViewModel
+import com.example.neoul.util.CategoryMenuBus
 import com.example.neoul.util.MainMenuBus
 import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidApplication
@@ -73,6 +75,7 @@ val appModule = module {
     //util
     single { ApplicationPreferenceManager(androidApplication()) }
     single { MainMenuBus() }
+    single { CategoryMenuBus() }
 
     //VM
     viewModel { HomeViewModel(get(), get(), get()) }

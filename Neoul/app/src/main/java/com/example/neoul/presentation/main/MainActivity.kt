@@ -123,5 +123,5 @@ class MainActivity : AppCompatActivity() {
 }
 
 enum class MainMenuId(@IdRes val id: Int){
-    BRAND(R.id.menu_brand),My(R.id.menu_my)
+    HOME(R.id.menu_home),CATEGORY(R.id.menu_category),BRAND(R.id.menu_brand),STORY(R.id.menu_story),My(R.id.menu_my)
 }

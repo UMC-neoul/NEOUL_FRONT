@@ -28,7 +28,6 @@ import com.example.neoul.util.savePhone
 import com.example.neoul.util.saveSignName
 import com.example.neoul.util.saveUserBirth
 import com.example.neoul.util.saveUsername
-import com.kakao.sdk.user.UserApiClient
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -121,13 +120,13 @@ class MyPageFragment : BaseFragment<MyPageViewModel, FragmentMypageBinding>() {
     private fun mypagesetting(){
         Log.d("Tester", "mypagesetting: 들어왔냐?")
         if(getkakaoLogin()!!){
-            UserApiClient.instance.me{user, error ->
-                viewBinding.txtUserName.text = "${user?.kakaoAccount?.profile?.nickname}"
-                viewBinding.txtUserEmail.text = "${user?.kakaoAccount?.email}"
-                viewBinding.txtUserName.visibility = View.VISIBLE
-                viewBinding.txtUserEmail.visibility = View.INVISIBLE
-                viewBinding.txtLogin.visibility = View.GONE
-            }
+//            UserApiClient.instance.me{user, error ->
+//                viewBinding.txtUserName.text = "${user?.kakaoAccount?.profile?.nickname}"
+//                viewBinding.txtUserEmail.text = "${user?.kakaoAccount?.email}"
+//                viewBinding.txtUserName.visibility = View.VISIBLE
+//                viewBinding.txtUserEmail.visibility = View.INVISIBLE
+//                viewBinding.txtLogin.visibility = View.GONE
+//            }
         }else{
             viewBinding.txtUserName.visibility = View.GONE
             viewBinding.txtUserEmail.visibility = View.GONE
