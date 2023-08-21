@@ -5,19 +5,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.neoul.R
 import com.example.neoul.data.model.Brand
+import com.example.neoul.data.model.BrandDetail
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.brand.list.BrandResponse
 import com.example.neoul.data.response.product.all.Data
+import com.example.neoul.data.response.product.all.dataToProduct
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
+import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
+import com.example.neoul.presentation.main.category.TabRVAdapter
 import com.example.neoul.presentation.main.header.LikeListActivity
 import com.example.neoul.presentation.main.header.SearchActivity
+import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
@@ -26,12 +35,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun getViewBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-    override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner){
+    override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner) {
         brandAdapter(it as ArrayList<BrandItem>)
         observeDate2()
     }
 
-    private fun  observeDate2() = viewModel.allLiveData.observe(viewLifecycleOwner){
+    private fun observeDate2() = viewModel.allLiveData.observe(viewLifecycleOwner) {
         bestAdapter(it as ArrayList<Data>)
         recommandAdapter(it)
     }
@@ -78,7 +87,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun bestAdapter(itemList: ArrayList<Data>) {
-        val dataRVAdapter = BestItemRVAdapter(itemList)
+        val dataRVAdapter = BestItemRVAdapter(itemList,{ data ->
+            val product = dataToProduct(data)
+            startActivity(
+                ProductActivity.newIntent(requireContext(), product)
+            )
+
+        },viewModel)
 
         binding.recyclerBest.adapter = dataRVAdapter
         binding.recyclerBest.layoutManager =
@@ -88,7 +103,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun recommandAdapter(itemList: ArrayList<Data>) {
-        val dataRVAdapter = BestItemRVAdapter(itemList)
+        val dataRVAdapter = BestItemRVAdapter(itemList, { data ->
+            val product = dataToProduct(data)
+            startActivity(
+                ProductActivity.newIntent(requireContext(), product)
+            )
+        }, viewModel)
 
         binding.recyclerRecommend.adapter = dataRVAdapter
         binding.recyclerRecommend.layoutManager =
@@ -98,7 +118,15 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun brandAdapter(itemList: ArrayList<BrandItem>) {
-        val dataRVAdapter = BrandRVAdapter(itemList,{})
+        val dataRVAdapter = BrandRVAdapter(
+            itemList,
+            { product ->
+                startActivity(ProductActivity.newIntent(requireContext(), product))
+            },
+            { brandItem ->
+                startActivity(BrandDetailActivity.newIntent(requireContext(), brandItem))
+            }
+        )
 
         binding.recyclerBrand.adapter = dataRVAdapter
         binding.recyclerBrand.layoutManager =

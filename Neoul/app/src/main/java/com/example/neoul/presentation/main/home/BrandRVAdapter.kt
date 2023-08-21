@@ -13,19 +13,25 @@ import com.example.neoul.databinding.ItemHomeBrandBinding
 
 class BrandRVAdapter(
     val itemList: ArrayList<BrandItem>,
-    val productClickListener: (Product) -> Unit
+    val productClickListener: (Product) -> Unit,
+    val brandClickListener: (BrandItem) -> Unit
+
 ) : RecyclerView.Adapter<BrandRVAdapter.DataViewHolder>() {
     inner class DataViewHolder(private val viewBinding: ItemHomeBrandBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
-        fun bind(data: BrandItem,isFirstItem:Boolean) {
+        fun bind(data: BrandItem, isFirstItem: Boolean) {
             viewBinding.apply {
+
+                viewContent.setOnClickListener {
+                    brandClickListener(data)
+                }
                 textBrandTitle.text = data.name
                 textBrandContent.text = data.content
 
                 recyclerBrandProduct.adapter =
                     ProductHorizontalRVAdapter(productClickListener, data.productList)
 
-                if (isFirstItem){
+                if (isFirstItem) {
                     recyclerBrandProduct.visibility = View.VISIBLE
                 }
             }
@@ -43,10 +49,10 @@ class BrandRVAdapter(
     }
 
     override fun onBindViewHolder(holder: BrandRVAdapter.DataViewHolder, position: Int) {
-        holder.bind(itemList[position],position==0)
+        holder.bind(itemList[position], position == 0)
     }
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int = if (itemList.size > 3) 3 else itemList.size
 
 
 }

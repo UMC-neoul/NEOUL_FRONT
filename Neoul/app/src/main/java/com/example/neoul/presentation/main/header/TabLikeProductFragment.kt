@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.neoul.data.response.like.product.LikedProduct
+import com.example.neoul.data.response.like.product.dataToProduct
 import com.example.neoul.databinding.FragmentTabLikeProductBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.category.LikeListProductRVAdater
+import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class TabLikeProductFragment : BaseFragment<LikeListViewModel, FragmentTabLikeProductBinding>() {
@@ -33,7 +35,12 @@ class TabLikeProductFragment : BaseFragment<LikeListViewModel, FragmentTabLikePr
     }
 
     private fun productAdapter(itemList: List<LikedProduct>) {
-        val dataRVAdapter = LikeListProductRVAdater(itemList)
+        val dataRVAdapter = LikeListProductRVAdater(itemList) { data ->
+            val product = dataToProduct(data)
+            startActivity(
+                ProductActivity.newIntent(requireContext(), product)
+            )
+        }
 
         binding.recyclerItem.adapter = dataRVAdapter
         binding.recyclerItem.layoutManager =

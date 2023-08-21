@@ -16,6 +16,7 @@ import com.example.neoul.data.repository.signup.DefaultSignupRepository
 import com.example.neoul.data.repository.signup.SignupRepository
 import com.example.neoul.data.repository.story.DefaultStoryRepository
 import com.example.neoul.data.repository.story.StoryRepository
+import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.presentation.main.brand.BrandViewModel
 import com.example.neoul.presentation.main.brand.detail.BrandDetailViewModel
 import com.example.neoul.presentation.main.category.CategoryViewModel
@@ -85,7 +86,7 @@ val appModule = module {
     viewModel { (story: Story) -> StoryDetailViewModel(story, get()) }
     viewModel { MyPageViewModel(get()) }
     viewModel { (product: Product) -> ProductViewModel(product, get()) }
-    viewModel { SearchViewModel() }
+    viewModel { SearchViewModel(get()) }
     viewModel { LikeListViewModel(get(), get()) }
 
 }

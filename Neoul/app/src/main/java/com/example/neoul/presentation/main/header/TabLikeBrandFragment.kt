@@ -4,20 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.neoul.data.response.like.brand.LikedBrand
-import com.example.neoul.data.response.like.product.LikedProduct
-import com.example.neoul.databinding.FragmentTabClothesBinding
+import com.example.neoul.data.response.like.brand.likedBrandToBrandItem
 import com.example.neoul.databinding.FragmentTabLikeBrandBinding
-import com.example.neoul.databinding.FragmentTabLikeProductBinding
 import com.example.neoul.presentation.BaseFragment
-import com.example.neoul.presentation.main.category.CategoryViewModel
+import com.example.neoul.presentation.main.brand.detail.BrandDetailActivity
 import com.example.neoul.presentation.main.category.LikeListBrandRVAdapter
 import com.example.neoul.presentation.main.category.LikeListProductRVAdater
+import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
+
 
 class TabLikeBrandFragment : BaseFragment<LikeListViewModel, FragmentTabLikeBrandBinding>() {
     override val viewModel by viewModel<LikeListViewModel>()
@@ -40,7 +37,12 @@ class TabLikeBrandFragment : BaseFragment<LikeListViewModel, FragmentTabLikeBran
     }
 
     private fun productAdapter(itemList: List<LikedBrand>) {
-        val dataRVAdapter = LikeListBrandRVAdapter(itemList)
+        val dataRVAdapter = LikeListBrandRVAdapter(itemList) { data ->
+            val brand = likedBrandToBrandItem(data)
+            startActivity(
+                BrandDetailActivity.newIntent(requireContext(), brand)
+            )
+        }
 
         binding.recyclerBrand.adapter = dataRVAdapter
         binding.recyclerBrand.layoutManager =

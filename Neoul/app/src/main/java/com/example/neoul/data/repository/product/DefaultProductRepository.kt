@@ -53,8 +53,8 @@ class DefaultProductRepository(
         categoryId: Int,
         option: Int
     ): List<com.example.neoul.data.response.product.category.Data>? =
-        withContext(ioDispatcher){
-            val response = productApiService.categoryProductApi(accessToken,categoryId,option)
+        withContext(ioDispatcher) {
+            val response = productApiService.categoryProductApi(accessToken, categoryId, option)
             if (response.isSuccessful) {
                 response.body()?.data
             } else {
@@ -62,6 +62,16 @@ class DefaultProductRepository(
             }
         }
 
+    override suspend fun recentProductList(accessToken: String): List<com.example.neoul.data.response.product.recent.Data>? =
+        withContext(ioDispatcher) {
+            val response = productApiService.recentProductListApi(accessToken)
+            if (response.isSuccessful) {
+                response.body()?.data
+            } else {
+                null
+            }
+        }
+        
     override suspend fun getProductDetail(accessToken: String, productId: Int): String? = withContext(ioDispatcher) {
         val response = productApiService.getProductDetailApi(accessToken, productId)
         if (response.isSuccessful){

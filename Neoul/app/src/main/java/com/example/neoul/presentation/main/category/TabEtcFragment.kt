@@ -12,9 +12,11 @@ import com.example.neoul.R
 
 import com.example.neoul.data.model.CategoryItem
 import com.example.neoul.data.response.product.category.Data
+import com.example.neoul.data.response.product.category.dataToProduct
 
 import com.example.neoul.databinding.FragmentTabClothesBinding
 import com.example.neoul.presentation.BaseFragment
+import com.example.neoul.presentation.product.ProductActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -47,7 +49,13 @@ class TabEtcFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBinding
     }
 
     private fun categoryAdapter(itemList: List<Data>) {
-        val dataRVAdapter = TabRVAdapter(itemList)
+        val dataRVAdapter = TabRVAdapter(itemList, { data ->
+            val product = dataToProduct(data)
+            startActivity(
+                ProductActivity.newIntent(requireContext(), product)
+            )
+        },viewModel)
+
 
         binding.recyclerItem.adapter = dataRVAdapter
         binding.recyclerItem.layoutManager =

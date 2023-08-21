@@ -4,11 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.neoul.data.response.like.brand.LikedBrand
-import com.example.neoul.data.response.like.product.LikedProduct
-import com.example.neoul.databinding.ItemCatItemBinding
 import com.example.neoul.databinding.ItemHomeBrandBinding
 
-class LikeListBrandRVAdapter(private val itemList: List<LikedBrand>) :
+class LikeListBrandRVAdapter(
+    private val itemList: List<LikedBrand>,
+    val brandClickListener: (LikedBrand) -> Unit
+) :
     RecyclerView.Adapter<LikeListBrandRVAdapter.DataViewHolder>() {
 
     inner class DataViewHolder(private val viewBinding: ItemHomeBrandBinding) :
@@ -16,7 +17,9 @@ class LikeListBrandRVAdapter(private val itemList: List<LikedBrand>) :
         fun bind(data: LikedBrand) {
 //            viewBinding.textName.text = data.brandName
             viewBinding.textBrandTitle.text = data.brandName
-
+            viewBinding.viewContent.setOnClickListener {
+                brandClickListener(data)
+            }
 //            viewBinding.textPrice.text = data.price.toString()
         }
     }

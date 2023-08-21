@@ -1,5 +1,6 @@
 package com.example.neoul.presentation.main.category
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import com.example.neoul.R
 import com.example.neoul.databinding.FragmentCategoryBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.brand.BrandFragment
+import com.example.neoul.presentation.main.header.LikeListActivity
+import com.example.neoul.presentation.main.header.SearchActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -31,17 +34,23 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
         const val TAG = "CategoryFragment"
     }
 
-    private lateinit var viewBinding: FragmentCategoryBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = FragmentCategoryBinding.inflate(layoutInflater)
+        binding = FragmentCategoryBinding.inflate(layoutInflater)
+        binding.imgSearch.setOnClickListener {
+            startActivity(Intent(requireContext(), SearchActivity::class.java))
 
+        }
+        binding.imgHeart.setOnClickListener {
+            startActivity(Intent(requireContext(), LikeListActivity::class.java))
+
+        }
         val tabAdapter = TabAdapter(this)
-        viewBinding.viewPager.adapter = tabAdapter
+        binding.viewPager.adapter = tabAdapter
 
         val tabTitleArray = arrayOf(
             "의류",
@@ -51,11 +60,11 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
             "기타"
         )
 
-        TabLayoutMediator(viewBinding.layoutTab, viewBinding.viewPager) { tab, position ->
+        TabLayoutMediator(binding.layoutTab, binding.viewPager) { tab, position ->
             tab.text = tabTitleArray[position]
 
         }.attach()
 
-        return viewBinding.root
+        return binding.root
     }
 }
