@@ -17,10 +17,9 @@ class MyPageViewModel(
     val mypageLiveData = MutableLiveData<List<MyPageProduct>>()
 
     override fun fetchData() = viewModelScope.launch {
-        Log.d("Tester", "fetchData: 확인")
+
         if(getJwt() != null){
-            val mypageList = myPageRepository.mypageproduct(getJwt()!!)!!.data.map{
-                Log.d("Tester", "fetchData: 확인2")
+            val mypageList = myPageRepository.mypageproduct(getJwt()!!)?.data?.map{
                 it.toModel()
             }
             mypageLiveData.value = mypageList

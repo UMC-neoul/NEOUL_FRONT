@@ -61,7 +61,7 @@ class MyPageFragment : BaseFragment<MyPageViewModel, FragmentMypageBinding>() {
     }
 
     private fun MyPageProduct.getProduct() = Product(
-        deliveryInfo = "", name = brandName, productId = productId, price = price, productImg = productName, productUrl = "",
+        deliveryInfo = "", name = brandName, productId = productId, price = price, productImg = productImgList[0], productUrl = "",
     )
 
 
