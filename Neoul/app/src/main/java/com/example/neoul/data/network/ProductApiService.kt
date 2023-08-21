@@ -7,6 +7,7 @@ import com.example.neoul.data.response.like.product.ProductLikeResponse
 import com.example.neoul.data.response.product.all.AllProduct
 import com.example.neoul.data.response.product.category.CategoryProduct
 import com.example.neoul.data.response.product.recent.RecentProduct
+import com.example.neoul.data.response.product.detail.ProductDetailResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -60,4 +61,9 @@ interface ProductApiService {
     ): Response<RecentProduct>
 
 
+    @GET("/product/{productId}")
+    suspend fun getProductDetailApi(
+        @Header("Authorization") accessToken: String,
+        @Path("productId") productId: Int
+    ): Response<ProductDetailResponse>
 }

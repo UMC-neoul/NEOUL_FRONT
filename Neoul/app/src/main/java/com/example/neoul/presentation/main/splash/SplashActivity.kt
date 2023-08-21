@@ -28,8 +28,13 @@ class SplashActivity:AppCompatActivity() {
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+            if(getJwt().isNullOrBlank()){
+                startActivity(Intent(this, LoginActivity::class.java))
+                finish()
+            }else {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
         },1500)
 
     }

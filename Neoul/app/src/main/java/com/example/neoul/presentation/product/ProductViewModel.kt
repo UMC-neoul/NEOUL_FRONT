@@ -36,6 +36,10 @@ class ProductViewModel(
             it.productId == product.productId
         }
         productLikedLiveData.value = liked
+        if (product.productUrl.isBlank()){
+            val productUrlApi = productRepository.getProductDetail(jwt,product.productId) ?:""
+            product.productUrl = productUrlApi
+        }
 
         productStateLiveData.value = ProductState.Success(product)
     }

@@ -71,6 +71,15 @@ class DefaultProductRepository(
                 null
             }
         }
+        
+    override suspend fun getProductDetail(accessToken: String, productId: Int): String? = withContext(ioDispatcher) {
+        val response = productApiService.getProductDetailApi(accessToken, productId)
+        if (response.isSuccessful){
+            response.body()?.data?.productUrl
+        } else{
+            null
+        }
+    }
 
 
 }

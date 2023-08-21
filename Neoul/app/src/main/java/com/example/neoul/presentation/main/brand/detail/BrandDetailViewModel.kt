@@ -4,12 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.Product
-import com.example.neoul.data.network.Url
-import com.example.neoul.data.preference.ApplicationPreferenceManager
 import com.example.neoul.data.repository.brand.BrandRepository
 import com.example.neoul.presentation.BaseViewModel
 import com.example.neoul.util.getJwt
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.Dispatcher
 
 class BrandDetailViewModel(
     private val brand: BrandItem,
@@ -79,9 +80,14 @@ class BrandDetailViewModel(
     }
 
     //최근순 버튼을 눌렀을 때
-    fun recentSortClick() {
-        fetchData()
-        productListLiveData.value = productListLiveData.value?.reversed()
+    suspend fun recentSortClick() {
+        val list=
+        withContext(Dispatchers.IO) {
+            brandRepository.getBrandDetail(jwt, brand.id)?.toModel()?.let {
+                it.productList
+            } ?: listOf()
+        }
+        productListLiveData.value = list.reversed()
     }
 
     //추천순 버튼을 눌렀을 때

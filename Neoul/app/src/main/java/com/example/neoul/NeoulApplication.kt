@@ -3,6 +3,7 @@ package com.example.neoul
 import android.app.Application
 import android.content.SharedPreferences
 import com.example.neoul.di.appModule
+import com.kakao.sdk.common.KakaoSdk
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -14,6 +15,8 @@ class NeoulApplication: Application() {
     }
     override fun onCreate() {
         super.onCreate()
+
+        KakaoSdk.init(this,"d333b474c3a293707baf0b7c410922c4")
 
         startKoin {
             androidLogger(

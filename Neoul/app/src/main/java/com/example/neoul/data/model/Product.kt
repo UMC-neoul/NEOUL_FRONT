@@ -9,7 +9,7 @@ data class Product(
     val name: String,
     val price: Int,
     val productId: Int,
-    val productUrl: String,
+    var productUrl: String,
     val productImg : String,
     var liked : Boolean = false
 ):Parcelable
