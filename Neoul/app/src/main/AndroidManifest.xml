@@ -65,9 +65,18 @@
 
         <activity
             android:name=".presentation.user.login.LoginActivity"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="oauth"
+                    android:scheme="kakaod333b474c3a293707baf0b7c410922c4" />
+            </intent-filter>
+        </activity>
 
 
         <!--SignUp Activity 추가-->
