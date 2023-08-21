@@ -7,29 +7,30 @@
     tools:context=".presentation.main.MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
-        app:labelVisibilityMode="labeled"
         android:layout_height="wrap_content"
+        app:itemIconTint="@color/color_btn"
+        app:itemTextAppearanceActive="@style/BottomNavTextActiveStyle"
+        app:itemTextAppearanceInactive="@style/BottomNavTextInactiveStyle"
+        app:itemTextColor="@color/color_btn"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:itemIconTint="@color/color_btn"
-        app:itemTextColor="@color/color_btn"
-
-        app:itemTextAppearanceInactive="@style/BottomNavTextInactiveStyle"
-        app:itemTextAppearanceActive="@style/BottomNavTextActiveStyle"
-
         app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
