@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.neoul.R
 import com.example.neoul.data.model.Brand
 import com.example.neoul.data.model.BrandDetail
 import com.example.neoul.data.model.BrandItem
@@ -83,12 +87,13 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun bestAdapter(itemList: ArrayList<Data>) {
-        val dataRVAdapter = BestItemRVAdapter(itemList) { data ->
+        val dataRVAdapter = BestItemRVAdapter(itemList,{ data ->
             val product = dataToProduct(data)
             startActivity(
                 ProductActivity.newIntent(requireContext(), product)
             )
-        }
+
+        },viewModel)
 
         binding.recyclerBest.adapter = dataRVAdapter
         binding.recyclerBest.layoutManager =
@@ -98,12 +103,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     private fun recommandAdapter(itemList: ArrayList<Data>) {
-        val dataRVAdapter = BestItemRVAdapter(itemList) { data ->
+        val dataRVAdapter = BestItemRVAdapter(itemList, { data ->
             val product = dataToProduct(data)
             startActivity(
                 ProductActivity.newIntent(requireContext(), product)
             )
-        }
+        }, viewModel)
 
         binding.recyclerRecommend.adapter = dataRVAdapter
         binding.recyclerRecommend.layoutManager =

@@ -16,6 +16,7 @@ class HomeViewModel(private val brandRepository: BrandRepository,private  val pr
 
     private var jwt =""
 
+    val productLikedLiveData = MutableLiveData<Boolean>(null)
     val brandLiveData = MutableLiveData<List<BrandItem>>()
     val allLiveData = MutableLiveData<List<Data>>()
 
@@ -36,5 +37,18 @@ class HomeViewModel(private val brandRepository: BrandRepository,private  val pr
         allLiveData.value = allList
     }
 
+    fun clickLikeBtn(productId:Int){
+        viewModelScope.launch {
+            if (productLikedLiveData.value == false) {
+                //PRODUCT LIKE PATCH
+                productRepository.likeProduct(jwt, productId)
+                productLikedLiveData.value = true
+            } else {
+                //PRODUCT DISLIKE PATCH
+                productRepository.dislikeProduct(jwt, productId)
+                productLikedLiveData.value = false
+            }
+        }
+    }
 
 }

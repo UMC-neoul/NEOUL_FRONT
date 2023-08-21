@@ -3,6 +3,7 @@ package com.example.neoul.presentation.main.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.neoul.R
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.databinding.ItemBestBinding
@@ -10,6 +11,7 @@ import com.example.neoul.databinding.ItemBestBinding
 class BestItemRVAdapter(
     val itemList: ArrayList<Data>,
     val productClickListener: (Data) -> Unit,
+    val viewModel: HomeViewModel
 ) :
     RecyclerView.Adapter<BestItemRVAdapter.DataViewHolder>() {
 
@@ -23,7 +25,35 @@ class BestItemRVAdapter(
                 textTitle.text = data.productName
 //                textPercent.text = data.
                 textPrice.text = data.price.toString()
+                if(data.phearted){
+                    imgHeart.setImageResource(R.drawable.favorite_18)
 
+                    var i=0
+                    imgHeart.setOnClickListener {
+                        if(i%2==0){
+                            imgHeart.setImageResource(R.drawable.favorite_border)
+                        }
+                        else{
+                            imgHeart.setImageResource(R.drawable.favorite_18)
+                        }
+                        i++
+//                       api                      추가
+                        viewModel.clickLikeBtn(data.productId)
+                    }
+                }
+                else{
+                    var i=0
+                    imgHeart.setOnClickListener {
+                        if(i%2==0){
+                            imgHeart.setImageResource(R.drawable.favorite_18)
+                        }
+                        else{
+                            imgHeart.setImageResource(R.drawable.favorite_border)
+                        }
+                        i++
+                        viewModel.clickLikeBtn(data.productId)
+                    }
+                }
             }
         }
 

@@ -49,12 +49,12 @@ class TabPropFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBindin
     }
 
     private fun categoryAdapter(itemList: List<Data>) {
-        val dataRVAdapter = TabRVAdapter(itemList) { data ->
+        val dataRVAdapter = TabRVAdapter(itemList, { data ->
             val product = dataToProduct(data)
             startActivity(
                 ProductActivity.newIntent(requireContext(), product)
             )
-        }
+        },viewModel)
 
 
         binding.recyclerItem.adapter = dataRVAdapter

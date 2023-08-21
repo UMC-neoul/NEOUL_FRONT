@@ -15,7 +15,7 @@ class CategoryViewModel(
     private val categoryId: Int
 ) : BaseViewModel() {
 
-
+    val productLikedLiveData = MutableLiveData<Boolean>(null)
     private var jwt =""
     val categoryLiveData = MutableLiveData<List<Data>>()
 
@@ -30,5 +30,19 @@ class CategoryViewModel(
         Log.d("아오",categoryList.toString())
 
         categoryLiveData.value = categoryList
+    }
+
+    fun clickLikeBtn(productId:Int){
+        viewModelScope.launch {
+            if (productLikedLiveData.value == false) {
+                //PRODUCT LIKE PATCH
+                productRepository.likeProduct(jwt, productId)
+                productLikedLiveData.value = true
+            } else {
+                //PRODUCT DISLIKE PATCH
+                productRepository.dislikeProduct(jwt, productId)
+                productLikedLiveData.value = false
+            }
+        }
     }
 }
