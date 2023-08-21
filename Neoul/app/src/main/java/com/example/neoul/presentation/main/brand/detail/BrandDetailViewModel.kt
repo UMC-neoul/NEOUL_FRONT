@@ -10,7 +10,6 @@ import com.example.neoul.util.getJwt
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.Dispatcher
 
 class BrandDetailViewModel(
     private val brand: BrandItem,
@@ -28,6 +27,7 @@ class BrandDetailViewModel(
         //accessToken 가져오기 (비회원일때는 my fragment 로 이동)
         if (getJwt().isNullOrEmpty()){
             brandDetailStateLiveData.value = BrandDetailState.NotAuth
+            return@launch
         }else{
             jwt = getJwt().toString()
         }

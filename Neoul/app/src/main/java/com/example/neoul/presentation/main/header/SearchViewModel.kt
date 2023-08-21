@@ -2,22 +2,60 @@ package com.example.neoul.presentation.main.header
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.neoul.data.network.Url
+import com.example.neoul.data.model.BrandItem
+import com.example.neoul.data.model.Product
+import com.example.neoul.data.repository.brand.BrandRepository
 import com.example.neoul.data.repository.product.ProductRepository
 import com.example.neoul.data.response.product.recent.Data
 import com.example.neoul.presentation.BaseViewModel
 import com.example.neoul.util.getJwt
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val productRepository: ProductRepository) : BaseViewModel() {
+class SearchViewModel(
+    private val productRepository: ProductRepository,
+    private val brandRepository: BrandRepository
+) : BaseViewModel() {
 
     private var jwt = ""
     val recentLiveData = MutableLiveData<List<Data>>()
+    val searchBrandLiveData = MutableLiveData<List<BrandItem>>()
+    val searchProductLiveData = MutableLiveData<List<Product>>()
+    val searchStateLiveData =MutableLiveData<SearchState>(SearchState.SearchBefore)
     override fun fetchData() = viewModelScope.launch {
 
-        jwt = getJwt().takeIf { !it.isNullOrEmpty() } ?: Url.AUTH_KEY
+        //accessToken 가져오기 (비회원일때는 my fragment 로 이동)
+        if (getJwt().isNullOrEmpty()){
+            searchStateLiveData.value = SearchState.NoAuth
+            return@launch
+        }else{
+            jwt = getJwt().toString()
+            searchStateLiveData.value = SearchState.SearchBefore
+        }
+
         val recentProductList = productRepository.recentProductList(jwt)
 
         recentLiveData.value = recentProductList
+    }
+
+    fun search(word : String){
+        viewModelScope.launch {
+            val brandList = brandRepository.getBrandList(jwt)?.map {
+                it.toModel()
+            }?.filter {
+                it.name.contains(word) or it.content.contains(word)
+            }?: listOf()
+
+            //상품은 많아서 오류 생김
+//            val productList = productRepository.allProduct(jwt)?.map {
+//                dataToProduct(it)
+//            }?.filter {
+//                it.name.contains(word)
+//            }
+
+            searchStateLiveData.value = SearchState.SearchAfter(brandList.size)
+
+            //searchProductLiveData.value = productList
+            searchBrandLiveData.value = brandList
+        }
     }
 }
