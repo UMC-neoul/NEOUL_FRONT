@@ -3,6 +3,7 @@ package com.example.neoul.presentation.main.home
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.neoul.R
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.product.all.Data
@@ -25,6 +26,11 @@ class BestItemRVAdapter(
                 textTitle.text = data.productName
 //                textPercent.text = data.
                 textPrice.text = data.price.toString()
+                Glide.with(itemView)
+                    .load(data.productImgList[0])
+                    .error(R.drawable.base_img)
+                    .fallback(R.drawable.base_img)
+                    .into(imgItem)
                 if(data.phearted){
                     imgHeart.setImageResource(R.drawable.favorite_18)
 

@@ -35,12 +35,12 @@ class TabLikeProductFragment : BaseFragment<LikeListViewModel, FragmentTabLikePr
     }
 
     private fun productAdapter(itemList: List<LikedProduct>) {
-        val dataRVAdapter = LikeListProductRVAdater(itemList) { data ->
+        val dataRVAdapter = LikeListProductRVAdater(itemList, { data ->
             val product = dataToProduct(data)
             startActivity(
                 ProductActivity.newIntent(requireContext(), product)
             )
-        }
+        },viewModel)
 
         binding.recyclerItem.adapter = dataRVAdapter
         binding.recyclerItem.layoutManager =

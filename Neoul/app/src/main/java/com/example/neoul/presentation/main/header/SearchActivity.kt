@@ -30,6 +30,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
         }
 
 
+
     }
 
     override fun observeData() = viewModel.recentLiveData.observe(this) {

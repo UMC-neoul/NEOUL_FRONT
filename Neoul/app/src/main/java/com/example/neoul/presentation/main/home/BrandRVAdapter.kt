@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.neoul.R
 import com.example.neoul.adapter.ProductHorizontalRVAdapter
 import com.example.neoul.data.model.Brand
 import com.example.neoul.data.model.BrandItem
@@ -34,6 +36,11 @@ class BrandRVAdapter(
                 if (isFirstItem) {
                     recyclerBrandProduct.visibility = View.VISIBLE
                 }
+                Glide.with(itemView)
+                    .load(data.image)
+                    .error(R.drawable.base_img)
+                    .fallback(R.drawable.base_img)
+                    .into(imgBrand)
             }
         }
 

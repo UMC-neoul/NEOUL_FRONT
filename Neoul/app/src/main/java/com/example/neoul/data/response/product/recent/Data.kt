@@ -1,5 +1,6 @@
 package com.example.neoul.data.response.product.recent
 
+import com.example.neoul.R
 import com.example.neoul.data.model.Product
 
 data class Data(
@@ -18,7 +19,7 @@ fun dataToProduct(data: Data): Product {
         price = data.price,
         productId = data.productId,
         productUrl = "",
-        productImg = "",
+        productImg = data.productImgList?.firstOrNull() ?: "",
         liked = false
     )
 }

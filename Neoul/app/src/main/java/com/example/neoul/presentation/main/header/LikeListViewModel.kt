@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 class LikeListViewModel(private val productRepository: ProductRepository,private val brandRepository: BrandRepository) : BaseViewModel() {
 
     private var jwt =""
+    val productLikedLiveData = MutableLiveData<Boolean>(true)
     val likedProductLiveData = MutableLiveData<Data>()
     val likedBrandLiveData = MutableLiveData<com.example.neoul.data.response.like.brand.Data>()
     override fun fetchData() = viewModelScope.launch {
@@ -28,5 +29,20 @@ class LikeListViewModel(private val productRepository: ProductRepository,private
         likedProductLiveData.value = likeProductList
         likedBrandLiveData.value = likeBrandList
 
+    }
+
+    fun clickLikeBtn(productId:Int){
+        viewModelScope.launch {
+            if (productLikedLiveData.value == false) {
+                //PRODUCT LIKE PATCH
+                productRepository.likeProduct(jwt, productId)
+                productLikedLiveData.value = true
+            } else {
+                //PRODUCT DISLIKE PATCH
+                productRepository.dislikeProduct(jwt, productId)
+                productLikedLiveData.value = false
+            }
+//            fetchData()
+        }
     }
 }

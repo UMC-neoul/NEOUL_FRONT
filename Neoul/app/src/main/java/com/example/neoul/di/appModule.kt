@@ -78,7 +78,7 @@ val appModule = module {
     single { CategoryMenuBus() }
 
     //VM
-    viewModel { HomeViewModel(get(), get()) }
+    viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { EventViewModel() }
     viewModel { (categoryId: Int) ->
         CategoryViewModel(get(), categoryId)
