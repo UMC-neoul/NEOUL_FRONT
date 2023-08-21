@@ -35,7 +35,7 @@ class BestItemRVAdapter(
         return DataViewHolder(viewBinding)
     }
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = if (itemList.size > 4) 4 else itemList.size
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(itemList[position])
