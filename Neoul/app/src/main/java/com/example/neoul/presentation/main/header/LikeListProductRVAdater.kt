@@ -3,10 +3,12 @@ package com.example.neoul.presentation.main.category
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.neoul.R
 import com.example.neoul.data.response.like.product.LikedProduct
 import com.example.neoul.databinding.ItemCatItemBinding
 import com.example.neoul.presentation.main.header.LikeListViewModel
+
 
 class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val productClickListener: (LikedProduct) -> Unit,val viewModel: LikeListViewModel) :
     RecyclerView.Adapter<LikeListProductRVAdater.DataViewHolder>() {
@@ -14,12 +16,10 @@ class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val prod
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: LikedProduct) {
-//            viewBinding.textName.text = data.brandName
-            viewBinding.textTitle.text = data.productName
+
             viewBinding.imgItem.setOnClickListener {
                 productClickListener(data)
             }
-//            viewBinding.textPrice.text = data.price.toString()
 
             viewBinding.apply {
                 imgHeart.setImageResource(R.drawable.favorite_18)
@@ -33,6 +33,20 @@ class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val prod
                     i++
                     viewModel.clickLikeBtn(data.productId)
                 }
+
+                if(data.discountedSalePrice.toString() == "0"){
+                    textPrice.text = data.price.toString()
+                } else{
+                    textPrice.text = data.discountedSalePrice.toString()
+                }
+                textTitle.text = data.productName
+                textName.text = data.brandName
+                textPercent.text = data.discountedRatio.toString()
+                Glide.with(itemView)
+                    .load(data.productImgList[0])
+                    .error(R.drawable.base)
+                    .fallback(R.drawable.base)
+                    .into(imgItem)
             }
         }
     }

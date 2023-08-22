@@ -19,7 +19,7 @@ fun dataToProduct(data: Data): Product {
         price = data.price,
         productId = data.productId,
         productUrl = "",
-        productImg = data.productImgList?.firstOrNull() ?: "",
+        productImg = data.productImgList.firstOrNull() ?: "",
         liked = false
     )
 }

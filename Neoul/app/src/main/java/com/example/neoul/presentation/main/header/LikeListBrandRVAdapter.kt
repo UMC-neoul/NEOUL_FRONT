@@ -17,19 +17,21 @@ class LikeListBrandRVAdapter(
     inner class DataViewHolder(private val viewBinding: ItemHomeBrandBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: LikedBrand) {
-//            viewBinding.textName.text = data.brandName
-            viewBinding.textBrandTitle.text = data.brandName
+
             viewBinding.viewContent.setOnClickListener {
                 brandClickListener(data)
             }
+            viewBinding.apply {
+                Glide.with(itemView)
+                .load(data.brandImg)
+                .error(R.drawable.base_img)
+                .fallback(R.drawable.base_img)
+                .into(imgBrand)
 
-//            Glide.with(itemView)
-//                .load(data.productImgList[0])
-//                .error(R.drawable.base_img)
-//                .fallback(R.drawable.base_img)
-//                .into()
+                textBrandContent.text = data.brandIntro
+                textBrandTitle.text = data.brandName
+            }
 
-//            viewBinding.textPrice.text = data.price.toString()
         }
     }
 
