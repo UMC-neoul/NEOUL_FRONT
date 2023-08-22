@@ -89,7 +89,7 @@ val appModule = module {
     viewModel { (story: Story) -> StoryDetailViewModel(story, get()) }
     viewModel { MyPageViewModel(get()) }
     viewModel { (product: Product) -> ProductViewModel(product, get()) }
-    viewModel { SearchViewModel(get()) }
+    viewModel { SearchViewModel(get() ,get()) }
     viewModel { LikeListViewModel(get(), get()) }
 
 }

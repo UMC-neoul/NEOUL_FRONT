@@ -27,6 +27,7 @@ class ProductViewModel(
         //accessToken 가져오기 (비회원일 경우 로그인 페이지로)
         if (getJwt().isNullOrEmpty()){
             productStateLiveData.value = ProductState.NotAuth
+            return@launch
         }else{
             jwt = getJwt().toString()
         }
