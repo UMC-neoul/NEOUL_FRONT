@@ -49,16 +49,5 @@ class TabLikeProductFragment : BaseFragment<LikeListViewModel, FragmentTabLikePr
         binding.recyclerItem.setHasFixedSize(true)
     }
 
-    private fun getDummyItemList(): ArrayList<LikedProduct> {
-        val dummyList = ArrayList<LikedProduct>().apply {
-            add(LikedProduct(1, "바다마을 목걸이"))
-            add(LikedProduct(2, "바다마을 목걸이3"))
-            add(LikedProduct(3, "바다마을 목걸이"))
-            add(LikedProduct(4, "바다마을 목걸이3"))
-            add(LikedProduct(5, "바다마을 목걸이"))
 
-
-        }
-        return dummyList
-    }
 }
