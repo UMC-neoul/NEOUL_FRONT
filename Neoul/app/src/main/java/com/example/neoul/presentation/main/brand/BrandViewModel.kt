@@ -30,7 +30,7 @@ class BrandViewModel(
 
         val brandList = brandRepository.getBrandList(jwt)?.map {
             it.toModel()
-        } ?: listOf()
+        }?.reversed() ?: listOf()
 
         brandLiveData.value = brandList
     }
