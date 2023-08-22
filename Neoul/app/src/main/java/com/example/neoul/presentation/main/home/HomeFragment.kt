@@ -116,6 +116,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
             }
             (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
         }
+        //더보기 이동
+        binding.brandMoreView.setOnClickListener {
+            (requireActivity() as MainActivity).goToTab(MainMenuId.BRAND)
+        }
+        binding.productMoreView.setOnClickListener {
+            (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
+        }
+        binding.productMoreView2.setOnClickListener {
+            (requireActivity() as MainActivity).goToTab(MainMenuId.CATEGORY)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

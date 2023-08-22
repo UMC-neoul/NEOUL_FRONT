@@ -12,6 +12,7 @@ import com.example.neoul.databinding.ItemMypageMerchandiseBinding
 import com.example.neoul.presentation.main.my.data.MyPageItem
 import com.example.neoul.presentation.main.my.data.MyPageProduct
 import kotlinx.coroutines.flow.merge
+import java.text.DecimalFormat
 
 class MyPageRVAdapter (val mypageclickListener: (MyPageProduct)->Unit): RecyclerView.Adapter<MyPageRVAdapter.ViewHolder>() {
 
@@ -43,13 +44,14 @@ class MyPageRVAdapter (val mypageclickListener: (MyPageProduct)->Unit): Recycler
     ) : RecyclerView.ViewHolder(binding.root){
         val imgdata = null
 
+        @SuppressLint("SetTextI18n")
         fun bind(data: MyPageProduct){
             Glide.with(itemView)
                 .load(if (data.productImgList.isNotEmpty()) data.productImgList[0] else R.drawable.base_img)
                 .error(R.drawable.base_img)
                 .fallback(R.drawable.base_img)
                 .into(binding.itemMypageMerchandise)
-            binding.price.text = data.price.toString()
+            binding.price.text = DecimalFormat("#,###").format(data.price)+"원"
             binding.name.text = data.productName
             binding.root.setOnClickListener {
                 mypageclickListener(data)
