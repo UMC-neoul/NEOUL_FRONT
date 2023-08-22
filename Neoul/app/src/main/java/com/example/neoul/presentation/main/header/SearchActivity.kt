@@ -73,7 +73,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
         binding.recyclerBrandSearch.adapter = adapterBrand
 
         //상품은 데이터가 너무 많아서 api 없으면 불가능
-        //binding.recyclerProductSearch.adapter = adapterGrid
+        binding.recyclerProductSearch.adapter = adapterGrid
     }
 
 
@@ -85,7 +85,7 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
         viewModel.searchStateLiveData.observe(this) {
             when (it) {
                 is SearchState.SearchBefore -> handleBefore()
-                is SearchState.SearchAfter -> handleAfter(it.size)
+                is SearchState.SearchAfter -> handleAfter(it.brandSize, it.productSize)
                 is SearchState.Failure -> Unit
                 is SearchState.NoAuth -> handleNoAuth()
             }
@@ -107,10 +107,11 @@ class SearchActivity : BaseActivity<SearchViewModel, ActivitySearchBinding>() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun handleAfter(size : Int) {
+    private fun handleAfter(brandSize : Int, productSize: Int) {
         binding.searchBefore.isGone = true
         binding.searchAfter.isVisible = true
-        binding.textBrandSearch.text = "브랜드 $size"
+        binding.textBrandSearch.text = "브랜드 $brandSize"
+        binding.textProductSearch.text = "상품 $productSize"
     }
 
     private fun handleBefore() {

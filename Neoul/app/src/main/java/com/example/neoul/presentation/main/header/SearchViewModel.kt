@@ -6,6 +6,7 @@ import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.Product
 import com.example.neoul.data.repository.brand.BrandRepository
 import com.example.neoul.data.repository.product.ProductRepository
+import com.example.neoul.data.response.product.all.dataToProduct
 import com.example.neoul.data.response.product.recent.Data
 import com.example.neoul.presentation.BaseViewModel
 import com.example.neoul.util.getJwt
@@ -45,16 +46,15 @@ class SearchViewModel(
                 it.name.contains(word) or it.content.contains(word)
             }?: listOf()
 
-            //상품은 많아서 오류 생김
-//            val productList = productRepository.allProduct(jwt)?.map {
-//                dataToProduct(it)
-//            }?.filter {
-//                it.name.contains(word)
-//            }
+            val productList = productRepository.allProduct(jwt)?.filter {
+                it.productName.contains(word)
+            }?.map {
+              dataToProduct(it)
+            }?: listOf()
 
-            searchStateLiveData.value = SearchState.SearchAfter(brandList.size)
+            searchStateLiveData.value = SearchState.SearchAfter(brandList.size, productList.size)
 
-            //searchProductLiveData.value = productList
+            searchProductLiveData.value = productList
             searchBrandLiveData.value = brandList
         }
     }

@@ -69,14 +69,15 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="visible"
-        app:constraint_referenced_ids="text_product,recycler_product" />
+        app:constraint_referenced_ids="text_product,recycler_product"
+        tools:visibility="gone" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/searchAfter"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:constraint_referenced_ids="textBrandSearch,recyclerBrandSearch"
+        app:constraint_referenced_ids="searchAfterScroll"
         tools:visibility="visible" />
 
     <TextView
@@ -105,57 +106,78 @@
         app:layout_constraintTop_toBottomOf="@id/text_product"
         tools:listitem="@layout/item_product_horizontal" />
 
-    <TextView
-        android:id="@+id/textBrandSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="20dp"
-        android:text="브랜드"
-        android:textColor="@color/warmGray70"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBar" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerBrandSearch"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/searchAfterScroll"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:paddingStart="11dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textBrandSearch"
-        tools:itemCount="1"
-        tools:listitem="@layout/item_brand" />
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
 
-<!--    <TextView-->
-<!--        android:id="@+id/textProductSearch"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="16dp"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:text="상품"-->
-<!--        android:textColor="@color/warmGray70"-->
-<!--        android:textSize="14sp"-->
-<!--        android:textStyle="bold"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/recyclerBrandSearch" />-->
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerProductSearch"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:paddingStart="11dp"-->
-<!--        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/textProductSearch"-->
-<!--        app:spanCount="2"-->
-<!--        tools:listitem="@layout/item_product_grid" />-->
+            <TextView
+                android:id="@+id/textBrandSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:text="브랜드"
+                android:textColor="@color/warmGray70"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolBar" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerBrandSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                android:paddingStart="11dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textBrandSearch"
+                tools:itemCount="1"
+                tools:listitem="@layout/item_home_brand" />
+
+            <TextView
+                android:id="@+id/textProductSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:text="상품"
+                android:textColor="@color/warmGray70"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerBrandSearch" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProductSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                android:paddingStart="11dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textProductSearch"
+                app:spanCount="2"
+                tools:listitem="@layout/item_product_grid" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
