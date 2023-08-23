@@ -47,7 +47,7 @@ class HomeViewModel(
             it
         } ?: listOf()
 
-        val bestList = productRepository.categoryProduct(jwt,7,2)?.map {
+        val bestList = productRepository.categoryProduct(jwt,14,2)?.map {
             it
         } ?: listOf()
 
