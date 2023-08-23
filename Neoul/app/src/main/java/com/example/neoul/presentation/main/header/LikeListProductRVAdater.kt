@@ -1,5 +1,6 @@
 package com.example.neoul.presentation.main.category
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,16 +28,17 @@ class LikeListProductRVAdater(
             }
 
             viewBinding.apply {
-                imgHeart.setImageResource(R.drawable.favorite_18)
-                var i = 0
+
+                imgHeart.setImageResource(if (data.liked) R.drawable.favorite_18 else R.drawable.favorite_border)
+
                 imgHeart.setOnClickListener {
-                    if (i % 2 == 0) {
-                        imgHeart.setImageResource(R.drawable.favorite_border)
-                    } else {
-                        imgHeart.setImageResource(R.drawable.favorite_18)
-                    }
-                    i++
-                    viewModel.clickLikeBtn(data.productId)
+                    val currentPosition = adapterPosition
+                    val currentHeartStatus = itemList[currentPosition].liked
+
+                    itemList[currentPosition].liked = !currentHeartStatus
+
+                    imgHeart.setImageResource(if (currentHeartStatus) R.drawable.favorite_border else R.drawable.favorite_18)
+                    viewModel.clickLikeBtn(data.productId, currentHeartStatus)
                 }
 
                 if (data.discountedSalePrice.toString() == "0") {

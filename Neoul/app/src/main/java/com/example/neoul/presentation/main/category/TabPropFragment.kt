@@ -24,7 +24,7 @@ class TabPropFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBindin
     //    private lateinit var viewBinding: FragmentTabClothesBinding
     private var option : Int = 1
     override val viewModel by viewModel<CategoryViewModel> {
-        parametersOf(8)
+        parametersOf(9,14)
     }
 
     override fun getViewBinding() = FragmentTabClothesBinding.inflate(layoutInflater)
