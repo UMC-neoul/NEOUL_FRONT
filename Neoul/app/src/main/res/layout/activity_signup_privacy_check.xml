@@ -103,7 +103,7 @@
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edit_phonenum"
         style="@style/TextBox"
-        android:layout_width="230dp"
+        android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginTop="42dp"
         android:hint="휴대폰 번호 '-'없이 입력"
@@ -111,19 +111,6 @@
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@+id/edit_birth"
         app:layout_constraintTop_toBottomOf="@+id/edit_birth" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/phone_check"
-        style="@style/SuccessFailBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:enabled="false"
-        android:text="인증 요청"
-        android:textColor="#909094"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_phonenum"
-        app:layout_constraintStart_toEndOf="@+id/edit_phonenum" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
