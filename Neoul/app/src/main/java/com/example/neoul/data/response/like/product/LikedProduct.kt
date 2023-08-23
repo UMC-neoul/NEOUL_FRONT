@@ -11,7 +11,8 @@ data class LikedProduct(
     val price: Int,
     val productId: Int,
     val productImgList: List<String>,
-    val productName: String
+    val productName: String,
+    var liked: Boolean = true
 )
 
 fun dataToProduct(data: LikedProduct): Product {
@@ -22,6 +23,6 @@ fun dataToProduct(data: LikedProduct): Product {
         productId = data.productId,
         productUrl = "",
         productImg = data.productImgList.firstOrNull() ?: "",
-        liked = true
+        liked = data.liked
     )
 }
