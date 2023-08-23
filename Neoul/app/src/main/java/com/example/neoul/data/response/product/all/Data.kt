@@ -23,7 +23,7 @@ fun dataToProduct(data: Data): Product {
     return Product(
         deliveryInfo = data.deliveryInfo,
         name = data.productName,
-        price = data.price,
+        price = data.discountedSalePrice,
         productId = data.productId,
         productUrl = data.productUrl,
         productImg = data.productImgList[0],

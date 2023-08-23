@@ -88,6 +88,13 @@ class CategoryFragment : BaseFragment<CategoryViewModel, FragmentCategoryBinding
         }
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            viewModel.fetchData()
+        }
+    }
+
 }
 
 enum class CategoryMenu(val position:Int){
