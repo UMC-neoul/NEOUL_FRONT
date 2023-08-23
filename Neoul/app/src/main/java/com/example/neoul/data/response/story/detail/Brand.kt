@@ -4,8 +4,8 @@ import com.example.neoul.data.model.BrandItem
 
 data class Brand(
     val brandId: Int,
-    val categoryVId: Int,
-    val categoryVName: String,
+    val categoryVId: List<Int>,
+    val categoryVName: List<String>,
     val intro: String,
     val name: String,
     val productList: List<Product>,
