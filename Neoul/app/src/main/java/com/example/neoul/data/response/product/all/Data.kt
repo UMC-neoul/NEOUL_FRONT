@@ -8,8 +8,10 @@ data class Data(
     val categoryPId: Int,
     val createdAt: String,
     val deliveryInfo: String,
+    val discountedRatio: Int,
+    val discountedSalePrice: Int,
     val phearted: Boolean,
-    val plikeCNT: Any,
+    val plikeCNT: Int,
     val price: Int,
     val productId: Int,
     val productImgList: List<String>,
@@ -25,6 +27,6 @@ fun dataToProduct(data: Data): Product {
         productId = data.productId,
         productUrl = data.productUrl,
         productImg = data.productImgList[0],
-        liked = data.phearted
+        liked =false,
     )
 }

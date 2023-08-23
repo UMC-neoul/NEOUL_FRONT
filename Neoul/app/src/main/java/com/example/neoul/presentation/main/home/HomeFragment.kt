@@ -14,8 +14,10 @@ import com.example.neoul.data.model.BrandDetail
 import com.example.neoul.data.model.BrandItem
 import com.example.neoul.data.model.GoodsItem
 import com.example.neoul.data.response.brand.list.BrandResponse
-import com.example.neoul.data.response.product.all.Data
-import com.example.neoul.data.response.product.all.dataToProduct
+import com.example.neoul.data.response.product.category.Data
+import com.example.neoul.data.response.product.category.dataToProduct
+//import com.example.neoul.data.response.product.all.Data
+//import com.example.neoul.data.response.product.all.dataToProduct
 import com.example.neoul.databinding.FragmentHomeBinding
 import com.example.neoul.presentation.BaseFragment
 import com.example.neoul.presentation.main.MainActivity
@@ -40,13 +42,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun observeDate() = viewModel.brandLiveData.observe(viewLifecycleOwner) {
         brandAdapter(it as ArrayList<BrandItem>)
-        allDate()
+        best()
+        recommend()
         nameDate()
     }
 
-    private fun allDate() = viewModel.allLiveData.observe(viewLifecycleOwner) {
+    private fun best() = viewModel.bestLiveData.observe(viewLifecycleOwner) {
         bestAdapter(it as ArrayList<Data>)
-        recommandAdapter(it)
+
+    }
+
+    private fun recommend() = viewModel.recommendLiveData.observe(viewLifecycleOwner) {
+        recommandAdapter(it as ArrayList<Data>)
     }
 
     private fun nameDate() = viewModel.nameLiveData.observe(viewLifecycleOwner) {

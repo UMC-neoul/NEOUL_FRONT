@@ -6,9 +6,11 @@ data class Data(
     val brandName: String,
     val categoryId: Int,
     val createdAt: String,
-    val likes: Int,
+    val discountedRatio: Int,
+    val liked: Boolean,
     val price: Int,
     val productId: Int,
+    val productImgList: List<String>,
     val productName: String
 )
 
@@ -19,8 +21,8 @@ fun dataToProduct(data: Data): Product {
         price = data.price,
         productId = data.productId,
         productUrl = "",
-        productImg = "",
-        liked = false
+        productImg = data.productImgList.firstOrNull() ?: "",
+        liked = data.liked
     )
 }
 

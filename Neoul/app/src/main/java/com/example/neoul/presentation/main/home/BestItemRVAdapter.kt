@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.neoul.R
 import com.example.neoul.data.model.GoodsItem
-import com.example.neoul.data.response.product.all.Data
+import com.example.neoul.data.response.product.category.Data
+//import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.databinding.ItemBestBinding
 
 class BestItemRVAdapter(
@@ -24,40 +25,44 @@ class BestItemRVAdapter(
                     productClickListener(data)
                 }
                 textTitle.text = data.productName
-//                textPercent.text = data.
+                textPercent.text = data.discountedRatio.toString()
                 textPrice.text = data.price.toString()
                 Glide.with(itemView)
                     .load(data.productImgList[0])
                     .error(R.drawable.base_img)
                     .fallback(R.drawable.base_img)
                     .into(imgItem)
-                if(data.phearted){
+                if (data.liked) {
                     imgHeart.setImageResource(R.drawable.favorite_18)
 
-                    var i=0
+                    var i = 0
                     imgHeart.setOnClickListener {
-                        if(i%2==0){
+                        if (i % 2 == 0) {
                             imgHeart.setImageResource(R.drawable.favorite_border)
-                        }
-                        else{
+                            viewModel.clickLikeBtn(data.productId, true)
+                        } else {
                             imgHeart.setImageResource(R.drawable.favorite_18)
+                            viewModel.clickLikeBtn(data.productId, false)
                         }
                         i++
-//                       api                      추가
-                        viewModel.clickLikeBtn(data.productId)
+
+
                     }
-                }
-                else{
-                    var i=0
+                } else {
+                    imgHeart.setImageResource(R.drawable.favorite_border)
+
+                    var i = 0
                     imgHeart.setOnClickListener {
-                        if(i%2==0){
+                        if (i % 2 == 0) {
                             imgHeart.setImageResource(R.drawable.favorite_18)
-                        }
-                        else{
+                            viewModel.clickLikeBtn(data.productId, false)
+                        } else {
                             imgHeart.setImageResource(R.drawable.favorite_border)
+                            viewModel.clickLikeBtn(data.productId, true)
                         }
                         i++
-                        viewModel.clickLikeBtn(data.productId)
+
+
                     }
                 }
             }
