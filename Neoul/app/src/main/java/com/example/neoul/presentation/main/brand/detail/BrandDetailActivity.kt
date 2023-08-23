@@ -35,6 +35,7 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
             intent.getParcelableExtra(BRAND_KEY)
         )
     }
+    var hashTag = ""
 
     private val mainMenuBus by inject<MainMenuBus>()
 
@@ -122,10 +123,8 @@ class BrandDetailActivity : BaseActivity<BrandDetailViewModel, ActivityBrandDeta
         adapterGrid.setList(state.brand.productList)
         adapterGrid.brandName = state.brand.name
         adapterHorizontal.setList(state.brand.productList)
-        var hashTag = ""
-        binding.brandTag.text = state.brand.hashTag?.forEach {
-            hashTag += "$it "
-        }.toString()
+        hashTag = ("#" + state.brand.hashTag?.joinToString(" #")) ?: " "
+        binding.brandTag.text = hashTag
     }
 
     private fun handleNotAuth() {

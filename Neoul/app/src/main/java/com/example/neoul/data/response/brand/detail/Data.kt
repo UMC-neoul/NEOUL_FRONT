@@ -5,8 +5,8 @@ import com.example.neoul.data.model.BrandDetail
 data class Data(
     val brandId: Int,
     val brandName: String,
-    val categoryVId: Int,
-    val categoryVName: String,
+    val categoryVId: List<Int>,
+    val categoryVName: List<String>,
     val createdAt: String,
     val hashtagList: List<String>,
     val hearted: Boolean,
@@ -35,7 +35,7 @@ data class Data(
             )
         },
         liked = hearted,
-        hashTag = hashtagList,
+        hashTag = categoryVName,
         likeCNT = likeCNT
     )
 }
