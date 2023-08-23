@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 
 class CategoryViewModel(
     private val productRepository: ProductRepository,
-    private val categoryId: Int
+    private val categoryId: Int,
+    private val categoryId2: Int
 ) : BaseViewModel() {
 
     private var jwt = ""
@@ -22,13 +23,23 @@ class CategoryViewModel(
 
         jwt = getJwt().takeIf { !it.isNullOrEmpty() } ?: Url.AUTH_KEY
 
-        val categoryList =
-            productRepository.categoryProduct(jwt, categoryId, option)?.map {
-                it
-            } ?: listOf()
-
-
-        categoryLiveData.value = categoryList
+        if(categoryId2 !== 0){
+            val categoryList =
+                productRepository.categoryProduct(jwt, categoryId, option)?.map {
+                    it
+                } ?: listOf()
+            val categoryList2 =
+                productRepository.categoryProduct(jwt, categoryId2, option)?.map {
+                    it
+                } ?: listOf()
+            categoryLiveData.value = categoryList + categoryList2
+        } else{
+            val categoryList =
+                productRepository.categoryProduct(jwt, categoryId, option)?.map {
+                    it
+                } ?: listOf()
+            categoryLiveData.value = categoryList
+        }
 
     }
 
@@ -37,12 +48,12 @@ class CategoryViewModel(
             if (!currentLiked) {
                 //PRODUCT LIKE PATCH
                 productRepository.likeProduct(jwt, productId)
-                Log.d("좋아요","좋아요")
+                Log.d("좋아요", "좋아요")
 
             } else {
                 //PRODUCT DISLIKE PATCH
                 productRepository.dislikeProduct(jwt, productId)
-                Log.d("찜해제","찜해제")
+                Log.d("찜해제", "찜해제")
             }
         }
     }

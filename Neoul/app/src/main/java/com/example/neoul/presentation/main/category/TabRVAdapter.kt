@@ -1,13 +1,10 @@
 package com.example.neoul.presentation.main.category
 
-import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.neoul.R
-import com.example.neoul.data.model.CategoryItem
-import com.example.neoul.data.model.Product
 import com.example.neoul.data.response.product.category.Data
 import com.example.neoul.databinding.ItemCatItemBinding
 
@@ -17,7 +14,6 @@ class TabRVAdapter(
     val viewModel: CategoryViewModel
 ) :
     RecyclerView.Adapter<TabRVAdapter.DataViewHolder>() {
-    private val heartStatus = SparseBooleanArray()
 
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
@@ -41,38 +37,17 @@ class TabRVAdapter(
                     .fallback(R.drawable.base_img)
                     .into(imgItem)
                 textPercent.text = data.discountedRatio.toString()
-                if (data.liked) {
-                    imgHeart.setImageResource(R.drawable.favorite_18)
 
-                    var i = 0
-                    imgHeart.setOnClickListener {
-                        if (i % 2 == 0) {
-                            imgHeart.setImageResource(R.drawable.favorite_border)
-                            viewModel.clickLikeBtn(data.productId, true)
-                        } else {
-                            imgHeart.setImageResource(R.drawable.favorite_18)
-                            viewModel.clickLikeBtn(data.productId, false)
-                        }
-                        i++
+                imgHeart.setImageResource(if (data.liked) R.drawable.favorite_18 else R.drawable.favorite_border)
 
+                imgHeart.setOnClickListener {
+                    val currentPosition = adapterPosition
+                    val currentHeartStatus = itemList[currentPosition].liked
 
-                    }
-                } else {
-                    imgHeart.setImageResource(R.drawable.favorite_border)
+                    itemList[currentPosition].liked = !currentHeartStatus
 
-                    var i = 0
-                    imgHeart.setOnClickListener {
-                        if (i % 2 == 0) {
-                            imgHeart.setImageResource(R.drawable.favorite_18)
-                            viewModel.clickLikeBtn(data.productId, false)
-                        } else {
-                            imgHeart.setImageResource(R.drawable.favorite_border)
-                            viewModel.clickLikeBtn(data.productId, true)
-                        }
-                        i++
-
-
-                    }
+                    imgHeart.setImageResource(if (currentHeartStatus) R.drawable.favorite_border else R.drawable.favorite_18)
+                    viewModel.clickLikeBtn(data.productId, currentHeartStatus)
                 }
             }
         }
