@@ -1,8 +1,10 @@
 package com.example.neoul.presentation.main.category
 
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.neoul.R
 import com.example.neoul.data.model.CategoryItem
 import com.example.neoul.data.model.Product
@@ -15,12 +17,16 @@ class TabRVAdapter(
     val viewModel: CategoryViewModel
 ) :
     RecyclerView.Adapter<TabRVAdapter.DataViewHolder>() {
+    private val heartStatus = SparseBooleanArray()
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: Data) {
+
+
             viewBinding.imgItem.setOnClickListener {
                 productClickListener(data)
             }
+
             viewBinding.textName.text = data.brandName
             viewBinding.textTitle.text = data.productName
 
@@ -28,34 +34,39 @@ class TabRVAdapter(
             viewBinding.apply {
 
 
-//            if(data.likes){
-//                imgHeart.setImageResource(R.drawable.favorite_18)
+                Glide.with(itemView)
+                    .load(data.productImgList[0])
+                    .error(R.drawable.base_img)
+                    .fallback(R.drawable.base_img)
+                    .into(imgItem)
+                textPercent.text = data.discountedRatio.toString()
+//                if (data.hearted) {
+//                    imgHeart.setImageResource(R.drawable.favorite_18)
 //
-//                var i=0
-//                imgHeart.setOnClickListener {
-//                    if(i%2==0){
-//                        imgHeart.setImageResource(R.drawable.favorite_border)
+//                    var i = 0
+//                    imgHeart.setOnClickListener {
+//                        if (i % 2 == 0) {
+//                            imgHeart.setImageResource(R.drawable.favorite_border)
+//                        } else {
+//                            imgHeart.setImageResource(R.drawable.favorite_18)
+//                        }
+//                        i++
+//                        viewModel.clickLikeBtn(data.productId)
+//
 //                    }
-//                    else{
-//                        imgHeart.setImageResource(R.drawable.favorite_18)
-//                    }
-//                    i++
-////                       api                      추가
-//                    viewModel.clickLikeBtn(data.productId)
-//                }
-//            }
-//            else{
-                var i = 0
-                imgHeart.setOnClickListener {
-                    if (i % 2 == 0) {
-                        imgHeart.setImageResource(R.drawable.favorite_18)
-                    } else {
-                        imgHeart.setImageResource(R.drawable.favorite_border)
+//                } else {
+                    var i = 0
+                    imgHeart.setOnClickListener {
+                        if (i % 2 == 0) {
+                            imgHeart.setImageResource(R.drawable.favorite_18)
+                        } else {
+                            imgHeart.setImageResource(R.drawable.favorite_border)
+                        }
+                        i++
+                        viewModel.clickLikeBtn(data.productId)
+
                     }
-                    i++
-                    viewModel.clickLikeBtn(data.productId)
-                }
-//            }
+//                }
             }
         }
     }

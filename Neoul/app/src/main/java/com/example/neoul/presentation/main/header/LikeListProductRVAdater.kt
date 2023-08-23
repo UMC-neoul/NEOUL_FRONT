@@ -10,11 +10,16 @@ import com.example.neoul.databinding.ItemCatItemBinding
 import com.example.neoul.presentation.main.header.LikeListViewModel
 
 
-class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val productClickListener: (LikedProduct) -> Unit,val viewModel: LikeListViewModel) :
+class LikeListProductRVAdater(
+    private val itemList: List<LikedProduct>,
+    val productClickListener: (LikedProduct) -> Unit,
+    val viewModel: LikeListViewModel
+) :
     RecyclerView.Adapter<LikeListProductRVAdater.DataViewHolder>() {
 
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
+
         fun bind(data: LikedProduct) {
 
             viewBinding.imgItem.setOnClickListener {
@@ -34,19 +39,22 @@ class LikeListProductRVAdater(private val itemList: List<LikedProduct>, val prod
                     viewModel.clickLikeBtn(data.productId)
                 }
 
-                if(data.discountedSalePrice.toString() == "0"){
+                if (data.discountedSalePrice.toString() == "0") {
                     textPrice.text = data.price.toString()
-                } else{
+                } else {
                     textPrice.text = data.discountedSalePrice.toString()
                 }
                 textTitle.text = data.productName
                 textName.text = data.brandName
                 textPercent.text = data.discountedRatio.toString()
+
                 Glide.with(itemView)
-                    .load(data.productImgList[0])
+                    .load(data.productImgList.firstOrNull())
                     .error(R.drawable.base)
                     .fallback(R.drawable.base)
                     .into(imgItem)
+
+
             }
         }
     }

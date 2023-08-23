@@ -21,10 +21,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class TabClothesFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBinding>() {
-    //    private lateinit var viewBinding: FragmentTabClothesBinding
+
     private var option: Int = 1
     override val viewModel by viewModel<CategoryViewModel> {
-        parametersOf(1)
+        parametersOf(7)
     }
 
     override fun getViewBinding() = FragmentTabClothesBinding.inflate(layoutInflater)
@@ -65,7 +65,7 @@ class TabClothesFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBin
     }
 
     private fun spinnerAdapt() {
-        val items = resources.getStringArray(R.array.product_sort)
+        val items = resources.getStringArray(R.array.category_sort)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, items)
         binding.brandSpinner.adapter = arrayAdapter
         binding.brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -118,17 +118,5 @@ class TabClothesFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBin
         }
     }
 
-    private fun getDummyItemList(): ArrayList<CategoryItem> {
-        val dummyList = ArrayList<CategoryItem>().apply {
-            add(CategoryItem("브랜드1", "바다마을 목걸이", 11, 25100, ""))
-            add(CategoryItem("브랜드2", "바다마을 목걸이3", 11, 20100, ""))
-            add(CategoryItem("브랜드3", "바다마을 목걸이", 11, 23100, ""))
-            add(CategoryItem("브랜드4", "바다마을 목걸이3", 16, 60100, ""))
-            add(CategoryItem("브랜드5", "바다마을 목걸이", 21, 27100, ""))
-
-
-        }
-        return dummyList
-    }
 
 }

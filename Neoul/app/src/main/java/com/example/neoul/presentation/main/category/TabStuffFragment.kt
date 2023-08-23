@@ -24,7 +24,7 @@ class TabStuffFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBindi
     //    private lateinit var viewBinding: FragmentTabClothesBinding
     private var option: Int = 1
     override val viewModel by viewModel<CategoryViewModel> {
-        parametersOf(4)
+        parametersOf(10)
     }
 
     override fun getViewBinding() = FragmentTabClothesBinding.inflate(layoutInflater)
@@ -65,7 +65,7 @@ class TabStuffFragment : BaseFragment<CategoryViewModel, FragmentTabClothesBindi
     }
 
     private fun spinnerAdapt() {
-        val items = resources.getStringArray(R.array.product_sort)
+        val items = resources.getStringArray(R.array.category_sort)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner, items)
         binding.brandSpinner.adapter = arrayAdapter
         binding.brandSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {

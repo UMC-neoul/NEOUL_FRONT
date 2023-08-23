@@ -15,7 +15,7 @@ class CategoryViewModel(
     private val categoryId: Int
 ) : BaseViewModel() {
 
-    val productLikedLiveData = MutableLiveData<Boolean>(null)
+    val productLikedLiveData = MutableLiveData<Boolean>(false)
     private var jwt =""
     val categoryLiveData = MutableLiveData<List<Data>>()
 
@@ -27,7 +27,6 @@ class CategoryViewModel(
             productRepository.categoryProduct(jwt, categoryId, option)?.map {
                 it
             } ?: listOf()
-        Log.d("아오",categoryList.toString())
 
         categoryLiveData.value = categoryList
     }
