@@ -1,5 +1,6 @@
 package com.example.neoul.presentation.main.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -8,8 +9,8 @@ import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.brand.BrandRepository
 import com.example.neoul.data.repository.mypage.MyPageRepository
 import com.example.neoul.data.repository.product.ProductRepository
-//import com.example.neoul.data.response.product.category.Data
-import com.example.neoul.data.response.product.all.Data
+import com.example.neoul.data.response.product.category.Data
+//import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.presentation.BaseViewModel
 import com.example.neoul.presentation.main.my.Info.MyPageInfoData
 import com.example.neoul.util.getJwt
@@ -25,7 +26,8 @@ class HomeViewModel(
 
     val productLikedLiveData = MutableLiveData<Boolean>(null)
     val brandLiveData = MutableLiveData<List<BrandItem>>()
-    val allLiveData = MutableLiveData<List<Data>>()
+    val recommendLiveData = MutableLiveData<List<Data>>()
+    val bestLiveData = MutableLiveData<List<Data>>()
     val nameLiveData = MutableLiveData<MyPageInfoData>()
 
     override fun fetchData() = viewModelScope.launch {
@@ -38,29 +40,35 @@ class HomeViewModel(
 
         brandLiveData.value = brandList.reversed()
 
-        val allList = productRepository.allProduct(jwt)?.map {
-            it
-        } ?: listOf()
-//        val allList = productRepository.categoryProduct(jwt,7,1)?.map {
+//        val allList = productRepository.allProduct(jwt)?.map {
 //            it
 //        } ?: listOf()
+        val allList = productRepository.categoryProduct(jwt,7,1)?.map {
+            it
+        } ?: listOf()
 
-        allLiveData.value = allList
+        val bestList = productRepository.categoryProduct(jwt,7,2)?.map {
+            it
+        } ?: listOf()
+
+        recommendLiveData.value = allList
+        bestLiveData.value = bestList
 
         val name = myPageRepository.mypageinfo(jwt)?.data
         nameLiveData.value = name
     }
 
-    fun clickLikeBtn(productId: Int) {
+    fun clickLikeBtn(productId: Int, currentLiked: Boolean) {
         viewModelScope.launch {
-            if (productLikedLiveData.value == false) {
+            if (!currentLiked) {
                 //PRODUCT LIKE PATCH
                 productRepository.likeProduct(jwt, productId)
-                productLikedLiveData.value = true
+                Log.d("좋아요","좋아요")
+
             } else {
                 //PRODUCT DISLIKE PATCH
                 productRepository.dislikeProduct(jwt, productId)
-                productLikedLiveData.value = false
+                Log.d("찜해제","찜해제")
             }
         }
     }
