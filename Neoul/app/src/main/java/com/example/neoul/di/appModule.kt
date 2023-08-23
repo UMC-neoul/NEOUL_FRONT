@@ -80,8 +80,8 @@ val appModule = module {
     //VM
     viewModel { HomeViewModel(get(), get(), get()) }
     viewModel { EventViewModel() }
-    viewModel { (categoryId: Int) ->
-        CategoryViewModel(get(), categoryId)
+    viewModel { (categoryId: Int, categoryId2: Int) ->
+        CategoryViewModel(get(), categoryId,categoryId2)
     }
     viewModel { BrandViewModel(get()) }
     viewModel { (brand: BrandItem) -> BrandDetailViewModel(brand, get()) }
