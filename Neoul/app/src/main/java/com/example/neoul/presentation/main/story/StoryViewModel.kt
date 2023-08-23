@@ -27,7 +27,7 @@ class StoryViewModel(
 
         val story = storyRepository.getStoryList(jwt)?.map {
             it.toModel()
-        } ?: listOf()
+        }?.reversed() ?: listOf()
         storyLiveData.value = story
     }
 }
