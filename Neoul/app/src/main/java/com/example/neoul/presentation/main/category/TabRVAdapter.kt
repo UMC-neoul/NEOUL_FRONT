@@ -48,11 +48,13 @@ class TabRVAdapter(
                     imgHeart.setOnClickListener {
                         if (i % 2 == 0) {
                             imgHeart.setImageResource(R.drawable.favorite_border)
+                            viewModel.clickLikeBtn(data.productId, true)
                         } else {
                             imgHeart.setImageResource(R.drawable.favorite_18)
+                            viewModel.clickLikeBtn(data.productId, false)
                         }
                         i++
-                        viewModel.clickLikeBtn(data.productId, data.liked)
+
 
                     }
                 } else {
@@ -62,11 +64,13 @@ class TabRVAdapter(
                     imgHeart.setOnClickListener {
                         if (i % 2 == 0) {
                             imgHeart.setImageResource(R.drawable.favorite_18)
+                            viewModel.clickLikeBtn(data.productId, false)
                         } else {
                             imgHeart.setImageResource(R.drawable.favorite_border)
+                            viewModel.clickLikeBtn(data.productId, true)
                         }
                         i++
-                        viewModel.clickLikeBtn(data.productId, data.liked)
+
 
                     }
                 }
