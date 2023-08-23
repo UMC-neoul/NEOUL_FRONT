@@ -18,6 +18,7 @@ class TabRVAdapter(
 ) :
     RecyclerView.Adapter<TabRVAdapter.DataViewHolder>() {
     private val heartStatus = SparseBooleanArray()
+
     inner class DataViewHolder(private val viewBinding: ItemCatItemBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun bind(data: Data) {
@@ -40,21 +41,23 @@ class TabRVAdapter(
                     .fallback(R.drawable.base_img)
                     .into(imgItem)
                 textPercent.text = data.discountedRatio.toString()
-//                if (data.hearted) {
-//                    imgHeart.setImageResource(R.drawable.favorite_18)
-//
-//                    var i = 0
-//                    imgHeart.setOnClickListener {
-//                        if (i % 2 == 0) {
-//                            imgHeart.setImageResource(R.drawable.favorite_border)
-//                        } else {
-//                            imgHeart.setImageResource(R.drawable.favorite_18)
-//                        }
-//                        i++
-//                        viewModel.clickLikeBtn(data.productId)
-//
-//                    }
-//                } else {
+                if (data.liked) {
+                    imgHeart.setImageResource(R.drawable.favorite_18)
+
+                    var i = 0
+                    imgHeart.setOnClickListener {
+                        if (i % 2 == 0) {
+                            imgHeart.setImageResource(R.drawable.favorite_border)
+                        } else {
+                            imgHeart.setImageResource(R.drawable.favorite_18)
+                        }
+                        i++
+                        viewModel.clickLikeBtn(data.productId, data.liked)
+
+                    }
+                } else {
+                    imgHeart.setImageResource(R.drawable.favorite_border)
+
                     var i = 0
                     imgHeart.setOnClickListener {
                         if (i % 2 == 0) {
@@ -63,10 +66,10 @@ class TabRVAdapter(
                             imgHeart.setImageResource(R.drawable.favorite_border)
                         }
                         i++
-                        viewModel.clickLikeBtn(data.productId)
+                        viewModel.clickLikeBtn(data.productId, data.liked)
 
                     }
-//                }
+                }
             }
         }
     }

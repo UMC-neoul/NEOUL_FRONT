@@ -8,8 +8,8 @@ import com.example.neoul.data.network.Url
 import com.example.neoul.data.repository.brand.BrandRepository
 import com.example.neoul.data.repository.mypage.MyPageRepository
 import com.example.neoul.data.repository.product.ProductRepository
-import com.example.neoul.data.response.product.category.Data
-//import com.example.neoul.data.response.product.all.Data
+//import com.example.neoul.data.response.product.category.Data
+import com.example.neoul.data.response.product.all.Data
 import com.example.neoul.presentation.BaseViewModel
 import com.example.neoul.presentation.main.my.Info.MyPageInfoData
 import com.example.neoul.util.getJwt
@@ -38,12 +38,12 @@ class HomeViewModel(
 
         brandLiveData.value = brandList.reversed()
 
-//        val allList = productRepository.allProduct(jwt)?.map {
-//            it
-//        } ?: listOf()
-        val allList = productRepository.categoryProduct(jwt,7,1)?.map {
+        val allList = productRepository.allProduct(jwt)?.map {
             it
         } ?: listOf()
+//        val allList = productRepository.categoryProduct(jwt,7,1)?.map {
+//            it
+//        } ?: listOf()
 
         allLiveData.value = allList
 
