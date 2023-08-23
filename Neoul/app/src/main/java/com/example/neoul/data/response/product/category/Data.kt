@@ -7,7 +7,7 @@ data class Data(
     val categoryId: Int,
     val createdAt: String,
     val discountedRatio: Int,
-    val liked: Boolean,
+    var liked: Boolean,
     val price: Int,
     val productId: Int,
     val productImgList: List<String>,
