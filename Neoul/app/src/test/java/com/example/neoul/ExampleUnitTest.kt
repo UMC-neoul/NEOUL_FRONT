@@ -1,4 +1,4 @@
-package com.example.neoul
+package com.umc.neoul
 
 import org.junit.Test
 
